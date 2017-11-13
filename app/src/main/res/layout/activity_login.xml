@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#3D86FC"
     android:orientation="vertical"
-    tools:context="com.prince.logan.playdate.LoginActivity">
+    tools:context="com.prince.logan.playdate.Activity.LoginActivity">
 
 
     <android.support.v4.view.ViewPager
