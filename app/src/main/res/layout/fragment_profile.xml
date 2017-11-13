@@ -1,14 +1,237 @@
 <?xml version="1.0"?>
-<FrameLayout
+<LinearLayout
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:textColor="#000000"
-        android:text="First Fragment"
-        android:gravity="center"/>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical"
+       android:background="@color/md_white_1000">
 
-</FrameLayout>
+       <ScrollView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent">
+               <ImageView
+                   android:layout_width="fill_parent"
+                   android:layout_height="wrap_content"
+                   android:adjustViewBounds="true"
+                   android:scaleType="fitCenter"
+                   android:id="@+id/img_profile"
+                   android:background="@drawable/profile_sample"/>
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="60dp"
+                   android:background="@drawable/rounded_bg"
+                   android:layout_alignTop="@+id/img_profile"
+                   android:layout_marginLeft="15dp"
+                   android:layout_marginRight="15dp"
+                   android:layout_marginTop="-20dp"
+                   android:paddingTop="20dp">
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:text="Welcome, David Castillo!"
+                       android:gravity="center"
+                       android:textSize="17dp"
+                       android:textColor="@color/md_white_1000"/>
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="45dp"
+                   android:background="@drawable/rounded_bg_go"
+                   android:layout_alignBottom="@+id/img_profile"
+                   android:orientation="horizontal"
+                   android:layout_marginBottom="5dp"
+                   android:layout_marginLeft="5dp"
+                   android:layout_marginRight="5dp">
+                   <LinearLayout
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="5"
+                       android:gravity="center">
+                       <ImageView
+                           android:layout_width="30dp"
+                           android:layout_height="30dp"
+                           android:src="@drawable/preference"/>
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="PREFERENCE"
+                           android:textColor="@color/md_white_1000"
+                           android:layout_marginLeft="20dp"/>
+
+                   </LinearLayout>
+                   <LinearLayout
+                       android:layout_width="1dp"
+                       android:layout_height="match_parent"
+                       android:background="@color/md_white_1000"></LinearLayout>
+                   <LinearLayout
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="5"
+                       android:gravity="center">
+                       <ImageView
+                           android:layout_width="30dp"
+                           android:layout_height="30dp"
+                           android:src="@drawable/playdate"/>
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="PLAYDATES"
+                           android:textColor="@color/md_white_1000"
+                           android:layout_marginLeft="20dp"/>
+                   </LinearLayout>
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="45dp"
+                   android:layout_below="@+id/img_profile"
+                   android:id="@+id/lin_name"
+                   android:orientation="horizontal">
+                   <TextView
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="5"
+                       android:textColor="@color/md_black_1000"
+                       android:text="First Name :"
+                       android:gravity="center|left"
+                       android:textStyle="bold"
+                       android:layout_marginLeft="25dp"
+                       android:textSize="16dp"/>
+
+                   <TextView
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="5"
+                       android:textColor="@color/md_black_1000"
+                       android:text="David"
+                       android:gravity="center|left"
+                       android:layout_marginLeft="25dp"
+                       android:textSize="16dp"/>
+               </LinearLayout>
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:background="@color/md_grey_400"
+                   android:layout_alignBottom="@+id/lin_name"
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginRight="10dp"></LinearLayout>
+
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="45dp"
+                   android:layout_below="@+id/lin_name"
+                   android:id="@+id/lin_gender"
+                   android:background="@color/md_grey_50"
+                   android:orientation="horizontal">
+                   <TextView
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="5"
+                       android:textStyle="bold"
+                       android:textColor="@color/md_black_1000"
+                       android:text="Last Name :"
+                       android:gravity="center|left"
+                       android:layout_marginLeft="25dp"
+                       android:textSize="16dp"/>
+
+                   <TextView
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="5"
+                       android:textColor="@color/md_black_1000"
+                       android:text="Castillo"
+                       android:gravity="center|left"
+                       android:layout_marginLeft="25dp"
+                       android:textSize="16dp"/>
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:background="@color/md_grey_400"
+                   android:layout_alignBottom="@+id/lin_gender"
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginRight="10dp"></LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="45dp"
+                   android:layout_below="@+id/lin_gender"
+                   android:id="@+id/lin_birthday"
+                   android:orientation="horizontal">
+                   <TextView
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="5"
+                       android:textColor="@color/md_black_1000"
+                       android:text="Gender :"
+                       android:textStyle="bold"
+                       android:gravity="center|left"
+                       android:layout_marginLeft="25dp"
+                       android:textSize="16dp"/>
+
+                   <TextView
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="5"
+                       android:textColor="@color/md_black_1000"
+                       android:text="Female"
+                       android:gravity="center|left"
+                       android:layout_marginLeft="25dp"
+                       android:textSize="16dp"/>
+               </LinearLayout>
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:background="@color/md_grey_400"
+                   android:layout_alignBottom="@+id/lin_birthday"
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginRight="10dp"></LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="45dp"
+                   android:background="@color/md_grey_50"
+                   android:layout_below="@+id/lin_birthday"
+                   android:id="@+id/lin_country"
+                   android:orientation="horizontal">
+                   <TextView
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="5"
+                       android:textColor="@color/md_black_1000"
+                       android:text="Birthday :"
+                       android:textStyle="bold"
+                       android:gravity="center|left"
+                       android:layout_marginLeft="25dp"
+                       android:textSize="16dp"/>
+
+                   <TextView
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="5"
+                       android:textColor="@color/md_black_1000"
+                       android:text="2017-12-21"
+                       android:gravity="center|left"
+                       android:layout_marginLeft="25dp"
+                       android:textSize="16dp"/>
+               </LinearLayout>
+           </RelativeLayout>
+
+
+       </ScrollView>
+   </LinearLayout>
+
+</LinearLayout>
