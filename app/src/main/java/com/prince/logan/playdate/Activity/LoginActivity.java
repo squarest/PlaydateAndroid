@@ -1,10 +1,10 @@
 package com.prince.logan.playdate.Activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,7 +34,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class LoginActivity extends Activity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     @Bind(R.id.btn_facebook_login)
     ImageView img_btn_facebook_login;
@@ -162,7 +162,8 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         switch (view.getId()){
             case R.id.btn_facebook_login:
 //                btn_login.performClick();
-//                Intent
+                Intent profileIntent = new Intent(this, MainActivity.class);
+                startActivity(profileIntent);
                 break;
         }
     }

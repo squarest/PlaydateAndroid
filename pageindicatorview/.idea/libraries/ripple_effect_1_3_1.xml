@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="ripple-effect-1.3.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/bc4c2ad0af5479bbab4f5077b49b901008d8ef45/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/bc4c2ad0af5479bbab4f5077b49b901008d8ef45/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.patrickpissurno/ripple-effect/1.3.1/ddfd915c73647b6bf1aef8428afeab2eb716ae12/ripple-effect-1.3.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

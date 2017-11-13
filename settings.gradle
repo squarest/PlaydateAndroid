@@ -1,1 +1,1 @@
-include ':app', ':pageindicatorview', ':bottom-nav-bar'
+include ':app', ':pageindicatorview'
