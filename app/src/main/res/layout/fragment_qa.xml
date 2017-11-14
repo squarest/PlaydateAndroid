@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            >
+            android:id="@+id/rel_fitness">
 
             <ImageView
                 android:layout_width="fill_parent"
@@ -23,13 +23,45 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:background="@drawable/qa1"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FITNESS"
+                android:textColor="@color/colorPrimary"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textSize="30dp"
+                android:textStyle="bold"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Question &amp; Answer"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/md_white_1000"/>
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:background="@drawable/arrow"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"/>
         </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/md_white_1000"></LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:id="@+id/rel_spiritual">
 
             <ImageView
                 android:layout_width="fill_parent"
@@ -38,7 +70,41 @@
                 android:scaleType="fitXY"
                 android:background="@drawable/qa2"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="@color/colorPrimary"
+                android:text="SPIRITUAL"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Question &amp; Answer"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/md_white_1000"/>
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:background="@drawable/arrow"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"/>
+
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/md_white_1000"></LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -51,6 +117,35 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:background="@drawable/qa3"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="@color/colorPrimary"
+                android:text="NIGHT LIFE"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Question &amp; Answer"
+                android:textColor="@color/md_white_1000"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:background="@drawable/arrow"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"/>
 
         </RelativeLayout>
     </LinearLayout>

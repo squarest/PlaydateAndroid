@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/md_green_600</color>
-    <color name="colorPrimaryDark">@color/md_green_600</color>
+    <color name="colorPrimary">#43c2ad</color>
+    <color name="colorPrimaryDark">#43c2ad</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="titleColor">#757575</color>

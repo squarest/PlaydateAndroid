@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.prince.logan.playdate.R;
 
 /**
@@ -29,6 +28,7 @@ public class MenuFragment extends Fragment{
         if (parent != null){
             parent.removeView(mRootView);
         }
+
         return mRootView;
     }
 

@@ -107,7 +107,7 @@
                        android:gravity="center|left"
                        android:textStyle="bold"
                        android:layout_marginLeft="25dp"
-                       android:textSize="16dp"/>
+                       android:textSize="15dp"/>
 
                    <TextView
                        android:layout_width="0dp"
@@ -117,7 +117,7 @@
                        android:text="David"
                        android:gravity="center|left"
                        android:layout_marginLeft="25dp"
-                       android:textSize="16dp"/>
+                       android:textSize="15dp"/>
                </LinearLayout>
                <LinearLayout
                    android:layout_width="match_parent"
@@ -144,7 +144,7 @@
                        android:text="Last Name :"
                        android:gravity="center|left"
                        android:layout_marginLeft="25dp"
-                       android:textSize="16dp"/>
+                       android:textSize="15dp"/>
 
                    <TextView
                        android:layout_width="0dp"
@@ -154,7 +154,7 @@
                        android:text="Castillo"
                        android:gravity="center|left"
                        android:layout_marginLeft="25dp"
-                       android:textSize="16dp"/>
+                       android:textSize="15dp"/>
                </LinearLayout>
 
                <LinearLayout
@@ -180,7 +180,7 @@
                        android:textStyle="bold"
                        android:gravity="center|left"
                        android:layout_marginLeft="25dp"
-                       android:textSize="16dp"/>
+                       android:textSize="15dp"/>
 
                    <TextView
                        android:layout_width="0dp"
@@ -190,7 +190,7 @@
                        android:text="Female"
                        android:gravity="center|left"
                        android:layout_marginLeft="25dp"
-                       android:textSize="16dp"/>
+                       android:textSize="15dp"/>
                </LinearLayout>
                <LinearLayout
                    android:layout_width="match_parent"
@@ -216,7 +216,7 @@
                        android:textStyle="bold"
                        android:gravity="center|left"
                        android:layout_marginLeft="25dp"
-                       android:textSize="16dp"/>
+                       android:textSize="15dp"/>
 
                    <TextView
                        android:layout_width="0dp"
@@ -226,7 +226,7 @@
                        android:text="2017-12-21"
                        android:gravity="center|left"
                        android:layout_marginLeft="25dp"
-                       android:textSize="16dp"/>
+                       android:textSize="15dp"/>
                </LinearLayout>
            </RelativeLayout>
 
