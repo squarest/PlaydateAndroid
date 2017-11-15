@@ -15,6 +15,13 @@
             android:background="@drawable/playdate_bg"
             android:orientation="vertical"
             android:gravity="center">
+            <com.andexert.library.RippleView
+                android:id="@+id/btn_playdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                rv_centered="true">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -22,6 +29,7 @@
                 android:text="Play Date"
                 android:textSize="30dp"
                 android:textStyle="bold"/>
+            </com.andexert.library.RippleView>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -48,7 +56,12 @@
             android:background="@drawable/chatting_bg"
             android:gravity="center"
             android:orientation="vertical">
-
+            <com.andexert.library.RippleView
+                android:id="@+id/btn_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                rv_centered="true">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,6 +70,7 @@
                 android:textSize="30dp"
                 android:textStyle="bold"
                 />
+            </com.andexert.library.RippleView>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

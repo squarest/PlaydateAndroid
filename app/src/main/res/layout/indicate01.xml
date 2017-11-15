@@ -2,8 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_green_600"
+    android:background="@drawable/slide1"
     android:id="@+id/lin_indicate01"
     android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/md_white_1000"
+        android:text="Playdate meet new people nearby and easily"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="200dp"/>
 
 </LinearLayout>

@@ -6,11 +6,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/menu_bg"
+        android:background="@drawable/menu_bg1"
         android:orientation="vertical"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,25 +26,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MENU"
-                android:textColor="@color/md_white_1000"
-                android:textSize="20dp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:layout_width="40dp"
                 android:layout_height="1dp"
                 android:layout_marginBottom="3dp"
-                android:background="@color/md_grey_400"></LinearLayout>
+                android:background="@color/md_white_1000"></LinearLayout>
 
             <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="1dp"
                 android:layout_marginBottom="3dp"
-                android:background="@color/md_grey_400"></LinearLayout>
+                android:background="@color/md_white_1000"></LinearLayout>
 
             <LinearLayout
                 android:layout_width="60dp"
                 android:layout_height="1dp"
-                android:background="@color/md_grey_400"></LinearLayout>
+                android:background="@color/md_white_1000"></LinearLayout>
         </LinearLayout>
 
         <LinearLayout

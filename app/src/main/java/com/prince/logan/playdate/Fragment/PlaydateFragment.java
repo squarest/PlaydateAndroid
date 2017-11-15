@@ -1,5 +1,6 @@
 package com.prince.logan.playdate.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,16 +9,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.andexert.library.RippleView;
+import com.prince.logan.playdate.Activity.ChatListActivity;
+import com.prince.logan.playdate.Activity.PlaydateListActivity;
 import com.prince.logan.playdate.R;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by Adib on 13-Apr-17.
  */
 
-public class PlaydateFragment extends Fragment {
+public class PlaydateFragment extends Fragment implements RippleView.OnRippleCompleteListener{
 
     private View mRootView;
-
+    @Bind(R.id.btn_playdate)
+    RippleView btnPlaydate;
+    @Bind(R.id.btn_chat)
+    RippleView btnChat;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,7 +39,34 @@ public class PlaydateFragment extends Fragment {
         if (parent != null){
             parent.removeView(mRootView);
         }
+        ButterKnife.bind(this, mRootView);
         return mRootView;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        setEvent();
+    }
+
+    private void setEvent(){
+        btnChat.setOnRippleCompleteListener(this);
+        btnPlaydate.setOnRippleCompleteListener(this);
+    }
+
+    @Override
+    public void onComplete(RippleView rippleView) {
+        switch (rippleView.getId())
+        {
+            case R.id.btn_playdate:
+                Intent playdateIntent = new Intent(getContext(), PlaydateListActivity.class);
+                startActivity(playdateIntent);
+                break;
+            case R.id.btn_chat:
+                Intent chatIntent = new Intent(getContext(), ChatListActivity.class);
+                startActivity(chatIntent);
+                break;
+        }
+    }
 }
