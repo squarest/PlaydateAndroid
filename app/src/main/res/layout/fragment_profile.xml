@@ -61,7 +61,7 @@
                        <ImageView
                            android:layout_width="30dp"
                            android:layout_height="30dp"
-                           android:src="@drawable/preference"/>
+                           android:src="@drawable/preference1"/>
                        <TextView
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
                        <ImageView
                            android:layout_width="30dp"
                            android:layout_height="30dp"
-                           android:src="@drawable/playdate"/>
+                           android:src="@drawable/playdate1"/>
                        <TextView
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
                    android:layout_height="45dp"
                    android:layout_below="@+id/lin_name"
                    android:id="@+id/lin_gender"
-                   android:background="@color/md_grey_50"
+                   android:background="@color/md_grey_100"
                    android:orientation="horizontal">
                    <TextView
                        android:layout_width="0dp"
@@ -203,7 +203,7 @@
                <LinearLayout
                    android:layout_width="match_parent"
                    android:layout_height="45dp"
-                   android:background="@color/md_grey_50"
+                   android:background="@color/md_grey_100"
                    android:layout_below="@+id/lin_birthday"
                    android:id="@+id/lin_country"
                    android:orientation="horizontal">

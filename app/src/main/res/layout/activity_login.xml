@@ -21,7 +21,7 @@
         app:piv_unselectedColor="@color/md_white_1000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="20dp"
         android:padding="15dp"
         attrs:piv_padding="12dp"
         attrs:piv_radius="4dp"

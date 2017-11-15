@@ -6,65 +6,49 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/menu_bg1"
+        android:background="@color/md_white_1000"
         android:orientation="vertical"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="25dp"
-            android:layout_weight="0.3"
-            android:gravity="center"
-            android:orientation="vertical">
-
+            android:layout_height="40dp"
+            android:background="@color/md_teal_300"
+            android:gravity="center|left"
+            android:paddingLeft="15dp">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/social"
+                android:layout_marginRight="10dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MENU"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20dp"
-                android:textStyle="bold"/>
-
-            <LinearLayout
-                android:layout_width="40dp"
-                android:layout_height="1dp"
-                android:layout_marginBottom="3dp"
-                android:background="@color/md_white_1000"></LinearLayout>
-
-            <LinearLayout
-                android:layout_width="50dp"
-                android:layout_height="1dp"
-                android:layout_marginBottom="3dp"
-                android:background="@color/md_white_1000"></LinearLayout>
-
-            <LinearLayout
-                android:layout_width="60dp"
-                android:layout_height="1dp"
-                android:background="@color/md_white_1000"></LinearLayout>
+                android:text="SOCIAL"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:textColor="@color/md_white_1000"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
+            android:layout_height="45dp"
             android:gravity="center|left"
-            android:layout_marginLeft="30dp">
+            android:layout_marginLeft="30dp"
+            android:id="@+id/lin_menu_playdate">
             <ImageView
-                android:layout_width="30dp"
+                android:layout_width="20dp"
                 android:layout_height="30dp"
                 android:src="@drawable/playdate"
                 android:layout_marginRight="10dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/md_white_1000"
+                android:textColor="@color/md_grey_900"
                 android:text="Playdates"
-                android:textSize="16dp"/>
+                android:textSize="15dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -82,14 +66,15 @@
             android:background="@color/md_grey_400"></LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
+            android:layout_height="45dp"
             android:gravity="center|left"
-            android:layout_marginLeft="30dp">
+            android:paddingLeft="30dp"
+            android:background="@color/md_grey_100"
+            android:id="@+id/lin_menu_chats">
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="30dp"
+                android:layout_width="20dp"
                 android:layout_height="30dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/chat_icon" />
@@ -97,9 +82,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/md_white_1000"
+                android:textColor="@color/md_grey_900"
                 android:text="Chats"
-                android:textSize="16dp"/>
+                android:textSize="15dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -111,27 +96,43 @@
                     android:src="@drawable/arrow_right"/>
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/md_grey_400"></LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
+            android:layout_height="40dp"
+            android:background="@color/md_teal_300"
             android:gravity="center|left"
-            android:layout_marginLeft="30dp">
+            android:paddingLeft="15dp">
             <ImageView
-                android:layout_width="30dp"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/about_mene"
+                android:layout_marginRight="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ABOUT"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:textColor="@color/md_white_1000"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center|left"
+            android:layout_marginLeft="30dp"
+            android:id="@+id/lin_menu_preference">
+            <ImageView
+                android:layout_width="20dp"
                 android:layout_height="30dp"
                 android:src="@drawable/preference"
                 android:layout_marginRight="10dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/md_white_1000"
+                android:textColor="@color/md_grey_900"
                 android:text="Preferences"
-                android:textSize="16dp"/>
+                android:textSize="15dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -149,14 +150,15 @@
             android:background="@color/md_grey_400"></LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
+            android:layout_height="45dp"
             android:gravity="center|left"
-            android:layout_marginLeft="30dp">
+            android:paddingLeft="30dp"
+            android:background="@color/md_grey_100"
+            android:id="@+id/lin_menu_feedback">
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="30dp"
+                android:layout_width="20dp"
                 android:layout_height="30dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/feedback" />
@@ -164,9 +166,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/md_white_1000"
+                android:textColor="@color/md_grey_900"
                 android:text="Feedback"
-                android:textSize="16dp"/>
+                android:textSize="15dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -184,21 +186,21 @@
             android:background="@color/md_grey_400"></LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
+            android:layout_height="45dp"
             android:gravity="center|left"
-            android:layout_marginLeft="30dp">
+            android:layout_marginLeft="30dp"
+            android:id="@+id/lin_menu_faq">
             <ImageView
-                android:layout_width="30dp"
+                android:layout_width="20dp"
                 android:layout_height="30dp"
                 android:src="@drawable/faq"
                 android:layout_marginRight="10dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/md_white_1000"
+                android:textColor="@color/md_grey_900"
                 android:text="FAQ"
-                android:textSize="16dp"/>
+                android:textSize="15dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -216,21 +218,22 @@
             android:background="@color/md_grey_400"></LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
+            android:layout_height="45dp"
             android:gravity="center|left"
-            android:layout_marginLeft="30dp">
+            android:paddingLeft="30dp"
+            android:background="@color/md_grey_100"
+            android:id="@+id/lin_menu_about">
             <ImageView
-                android:layout_width="30dp"
+                android:layout_width="20dp"
                 android:layout_height="30dp"
                 android:src="@drawable/about"
                 android:layout_marginRight="10dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/md_white_1000"
+                android:textColor="@color/md_grey_900"
                 android:text="About"
-                android:textSize="16dp"/>
+                android:textSize="15dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -247,14 +250,13 @@
             android:layout_height="1dp"
             android:background="@color/md_grey_400"></LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3"
-        android:gravity="center|left"
-        android:layout_marginLeft="30dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:gravity="center|left"
+            android:layout_marginLeft="30dp">
         </LinearLayout>
-
 
     </LinearLayout>
 

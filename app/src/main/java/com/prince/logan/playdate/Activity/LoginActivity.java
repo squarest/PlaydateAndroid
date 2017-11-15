@@ -1,7 +1,9 @@
 package com.prince.logan.playdate.Activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -19,9 +21,12 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.prince.logan.playdate.Model.UserModel;
 import com.prince.logan.playdate.R;
 import com.rd.PageIndicatorView;
 import com.rd.animation.type.AnimationType;
@@ -29,7 +34,9 @@ import com.rd.animation.type.AnimationType;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
@@ -46,7 +53,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Bind(R.id.viewPager)
     ViewPager pager;
 
+    private ProfileTracker profileTracker;
     CallbackManager mCallbackManager;
+
+    UserModel userModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +83,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         pageIndicatorView.setAnimationType(AnimationType.COLOR);
         pageIndicatorView.setViewPager(pager);
+
+        btn_login.setReadPermissions(Arrays.asList(
+                "user_location", "public_profile", "email", "user_birthday", "user_friends"));
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         mCallbackManager = CallbackManager.Factory.create();
@@ -130,24 +143,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         try {
                             Log.i("Response",response.toString());
 
-//                            String email = response.getJSONObject().getString("email");
-//                            String bday= response.getJSONObject().getString("birthday");
-                            String first_name = response.getJSONObject().getString("first_name");
-                            String lastName = response.getJSONObject().getString("last_name");
-
-                            String name = first_name + " " + lastName;
+                            String facebook_id = object.getString("id");
+                            String firstName = object.getString("first_name");
+                            String lastName = object.getString("last_name");
+                            String email = object.getString("email");
+                            String fullName = response.getJSONObject().getString("name");
                             String gender = response.getJSONObject().getString("gender");
+                            String image_url = "http://graph.facebook.com/" + facebook_id + "/picture?type=large";
 
-//                            savePreferences(name, gender);
-//                            ConnectServer();
+                            userModel.setUserModel(facebook_id, fullName, firstName, lastName, gender, image_url,email);
+
+//                            savePreferences(userModel.getID(), userModel.getUser_name(), userModel.getUser_email());
+
+                            Intent main = new Intent(LoginActivity.this, MainActivity.class);
+                            main.putExtra("user", 0);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("userModel", (Serializable) userModel);
+                            main.putExtras(bundle);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(LoginActivity.this, "Failed to connect to facebook!", Toast.LENGTH_SHORT).show();
+                            return;
                         }
                     }
                 });
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "id, email, first_name, last_name, gender, birthday");
+        parameters.putString("fields", "email, name, birthday, education, hometown, gender, inspirational_people, languages, first_name, last_name, relationship_status, friends,photos");
         request.setParameters(parameters);
         request.executeAsync();
     }
@@ -164,9 +186,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId()){
             case R.id.btn_facebook_login:
 //                btn_login.performClick();
-                Intent profileIntent = new Intent(this, MainActivity.class);
-                startActivity(profileIntent);
+                Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intentMain);
                 break;
         }
+    }
+
+    protected void savePreferences(int userID, String userName, String userMail) {
+//        // Create or retrieve the shared preference object.
+//        int mode = Activity.MODE_PRIVATE;
+//        SharedPreferences mySharedPreferences = getSharedPreferences(Variables.MYREF,
+//                mode);
+//        // Retrieve an editor to modify the shared preferences.
+//        SharedPreferences.Editor editor = mySharedPreferences.edit();
+//        // Store new primitive types in the shared preferences object.
+//        editor.putInt("user", userID);
+//        editor.putString("user_name", userName);
+//        editor.putString("user_mail", userMail);
+//
+//        // Commit the changes.
+//        editor.commit();
     }
 }
