@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -26,6 +30,13 @@ import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.prince.logan.playdate.Model.UserModel;
 import com.prince.logan.playdate.R;
 import com.rd.PageIndicatorView;
@@ -35,6 +46,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.Signature;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -56,6 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     CallbackManager mCallbackManager;
 
     UserModel userModel;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +79,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         ButterKnife.bind(this);
 
+        PackageInfo info;
+        try {
+            info = getPackageManager().getPackageInfo("com.prince.logan.playdate", PackageManager.GET_SIGNATURES);
+            for (android.content.pm.Signature signature : info.signatures) {
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String something = new String(Base64.encode(md.digest(), 0));
+                //String something = new String(Base64.encodeBytes(md.digest()));
+                Log.i("111111111", something);
+                Log.e("111111111", something);
+//                Toast.makeText(this, something , Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (PackageManager.NameNotFoundException e1) {
+            Log.e("name not found", e1.toString());
+        } catch (NoSuchAlgorithmException e) {
+            Log.e("no such an algorithm", e.toString());
+        } catch (Exception e) {
+            Log.e("exception", e.toString());
+        }
+
         initViews();
+        initData();
         setEvent();
     }
 
@@ -94,7 +132,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onSuccess(LoginResult loginResult)
                     {
-                        setFacebookData(loginResult);
+                        String accessToken= loginResult.getAccessToken().getToken();
+                        handleFacebookAccessToken(accessToken);
+//                        setFacebookData(loginResult);
                     }
 
                     @Override
@@ -131,6 +171,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return view;
     }
 
+    private void initData() {
+        userModel = new UserModel();
+        mAuth = FirebaseAuth.getInstance();
+    }
+
+    private void handleFacebookAccessToken(String token) {
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            String fbUser = user.getUid();
+                            Toast.makeText(LoginActivity.this, "Authentication Success.",
+                                    Toast.LENGTH_SHORT).show();
+//                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+//                            updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
     private void setFacebookData(final LoginResult loginResult)
     {
         GraphRequest request = GraphRequest.newMeRequest(
@@ -150,7 +221,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String gender = response.getJSONObject().getString("gender");
                             String image_url = "http://graph.facebook.com/" + facebook_id + "/picture?type=large";
 
-                            userModel = new UserModel();
                             userModel.setUserModel(facebook_id, fullName, firstName, lastName, gender, image_url,email);
 
 //                            savePreferences(userModel.getID(), userModel.getUser_name(), userModel.getUser_email());
@@ -185,11 +255,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_facebook_login:
-                btn_login.performClick();
-//                Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
-//                startActivity(intentMain);
+//                btn_login.performClick();
+                Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intentMain);
                 break;
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        updateUI(currentUser);
     }
 
     protected void savePreferences(int userID, String userName, String userMail) {
