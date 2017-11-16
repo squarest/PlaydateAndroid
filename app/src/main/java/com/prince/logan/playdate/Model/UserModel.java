@@ -44,14 +44,14 @@ public class UserModel implements Serializable {
         return avatar_url;
     }
 
-    public void setUserModel(String facebook_id, String user_full_name, String user_first_name, String user_last_name, String gender, String avatar_url, String user_mail) {
-        this.facebook_id = facebook_id;
-        this.user_full_name = user_full_name;
-        this.user_first_name = user_first_name;
-        this.user_last_name = user_last_name;
-        this.gender = gender;
-        this.avatar_url = avatar_url;
-        this.user_mail= user_mail;
+    public void setUserModel(String facebookId, String userFullName, String userFirstName, String userLastName, String userGender, String avatarUrl, String userMail) {
+        this.facebook_id = facebookId;
+        this.user_full_name = userFullName;
+        this.user_first_name = userFirstName;
+        this.user_last_name = userLastName;
+        this.gender = userGender;
+        this.avatar_url = avatarUrl;
+        this.user_mail= userMail;
     }
 
 }

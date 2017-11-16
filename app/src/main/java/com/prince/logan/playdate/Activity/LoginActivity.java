@@ -53,7 +53,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Bind(R.id.viewPager)
     ViewPager pager;
 
-    private ProfileTracker profileTracker;
     CallbackManager mCallbackManager;
 
     UserModel userModel;
@@ -151,6 +150,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String gender = response.getJSONObject().getString("gender");
                             String image_url = "http://graph.facebook.com/" + facebook_id + "/picture?type=large";
 
+                            userModel = new UserModel();
                             userModel.setUserModel(facebook_id, fullName, firstName, lastName, gender, image_url,email);
 
 //                            savePreferences(userModel.getID(), userModel.getUser_name(), userModel.getUser_email());
@@ -185,9 +185,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_facebook_login:
-//                btn_login.performClick();
-                Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intentMain);
+                btn_login.performClick();
+//                Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
+//                startActivity(intentMain);
                 break;
         }
     }
