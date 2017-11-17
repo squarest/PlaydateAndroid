@@ -8,11 +8,16 @@ import java.util.ArrayList;
 
 public class RequestModel {
     UserModel user;
+    private ArrayList<QuestionModel> cateQuestion;
     private String msg;
     private int result;
 
     public UserModel getUser(){
         return user;
+    }
+
+    public ArrayList<QuestionModel> getCateQuestion(){
+        return cateQuestion;
     }
 
     public String getMsg(){

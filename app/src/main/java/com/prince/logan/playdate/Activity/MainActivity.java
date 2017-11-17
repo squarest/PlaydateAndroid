@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static UserModel userProfile;
     public static String userFirebaseID;
+    public static boolean isFaq;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+        userProfile = new UserModel();
+        isFaq = false;
         gettingProfile();
     }
 
@@ -146,11 +149,14 @@ public class MainActivity extends AppCompatActivity {
 
                 if (responseData.getResult() == 1){
                     showAlert("Welcome", "Welcome to Playdates!");
+                    userProfile = responseData.getUser();
                     initView();
                     initEvent();
                 }
                 else{
-                    showAlert("Alert", responseData.getMsg());
+                    userProfile = responseData.getUser();
+                    initView();
+                    initEvent();
                 }
             }
 
@@ -222,6 +228,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
+                if (position == 1){
+                   isFaq = true;
+                }
                 mTabHost.setCurrentTab(position);
             }
 
@@ -231,6 +240,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
