@@ -17,4 +17,14 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">#e62228</item>
+        <item name="android:textColorPrimary">@color/md_black_1000</item>
+        <item name="android:textColor">@color/md_black_1000</item>
+        <item name="android:textColorHint">@color/md_black_1000</item>
+        <item name="android:background">@color/md_white_1000</item>
+        <item name="colorControlNormal">@color/md_black_1000</item>
+        <item name="colorButtonNormal">@color/md_yellow_900</item>
+    </style>
+
 </resources>

@@ -1,6 +1,7 @@
 package com.prince.logan.playdate.Activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -37,6 +38,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.prince.logan.playdate.Global.Constant;
 import com.prince.logan.playdate.Model.UserModel;
 import com.prince.logan.playdate.R;
 import com.rd.PageIndicatorView;
@@ -71,10 +73,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     UserModel userModel;
     private FirebaseAuth mAuth;
+    LoginResult facebookUserResult;
+    String fbUserId;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            String uid = currentUser.getUid();
+            Intent main = new Intent(LoginActivity.this, MainActivity.class);
+            main.putExtra("user_id", uid);
+            startActivity(main);
+            LoginActivity.this.overridePendingTransition(R.anim.slide_in_from_right,
+                    R.anim.slide_out_to_left);
+            LoginActivity.this.finish();
+        }
+
         setContentView(R.layout.activity_login);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         ButterKnife.bind(this);
@@ -87,10 +106,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
                 String something = new String(Base64.encode(md.digest(), 0));
-                //String something = new String(Base64.encodeBytes(md.digest()));
                 Log.i("111111111", something);
                 Log.e("111111111", something);
-//                Toast.makeText(this, something , Toast.LENGTH_SHORT).show();
             }
 
         } catch (PackageManager.NameNotFoundException e1) {
@@ -132,9 +149,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onSuccess(LoginResult loginResult)
                     {
+                        progressDialog = new ProgressDialog(LoginActivity.this, R.style.AppTheme_Dark_Dialog);
+                        progressDialog.setIndeterminate(true);
+                        progressDialog.setMessage("Please wait...");
+                        progressDialog.show();
+
                         String accessToken= loginResult.getAccessToken().getToken();
                         handleFacebookAccessToken(accessToken);
-//                        setFacebookData(loginResult);
+                        facebookUserResult = loginResult;
                     }
 
                     @Override
@@ -173,7 +195,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void initData() {
         userModel = new UserModel();
-        mAuth = FirebaseAuth.getInstance();
     }
 
     private void handleFacebookAccessToken(String token) {
@@ -186,32 +207,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            String fbUser = user.getUid();
-                            Toast.makeText(LoginActivity.this, "Authentication Success.",
-                                    Toast.LENGTH_SHORT).show();
-//                            updateUI(user);
+                            fbUserId = user.getUid();
+                            setFacebookData();
                         } else {
                             // If sign in fails, display a message to the user.
+                            progressDialog.dismiss();
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-//                            updateUI(null);
                         }
 
-                        // ...
                     }
                 });
     }
 
-    private void setFacebookData(final LoginResult loginResult)
+    private void setFacebookData()
     {
         GraphRequest request = GraphRequest.newMeRequest(
-                loginResult.getAccessToken(),
+                facebookUserResult.getAccessToken(),
                 new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         // Application code
                         try {
                             Log.i("Response",response.toString());
+
+                            progressDialog.dismiss();
 
                             String facebook_id = object.getString("id");
                             String firstName = object.getString("first_name");
@@ -221,18 +241,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String gender = response.getJSONObject().getString("gender");
                             String image_url = "http://graph.facebook.com/" + facebook_id + "/picture?type=large";
 
-                            userModel.setUserModel(facebook_id, fullName, firstName, lastName, gender, image_url,email);
-
-//                            savePreferences(userModel.getID(), userModel.getUser_name(), userModel.getUser_email());
+                            userModel.setUserModel(fbUserId, fullName, firstName, lastName, gender, image_url,email);
 
                             Intent main = new Intent(LoginActivity.this, MainActivity.class);
-                            main.putExtra("user", 0);
+                            main.putExtra("user_id", "");
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("userModel", (Serializable) userModel);
                             main.putExtras(bundle);
+                            startActivity(main);
+                            LoginActivity.this.overridePendingTransition(R.anim.slide_in_from_right,
+                                    R.anim.slide_out_to_left);
+                            LoginActivity.this.finish();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            progressDialog.dismiss();
                             Toast.makeText(LoginActivity.this, "Failed to connect to facebook!", Toast.LENGTH_SHORT).show();
                             return;
                         }
@@ -255,34 +278,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_facebook_login:
-//                btn_login.performClick();
-                Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intentMain);
+                btn_login.performClick();
                 break;
         }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        updateUI(currentUser);
-    }
-
-    protected void savePreferences(int userID, String userName, String userMail) {
-//        // Create or retrieve the shared preference object.
-//        int mode = Activity.MODE_PRIVATE;
-//        SharedPreferences mySharedPreferences = getSharedPreferences(Variables.MYREF,
-//                mode);
-//        // Retrieve an editor to modify the shared preferences.
-//        SharedPreferences.Editor editor = mySharedPreferences.edit();
-//        // Store new primitive types in the shared preferences object.
-//        editor.putInt("user", userID);
-//        editor.putString("user_name", userName);
-//        editor.putString("user_mail", userMail);
-//
-//        // Commit the changes.
-//        editor.commit();
     }
 }

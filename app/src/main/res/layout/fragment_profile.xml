@@ -41,6 +41,7 @@
                        android:text="Welcome, David Castillo!"
                        android:gravity="center"
                        android:textSize="17dp"
+                       android:id="@+id/txt_profile_fullname"
                        android:textColor="@color/md_white_1000"/>
                </LinearLayout>
 
@@ -66,6 +67,7 @@
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:text="PREFERENCE"
+                           android:id="@+id/txt_profile_preference"
                            android:textColor="@color/md_white_1000"
                            android:layout_marginLeft="20dp"/>
 
@@ -87,6 +89,7 @@
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:text="PLAYDATES"
+                           android:id="@+id/txt_profile_playdate"
                            android:textColor="@color/md_white_1000"
                            android:layout_marginLeft="20dp"/>
                    </LinearLayout>
@@ -115,6 +118,7 @@
                        android:layout_weight="5"
                        android:textColor="@color/md_black_1000"
                        android:text="David"
+                       android:id="@+id/txt_profile_firstname"
                        android:gravity="center|left"
                        android:layout_marginLeft="25dp"
                        android:textSize="15dp"/>
@@ -152,6 +156,7 @@
                        android:layout_weight="5"
                        android:textColor="@color/md_black_1000"
                        android:text="Castillo"
+                       android:id="@+id/txt_profile_lastname"
                        android:gravity="center|left"
                        android:layout_marginLeft="25dp"
                        android:textSize="15dp"/>
@@ -188,6 +193,7 @@
                        android:layout_weight="5"
                        android:textColor="@color/md_black_1000"
                        android:text="Female"
+                       android:id="@+id/txt_profile_gender"
                        android:gravity="center|left"
                        android:layout_marginLeft="25dp"
                        android:textSize="15dp"/>
@@ -212,7 +218,7 @@
                        android:layout_height="match_parent"
                        android:layout_weight="5"
                        android:textColor="@color/md_black_1000"
-                       android:text="Birthday :"
+                       android:text="Email :"
                        android:textStyle="bold"
                        android:gravity="center|left"
                        android:layout_marginLeft="25dp"
@@ -224,6 +230,7 @@
                        android:layout_weight="5"
                        android:textColor="@color/md_black_1000"
                        android:text="2017-12-21"
+                       android:id="@+id/txt_profile_mail"
                        android:gravity="center|left"
                        android:layout_marginLeft="25dp"
                        android:textSize="15dp"/>

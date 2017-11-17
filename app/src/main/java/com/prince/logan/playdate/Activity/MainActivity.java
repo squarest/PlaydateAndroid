@@ -1,6 +1,10 @@
 package com.prince.logan.playdate.Activity;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -22,10 +26,17 @@ import com.prince.logan.playdate.Fragment.ProfileFragment;
 import com.prince.logan.playdate.Fragment.MenuFragment;
 import com.prince.logan.playdate.Fragment.QAFragment;
 import com.prince.logan.playdate.Fragment.PlaydateFragment;
+import com.prince.logan.playdate.Interface.ApiClient;
+import com.prince.logan.playdate.Interface.ApiInterface;
+import com.prince.logan.playdate.Model.RequestModel;
+import com.prince.logan.playdate.Model.UserModel;
 import com.prince.logan.playdate.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.tab_menu
     };
 
+    public static UserModel userProfile;
+    public static String userFirebaseID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,14 +65,102 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         init();
-
     }
 
     private void init() {
+        gettingProfile();
+    }
 
-        initView();
+    private void gettingProfile() {
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            userFirebaseID = bundle.getString("user_id");
+            if (userFirebaseID.equals("")) {
+                userProfile = (UserModel) bundle.getSerializable("userModel");
+                signUpToServer();
+            } else {
+                loginToServer();
+            }
+        }
+    }
 
-        initEvent();
+    private void loginToServer() {
+
+        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        loading.setIndeterminate(true);
+        loading.setMessage("Please wait...");
+        loading.show();
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<RequestModel> req = apiService.login(userFirebaseID);
+        req.enqueue(new Callback<RequestModel>() {
+            @Override
+            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+                loading.dismiss();
+                RequestModel responseData = response.body();
+
+                if (responseData.getResult() == 1){
+                    userProfile = responseData.getUser();
+                    initView();
+                    initEvent();
+                }
+                else{
+                    showAlert("Alert", responseData.getMsg());
+                    MainActivity.this.finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RequestModel> call, Throwable t) {
+                t.printStackTrace();
+                loading.dismiss();
+                showAlert("Alert", "Failed!");
+            }
+        });
+    }
+
+    private void signUpToServer() {
+        String firebase_id = userProfile.get_firebase_id();
+        String user_full_name = userProfile.get_user_full_name();
+        String user_first_name = userProfile.get_user_first_name();
+        String user_last_name = userProfile.get_user_last_name();
+        String gender = userProfile.get_user_gender();
+        String avatar_url = userProfile.get_user_avatar();
+        String user_mail = userProfile.get_user_mail();
+
+        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        loading.setIndeterminate(true);
+        loading.setMessage("Please wait...");
+        loading.show();
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<RequestModel> req = apiService.signup(firebase_id, user_full_name, user_first_name, user_last_name, gender, avatar_url, user_mail);
+        req.enqueue(new Callback<RequestModel>() {
+            @Override
+            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+                loading.dismiss();
+                RequestModel responseData = response.body();
+
+                if (responseData.getResult() == 1){
+                    showAlert("Welcome", "Welcome to Playdates!");
+                    initView();
+                    initEvent();
+                }
+                else{
+                    showAlert("Alert", responseData.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RequestModel> call, Throwable t) {
+                t.printStackTrace();
+                loading.dismiss();
+                showAlert("Alert", "Failed!");
+            }
+        });
     }
 
     private void initView() {
@@ -116,7 +218,6 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -129,7 +230,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     @Override
@@ -152,5 +252,22 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void showAlert(String title, String msg){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        // Dialog Title
+        alertDialog.setTitle(title);
+        // Dialog Message
+        alertDialog.setMessage(msg);
+        // on pressing cancel button
+        alertDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        // Showing Alert Message
+        alertDialog.show();
     }
 }

@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class UserModel implements Serializable {
 
-    private String facebook_id;
+    private String firebase_id;
     private String user_full_name;
     private String user_first_name;
     private String user_last_name;
@@ -16,8 +16,8 @@ public class UserModel implements Serializable {
     private String avatar_url;
     private String user_mail;
 
-    public String get_facebook_id(){
-        return facebook_id;
+    public String get_firebase_id(){
+        return firebase_id;
     }
 
     public String get_user_full_name() {
@@ -44,8 +44,8 @@ public class UserModel implements Serializable {
         return avatar_url;
     }
 
-    public void setUserModel(String facebookId, String userFullName, String userFirstName, String userLastName, String userGender, String avatarUrl, String userMail) {
-        this.facebook_id = facebookId;
+    public void setUserModel(String firebaseId, String userFullName, String userFirstName, String userLastName, String userGender, String avatarUrl, String userMail) {
+        this.firebase_id = firebaseId;
         this.user_full_name = userFullName;
         this.user_first_name = userFirstName;
         this.user_last_name = userLastName;
