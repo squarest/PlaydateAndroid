@@ -18,6 +18,7 @@ import com.prince.logan.playdate.Activity.ChatListActivity;
 import com.prince.logan.playdate.Activity.LoginActivity;
 import com.prince.logan.playdate.Activity.MainActivity;
 import com.prince.logan.playdate.Activity.PlaydateListActivity;
+import com.prince.logan.playdate.Activity.PreferencesActivity;
 import com.prince.logan.playdate.Activity.QuestionActivity;
 import com.prince.logan.playdate.R;
 import com.squareup.picasso.Picasso;
@@ -106,11 +107,12 @@ public class ProfileFragment extends Fragment implements RippleView.OnRippleComp
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.txt_profile_playdate:
-                Intent main = new Intent(getContext(), PlaydateListActivity.class);
-                startActivity(main);
+                Intent intentPlaydate = new Intent(getContext(), PlaydateListActivity.class);
+                startActivity(intentPlaydate);
                 break;
             case R.id.txt_profile_preference:
-                Toast.makeText(getContext(), "preference", Toast.LENGTH_LONG).show();
+                Intent intentPreference = new Intent(getContext(), PreferencesActivity.class);
+                startActivity(intentPreference);
                 break;
         }
     }

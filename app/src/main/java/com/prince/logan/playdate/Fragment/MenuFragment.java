@@ -11,7 +11,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.prince.logan.playdate.Activity.AboutActivity;
+import com.prince.logan.playdate.Activity.ChatListActivity;
 import com.prince.logan.playdate.Activity.FAQActivity;
+import com.prince.logan.playdate.Activity.PlaydateListActivity;
+import com.prince.logan.playdate.Activity.PreferencesActivity;
 import com.prince.logan.playdate.R;
 
 import butterknife.Bind;
@@ -80,16 +83,19 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                 startActivity(faqIntent);
                 break;
             case R.id.lin_menu_playdate:
-
+                Intent playdateIntent = new Intent(getContext(), PlaydateListActivity.class);
+                startActivity(playdateIntent);
                 break;
             case R.id.lin_menu_chats:
-
+                Intent chatIntent = new Intent(getContext(), ChatListActivity.class);
+                startActivity(chatIntent);
                 break;
             case R.id.lin_menu_feedback:
 
                 break;
             case R.id.lin_menu_preference:
-
+                Intent preferenceIntent = new Intent(getContext(), PreferencesActivity.class);
+                startActivity(preferenceIntent);
                 break;
         }
     }

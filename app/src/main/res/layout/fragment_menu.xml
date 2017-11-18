@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:text="SOCIAL"
                 android:textStyle="bold"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:textColor="@color/md_white_1000"/>
         </LinearLayout>
 
@@ -47,8 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/md_grey_900"
-                android:text="Playdates"
-                android:textSize="15dp"/>
+                android:text="Playdates"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -83,8 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/md_grey_900"
-                android:text="Chats"
-                android:textSize="15dp"/>
+                android:text="Chats"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -101,19 +99,19 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/md_teal_300"
-            android:gravity="center|left"
-            android:paddingLeft="15dp">
+            android:gravity="center|left">
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/about_mene"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ABOUT"
                 android:textStyle="bold"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:textColor="@color/md_white_1000"/>
         </LinearLayout>
         <LinearLayout
@@ -131,8 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/md_grey_900"
-                android:text="Preferences"
-                android:textSize="15dp"/>
+                android:text="Preferences"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -167,8 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/md_grey_900"
-                android:text="Feedback"
-                android:textSize="15dp"/>
+                android:text="Feedback"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -199,8 +195,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/md_grey_900"
-                android:text="FAQ"
-                android:textSize="15dp"/>
+                android:text="FAQ"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -232,8 +227,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/md_grey_900"
-                android:text="About"
-                android:textSize="15dp"/>
+                android:text="About"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
