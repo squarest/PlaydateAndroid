@@ -23,14 +23,6 @@
                 android:scaleType="fitXY"
                 android:id="@+id/qa_adap_image"
                 android:background="@drawable/qa_placeholder"/>
-            <com.andexert.library.RippleView
-                android:id="@+id/btn_qa_adap_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                rv_centered="true">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -38,8 +30,9 @@
                     android:id="@+id/txt_qa_adap_category"
                     android:textColor="@color/md_white_1000"
                     android:textSize="30dp"
-                    android:textStyle="bold"/>
-            </com.andexert.library.RippleView>
+                    android:textStyle="bold"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"/>
 
             <TextView
                 android:layout_width="wrap_content"

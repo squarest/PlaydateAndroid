@@ -2,8 +2,13 @@ package com.prince.logan.playdate.Activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarChangeListener;
@@ -19,10 +24,10 @@ import info.hoang8f.android.segmented.SegmentedGroup;
  * Created by PRINCE on 11/17/2017.
  */
 
-public class PreferencesActivity extends Activity {
+public class PreferencesActivity extends Activity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener{
 
     @Bind(R.id.segmented_look_for)
-    SegmentedGroup segmentedGroup;
+    SegmentedGroup segmentLookFor;
     @Bind(R.id.txt_age_min)
     TextView txtAgeMin;
     @Bind(R.id.txt_age_max)
@@ -39,6 +44,8 @@ public class PreferencesActivity extends Activity {
     TextView txtDistMax;
     @Bind(R.id.rangeSeekbar_mile)
     CrystalSeekbar rangeMile;
+    @Bind(R.id.img_preference_back)
+    ImageView back;
 
 
     @Override
@@ -51,6 +58,7 @@ public class PreferencesActivity extends Activity {
     }
 
     private void setEvent() {
+        segmentLookFor.setOnCheckedChangeListener(this);
         rangeAge.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
             @Override
             public void valueChanged(Number minValue, Number maxValue) {
@@ -74,5 +82,35 @@ public class PreferencesActivity extends Activity {
                 txtDistMax.setText(String.valueOf(value)+"miles");
             }
         });
+
+        back.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, @IdRes int checkedId) {
+        switch (checkedId) {
+            case R.id.radio_woman:
+                Toast.makeText(this, "woman", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.radio_man:
+                Toast.makeText(this, "man", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.radio_both:
+                Toast.makeText(this, "both", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                // Nothing to do
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId())
+        {
+            case R.id.img_preference_back:
+                this.finish();
+                break;
+        }
     }
 }

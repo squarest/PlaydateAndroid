@@ -20,6 +20,7 @@
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:src="@drawable/back"
+                    android:id="@+id/img_chatlist_back"
                     android:layout_marginLeft="15dp"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -34,10 +35,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
             <ListView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:id="@+id/list_chat">
 
             </ListView>
         </LinearLayout>

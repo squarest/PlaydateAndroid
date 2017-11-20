@@ -1,8 +1,11 @@
 package com.prince.logan.playdate.Activity;
 
 import android.app.Activity;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -18,22 +21,26 @@ import butterknife.ButterKnife;
  * Created by PRINCE on 11/15/2017.
  */
 
-public class FAQActivity extends Activity {
+public class FAQActivity extends Activity implements View.OnClickListener{
 
     @Bind(R.id.list_faq)
     ListView listFaq;
     @Bind(R.id.search_faq)
     SearchView searchFaq;
+    @Bind(R.id.img_faq_back)
+    ImageView back;
 
     FaqAdapter adapter_faq;
 
     ArrayList<String> faqList = new ArrayList<String>();
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faq);
         ButterKnife.bind(this);
+
+        back.setOnClickListener(this);
 
         initView();
     }
@@ -61,5 +68,14 @@ public class FAQActivity extends Activity {
         faq_list.add("I'm confused. Where do I get an overview?");
 
         return faq_list;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.img_faq_back:
+                this.finish();
+                break;
+        }
     }
 }

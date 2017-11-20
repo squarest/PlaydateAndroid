@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.andexert.library.RippleView;
 import com.prince.logan.playdate.Activity.ChatListActivity;
+import com.prince.logan.playdate.Activity.MainActivity;
 import com.prince.logan.playdate.Activity.PlaydateListActivity;
 import com.prince.logan.playdate.R;
 

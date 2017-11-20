@@ -153,11 +153,6 @@ public class MainActivity extends AppCompatActivity {
                     initView();
                     initEvent();
                 }
-                else{
-                    userProfile = responseData.getUser();
-                    initView();
-                    initEvent();
-                }
             }
 
             @Override

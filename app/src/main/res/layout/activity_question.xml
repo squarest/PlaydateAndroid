@@ -20,6 +20,7 @@
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/back"
+                android:id="@+id/img_questions_back"
                 android:layout_marginLeft="15dp"/>
             <TextView
                 android:layout_width="wrap_content"

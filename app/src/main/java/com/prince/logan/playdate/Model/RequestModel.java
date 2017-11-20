@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class RequestModel {
     UserModel user;
     private ArrayList<QuestionModel> cateQuestion;
+    private ArrayList<UserModel> userList;
     private String msg;
     private int result;
 
@@ -18,6 +19,10 @@ public class RequestModel {
 
     public ArrayList<QuestionModel> getCateQuestion(){
         return cateQuestion;
+    }
+
+    public ArrayList<UserModel> getMatchedUser(){
+        return userList;
     }
 
     public String getMsg(){

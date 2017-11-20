@@ -239,7 +239,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             String email = object.getString("email");
                             String fullName = response.getJSONObject().getString("name");
                             String gender = response.getJSONObject().getString("gender");
-                            String image_url = "http://graph.facebook.com/" + facebook_id + "/picture?type=large";
+                            String image_url = "https://graph.facebook.com/" + facebook_id + "/picture?type=large";
 
                             userModel.setUserModel(fbUserId, fullName, firstName, lastName, gender, image_url,email);
 

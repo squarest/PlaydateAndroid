@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daprlabs.cardstack.SwipeDeck;
@@ -30,6 +31,7 @@ import com.prince.logan.playdate.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -37,7 +39,7 @@ import retrofit2.Callback;
  * Created by PRINCE on 11/14/2017.
  */
 
-public class QuestionActivity extends AppCompatActivity {
+public class QuestionActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "MainActivity";
     private SwipeDeck cardStack;
@@ -48,11 +50,15 @@ public class QuestionActivity extends AppCompatActivity {
     private int questionCateId;
     private ArrayList<QuestionModel> qaArrayList = new ArrayList<QuestionModel>();
 
+    @Bind(R.id.img_questions_back)
+    ImageView back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
+        back.setOnClickListener(this);
         getQuestions();
     }
 
@@ -186,6 +192,15 @@ public class QuestionActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.img_questions_back:
+                this.finish();
+                break;
+        }
     }
 
     public class SwipeDeckAdapter extends ArrayAdapter<QuestionModel> {

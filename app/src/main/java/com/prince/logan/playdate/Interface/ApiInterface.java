@@ -26,6 +26,11 @@ public interface ApiInterface {
     @GET("get_category")
     Call<RequestModel> get_category();
 
+    @POST("get_matched_users")
+    Call<RequestModel> get_matched_users(
+            @Query("user_id") String user_id
+    );
+
     @GET("getQuestionsById/{id}")
     Call<RequestModel> get_questions(
             @Path("id") int questionCateId
