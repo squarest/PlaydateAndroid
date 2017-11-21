@@ -1,10 +1,12 @@
 package com.prince.logan.playdate.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -42,6 +44,14 @@ public class FAQActivity extends Activity implements View.OnClickListener{
 
         back.setOnClickListener(this);
 
+        listFaq.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent detailIntent = new Intent(FAQActivity.this, FAQDetailActivity.class);
+                startActivity(detailIntent);
+            }
+        });
+
         initView();
     }
 
@@ -59,13 +69,13 @@ public class FAQActivity extends Activity implements View.OnClickListener{
         ArrayList<String> faq_list = new ArrayList<>();
 
         faq_list.add("I'm confused. Where do I get an overview?");
-        faq_list.add("I'm confused. Where do I get an overview?");
-        faq_list.add("I'm confused. Where do I get an overview?");
-        faq_list.add("I'm confused. Where do I get an overview?");
-        faq_list.add("I'm confused. Where do I get an overview?");
-        faq_list.add("I'm confused. Where do I get an overview?");
-        faq_list.add("I'm confused. Where do I get an overview?");
-        faq_list.add("I'm confused. Where do I get an overview?");
+        faq_list.add("How to Navigate the issue iOS App");
+        faq_list.add("Can I Download a Publication from the Issues?");
+        faq_list.add("How to rate this app?");
+        faq_list.add("How to Chat with someone who is matched");
+        faq_list.add("What is the main purpose of this app?");
+        faq_list.add("Can I meet someone with this app?");
+        faq_list.add("How to make the profile Image?");
 
         return faq_list;
     }

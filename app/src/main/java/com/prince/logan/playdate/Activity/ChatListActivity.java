@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -19,6 +21,7 @@ import com.prince.logan.playdate.Model.RequestModel;
 import com.prince.logan.playdate.Model.UserModel;
 import com.prince.logan.playdate.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -47,6 +50,18 @@ public class ChatListActivity extends Activity implements View.OnClickListener{
         ButterKnife.bind(this);
 
         back.setOnClickListener(this);
+
+        listChat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                UserModel chatUser = arryChatUsers.get(i);
+                Intent playdateDetailIntent = new Intent(ChatListActivity.this, ChatActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("userModel", (Serializable) chatUser);
+                playdateDetailIntent.putExtras(bundle);
+                startActivity(playdateDetailIntent);
+            }
+        });
 
         gettingChatLists();
     }

@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             userFirebaseID = bundle.getString("user_id");
             if (userFirebaseID.equals("")) {
                 userProfile = (UserModel) bundle.getSerializable("userModel");
+                userFirebaseID = userProfile.get_firebase_id();
                 signUpToServer();
             } else {
                 loginToServer();

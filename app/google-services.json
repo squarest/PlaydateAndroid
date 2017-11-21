@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "38515805991-p0vug5cedg74grm341act6h2gp937cpn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.prince.logan.playdate",
+            "certificate_hash": "b311a578b0e702ee157be5ba2cf3822a854bb7cf"
+          }
+        },
+        {
           "client_id": "38515805991-fjm76dqhucas43mmvpfhpsmta5783grf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
