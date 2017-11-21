@@ -1,14 +1,11 @@
 package com.prince.logan.playdate.Activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -33,7 +30,6 @@ import java.util.Date;
 
 public class ChatActivity extends Activity implements View.OnClickListener{
     private FirebaseDatabase mFirebaseDatabase;
-//    private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
     private ChatAdapter mAdapter;
@@ -43,6 +39,7 @@ public class ChatActivity extends Activity implements View.OnClickListener{
     private TextView txtUserName;
 
     UserModel chatUserDetail;
+    String roomId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +76,6 @@ public class ChatActivity extends Activity implements View.OnClickListener{
     }
 
     private void initFirebaseDatabase() {
-
-        String roomId;
 
         int compare = chatUserDetail.get_firebase_id().compareTo(MainActivity.userFirebaseID);
         if (compare>0){
