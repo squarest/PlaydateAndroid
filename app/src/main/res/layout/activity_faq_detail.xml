@@ -46,7 +46,8 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:textSize="18dp"/>
+                android:textSize="22dp"
+                android:id="@+id/txt_faq_title"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -54,7 +55,10 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
-                android:text="The image of the lady passing the soldier (image 3) had the greatest impact on me. I think this woman decided to dress up because she is determined to carry on with her life as usual, despite the presence of soldiers on the streets of her city. Dressing up allows her to feel powerful and important. I particularly noticed her pearls in this image, as they are traditionally a symbol of wealth. Clearly as an unarmed woman in a besieged city, she felt powerless and threatened. Walking the streets of her city dressed up to the nines is an act of defiance against the occupiers – the caption under the photo says that it was taken during the siege of Sarajevo."/>
+                android:textSize="16dp"
+                android:id="@+id/txt_faq_content"
+                android:text=""
+                android:textColor="@color/md_black_1000"/>
         </LinearLayout>
 
     </ScrollView>

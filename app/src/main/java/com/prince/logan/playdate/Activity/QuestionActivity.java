@@ -17,7 +17,9 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daprlabs.cardstack.SwipeDeck;
 import com.prince.logan.playdate.Adapter.QaCateAdapter;
@@ -141,6 +143,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void cardsDepleted() {
                 Log.i("MainActivity", "no more cards");
+                Toast.makeText(QuestionActivity.this, "No Questions", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -252,7 +255,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             String item = questions.getQuestions();
             txt_question.setText(item);
             int questionIndex = position+1;
-            txt_cate_question.setText(questions.getCategory()+"- Question "+questionIndex);
+            txt_cate_question.setText(questions.getSub_cate()+"- Question "+questionIndex);
 
             return v;
         }

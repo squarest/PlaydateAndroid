@@ -48,6 +48,7 @@ public class FAQActivity extends Activity implements View.OnClickListener{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent detailIntent = new Intent(FAQActivity.this, FAQDetailActivity.class);
+                detailIntent.putExtra("faq_id", i);
                 startActivity(detailIntent);
             }
         });
@@ -68,14 +69,11 @@ public class FAQActivity extends Activity implements View.OnClickListener{
 
         ArrayList<String> faq_list = new ArrayList<>();
 
-        faq_list.add("I'm confused. Where do I get an overview?");
-        faq_list.add("How to Navigate the issue iOS App");
-        faq_list.add("Can I Download a Publication from the Issues?");
-        faq_list.add("How to rate this app?");
-        faq_list.add("How to Chat with someone who is matched");
-        faq_list.add("What is the main purpose of this app?");
-        faq_list.add("Can I meet someone with this app?");
-        faq_list.add("How to make the profile Image?");
+        faq_list.add("How does this all work?");
+        faq_list.add("How do I request questions for an activity?");
+        faq_list.add("Why does chat only stay open for 24 hours?");
+        faq_list.add("Why do I only get one playdate a day?");
+        faq_list.add("How can I contribute?");
 
         return faq_list;
     }

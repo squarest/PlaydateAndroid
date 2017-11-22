@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.prince.logan.playdate.Fragment.ProfileFragment;
 import com.prince.logan.playdate.Fragment.MenuFragment;
@@ -111,8 +112,10 @@ public class MainActivity extends AppCompatActivity {
                     initEvent();
                 }
                 else{
-                    showAlert("Alert", responseData.getMsg());
-                    MainActivity.this.finish();
+                    Toast.makeText(getApplicationContext(), responseData.getMsg(), Toast.LENGTH_LONG).show();
+                    Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(loginIntent);
                 }
             }
 

@@ -31,8 +31,18 @@ public interface ApiInterface {
             @Query("user_id") String user_id
     );
 
+    @GET("get_sub_category/{id}")
+    Call<RequestModel> get_sub_category(
+            @Path("id") int questionCateId
+    );
+
     @GET("getQuestionsById/{id}")
     Call<RequestModel> get_questions(
             @Path("id") int questionCateId
+    );
+
+    @POST("report_bug")
+    Call<RequestModel> report_bug(
+            @Query("name") String name, @Query("mail") String mail, @Query("message") String message
     );
 }

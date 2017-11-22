@@ -47,7 +47,7 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/icon"/>
+                    android:src="@drawable/fav"/>
             </LinearLayout>
 
             <LinearLayout
@@ -73,14 +73,14 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
                     android:gravity="center|right"
                     android:layout_marginRight="10dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/md_grey_900"
-                        android:text="www.wozjobs.ca"
+                        android:textColor="@color/md_blue_900"
+                        android:text="www.makeplaydate.com"
                         android:textSize="15dp"/>
                 </LinearLayout>
             </LinearLayout>
@@ -106,7 +106,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/md_grey_900"
-                        android:text="Send Tweeter"
+                        android:text="Twitter"
                         android:textSize="15dp"/>
                 </LinearLayout>
                 <LinearLayout
@@ -118,8 +118,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/md_grey_900"
-                        android:text="http://makeplaydate"
+                        android:textColor="@color/md_blue_900"
+                        android:text="makeplaydate.com"
+                        android:id="@+id/txt_twitter"
                         android:textSize="15dp"/>
                 </LinearLayout>
             </LinearLayout>
@@ -134,7 +135,8 @@
                 android:gravity="center|left"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/lin_about_leave">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -173,7 +175,49 @@
                 android:gravity="center|left"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/lin_about_vision">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:layout_marginRight="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/md_grey_900"
+                        android:text="Vision"
+                        android:textSize="15dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|right"
+                    android:layout_marginRight="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/md_grey_900"
+                        android:text=""
+                        android:textSize="15dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/md_grey_400"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center|left"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal"
+                android:id="@+id/lin_about_knowledge">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -223,7 +267,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/md_grey_900"
-                        android:text="Disable push notification"
+                        android:text="Enable push notification"
                         android:textSize="15dp"/>
                 </LinearLayout>
                 <LinearLayout
@@ -234,7 +278,8 @@
                     android:layout_marginRight="10dp">
                     <Switch
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:id="@+id/switch_push_notification"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout

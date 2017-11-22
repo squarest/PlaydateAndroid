@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.andexert.library.RippleView;
 import com.prince.logan.playdate.Activity.ChatListActivity;
@@ -22,13 +24,18 @@ import butterknife.ButterKnife;
  * Created by Adib on 13-Apr-17.
  */
 
-public class PlaydateFragment extends Fragment implements RippleView.OnRippleCompleteListener{
+public class PlaydateFragment extends Fragment implements RippleView.OnRippleCompleteListener, View.OnClickListener{
 
     private View mRootView;
     @Bind(R.id.btn_playdate)
     RippleView btnPlaydate;
     @Bind(R.id.btn_chat)
     RippleView btnChat;
+    @Bind(R.id.lin_playdate)
+    LinearLayout linPlaydate;
+    @Bind(R.id.lin_chat)
+    LinearLayout linChat;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +61,8 @@ public class PlaydateFragment extends Fragment implements RippleView.OnRippleCom
     private void setEvent(){
         btnChat.setOnRippleCompleteListener(this);
         btnPlaydate.setOnRippleCompleteListener(this);
+        linChat.setOnClickListener(this);
+        linPlaydate.setOnClickListener(this);
     }
 
     @Override
@@ -65,6 +74,20 @@ public class PlaydateFragment extends Fragment implements RippleView.OnRippleCom
                 startActivity(playdateIntent);
                 break;
             case R.id.btn_chat:
+                Intent chatIntent = new Intent(getContext(), ChatListActivity.class);
+                startActivity(chatIntent);
+                break;
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.lin_playdate:
+                Intent playdateIntent = new Intent(getContext(), PlaydateListActivity.class);
+                startActivity(playdateIntent);
+                break;
+            case R.id.lin_chat:
                 Intent chatIntent = new Intent(getContext(), ChatListActivity.class);
                 startActivity(chatIntent);
                 break;

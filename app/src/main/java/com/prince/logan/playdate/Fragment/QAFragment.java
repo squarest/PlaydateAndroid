@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.prince.logan.playdate.Activity.FAQActivity;
 import com.prince.logan.playdate.Activity.QuestionActivity;
+import com.prince.logan.playdate.Activity.QuestionSubCateActivity;
 import com.prince.logan.playdate.Adapter.QaCateAdapter;
 import com.prince.logan.playdate.Interface.ApiClient;
 import com.prince.logan.playdate.Interface.ApiInterface;
@@ -77,8 +78,9 @@ public class QAFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 QuestionModel itemCate = questionCateList.get(i);
-                Intent intentQuestion = new Intent(getContext(), QuestionActivity.class);
-                intentQuestion.putExtra("cate_id", itemCate.getQa_cate_id());
+                Intent intentQuestion = new Intent(getContext(), QuestionSubCateActivity.class);
+                intentQuestion.putExtra("cate_id", itemCate.getCate_id());
+                intentQuestion.putExtra("cate_title", itemCate.getCategory());
                 startActivity(intentQuestion);
             }
         });

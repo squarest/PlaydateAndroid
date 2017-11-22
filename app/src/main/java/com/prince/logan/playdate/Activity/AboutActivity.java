@@ -1,10 +1,14 @@
 package com.prince.logan.playdate.Activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.prince.logan.playdate.R;
 
@@ -16,8 +20,16 @@ import butterknife.ButterKnife;
  */
 
 public class AboutActivity extends Activity implements ImageView.OnClickListener{
+
     @Bind(R.id.img_about_back)
     ImageView back;
+    @Bind(R.id.txt_twitter)
+    TextView txtTwitter;
+    @Bind(R.id.lin_about_vision)
+    LinearLayout linVision;
+    @Bind(R.id.lin_about_knowledge)
+    LinearLayout linKnowledge;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +37,10 @@ public class AboutActivity extends Activity implements ImageView.OnClickListener
         ButterKnife.bind(this);
 
         back.setOnClickListener(this);
+        linKnowledge.setOnClickListener(this);
+        linVision.setOnClickListener(this);
+
+        txtTwitter.setText("@makeplaydate");
     }
 
     @Override
@@ -33,6 +49,29 @@ public class AboutActivity extends Activity implements ImageView.OnClickListener
             case R.id.img_about_back:
                 this.finish();
                 break;
+            case R.id.lin_about_vision:
+                showAlert("Vision", "Our vision is to make it easy to meet new people and have fun");
+                break;
+            case R.id.lin_about_knowledge:
+                showAlert("Acknowledgements", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
+                break;
         }
+    }
+
+    public void showAlert(String title, String msg){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        // Dialog Title
+        alertDialog.setTitle(title);
+        // Dialog Message
+        alertDialog.setMessage(msg);
+        // on pressing cancel button
+        alertDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        // Showing Alert Message
+        alertDialog.show();
     }
 }

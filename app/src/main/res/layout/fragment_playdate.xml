@@ -14,7 +14,8 @@
             android:layout_weight="5"
             android:background="@drawable/playdate_bg"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:id="@+id/lin_playdate">
             <com.andexert.library.RippleView
                 android:id="@+id/btn_playdate"
                 android:layout_width="wrap_content"
@@ -55,6 +56,7 @@
             android:layout_weight="5"
             android:background="@drawable/chatting_bg"
             android:gravity="center"
+            android:id="@+id/lin_chat"
             android:orientation="vertical">
             <com.andexert.library.RippleView
                 android:id="@+id/btn_chat"

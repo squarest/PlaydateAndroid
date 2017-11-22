@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:text="Sample Text"
             android:gravity="center_horizontal"
-            android:textSize="15dp"
+            android:textSize="16dp"
             android:textColor="@color/md_white_1000"
             android:layout_marginTop="30dp"/>
 

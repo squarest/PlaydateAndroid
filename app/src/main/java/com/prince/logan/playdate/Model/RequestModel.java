@@ -10,6 +10,7 @@ public class RequestModel {
     UserModel user;
     private ArrayList<QuestionModel> cateQuestion;
     private ArrayList<UserModel> userList;
+    private ArrayList<SubCateModel> subCategory;
     private String msg;
     private int result;
 
@@ -23,6 +24,10 @@ public class RequestModel {
 
     public ArrayList<UserModel> getMatchedUser(){
         return userList;
+    }
+
+    public ArrayList<SubCateModel> getSubCategory(){
+        return subCategory;
     }
 
     public String getMsg(){
