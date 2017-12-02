@@ -12,6 +12,7 @@ public class QuestionModel{
     private String category;
     private String questions;
     private String img_cate;
+    private int is_answer;
 
     public int getId(){
         return id;
@@ -39,5 +40,9 @@ public class QuestionModel{
 
     public String getQuestions() {
         return questions;
+    }
+
+    public int getIs_answer(){
+        return is_answer;
     }
 }

@@ -1,5 +1,6 @@
 package com.prince.logan.playdate.Activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -51,7 +52,12 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     private SwipeDeckAdapter adapter;
 
     private int questionCateId;
+    private int questionSubCateId;
+    private int cardIndex;
+    private int isAnswered;
     private ArrayList<QuestionModel> qaArrayList = new ArrayList<QuestionModel>();
+
+    StringBuilder questions = new StringBuilder();
 
     @Bind(R.id.img_questions_back)
     ImageView back;
@@ -63,6 +69,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         ButterKnife.bind(this);
 
         back.setOnClickListener(this);
+        cardIndex = 0;
         getQuestions();
     }
 
@@ -76,11 +83,13 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             questionCateId = bundle.getInt("cate_id");
+            questionSubCateId = bundle.getInt("sub_cate_id");
+            isAnswered = bundle.getInt("answer_id");
         }
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<RequestModel> req = apiService.get_questions(questionCateId);
+        Call<RequestModel> req = apiService.get_questions(questionSubCateId);
         req.enqueue(new Callback<RequestModel>() {
             @Override
             public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
@@ -133,17 +142,26 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void cardSwipedLeft(int position) {
                 Log.i("MainActivity", "card was swiped left, position in adapter: " + position);
+                cardIndex++;
             }
 
             @Override
             public void cardSwipedRight(int position) {
                 Log.i("MainActivity", "card was swiped right, position in adapter: " + position);
+                cardIndex++;
+                questions.append(qaArrayList.get(position).getId()+",");
             }
 
             @Override
             public void cardsDepleted() {
-                Log.i("MainActivity", "no more cards");
-                Toast.makeText(QuestionActivity.this, "No Questions", Toast.LENGTH_LONG).show();
+                StringBuilder questionString = questions;
+                if(questionString.toString().equals("")){
+                    showAlert("", "You've never answered! Please try again");
+                    ((Activity)context).finish();
+                }
+                else{
+                    showQuestionAlert("", "You've answered all questions. Will you save this answers?", questionString);
+                }
             }
 
             @Override
@@ -165,7 +183,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 cardStack.swipeTopCardLeft(180);
-
+                cardIndex++;
             }
         });
         Button btn2 = (Button) findViewById(R.id.button2);
@@ -173,6 +191,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 cardStack.swipeTopCardRight(180);
+                cardIndex++;
+                questions.append(qaArrayList.get(cardIndex).getId()+",");
             }
         });
     }
@@ -206,6 +226,100 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                 this.finish();
                 break;
         }
+    }
+
+    public void showQuestionAlert(String title, String msg, final StringBuilder answers){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        // Dialog Title
+        alertDialog.setTitle(title);
+        // Dialog Message
+        alertDialog.setMessage(msg);
+        // on pressing cancel button
+        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if (isAnswered >0){
+                    updateAnswers(answers, isAnswered);
+                }
+                else{
+                    savingAnswers(answers);
+                }
+            }
+        });
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                dialog.cancel();
+            }
+        });
+        // Showing Alert Message
+        alertDialog.show();
+    }
+
+    private void updateAnswers(StringBuilder answers, int answer_id) {
+        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        loading.setIndeterminate(true);
+        loading.setMessage("Updating answers...");
+        loading.show();
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<RequestModel> req = apiService.update_answers(answer_id, answers.toString());
+        req.enqueue(new Callback<RequestModel>() {
+            @Override
+            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+                RequestModel responseData = response.body();
+
+                loading.dismiss();
+                if (responseData.getResult() == 1){
+                    ((Activity)context).finish();
+                }
+                else{
+                    showAlert("Alert", responseData.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RequestModel> call, Throwable t) {
+                t.printStackTrace();
+                loading.dismiss();
+                showAlert("Alert", "Failed!");
+            }
+        });
+    }
+
+    private void savingAnswers(StringBuilder answers) {
+        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        loading.setIndeterminate(true);
+        loading.setMessage("Saving answers...");
+        loading.show();
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        String user_id = MainActivity.userFirebaseID;
+        if(user_id.equals("") || user_id == null){
+            user_id = MainActivity.userProfile.get_firebase_id();
+        }
+        Call<RequestModel> req = apiService.saving_answers(questionCateId, questionSubCateId, user_id, answers.toString());
+        req.enqueue(new Callback<RequestModel>() {
+            @Override
+            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+                RequestModel responseData = response.body();
+
+                loading.dismiss();
+                if (responseData.getResult() == 1){
+                    ((Activity)context).finish();
+                }
+                else{
+                    showAlert("Alert", responseData.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RequestModel> call, Throwable t) {
+                t.printStackTrace();
+                loading.dismiss();
+                showAlert("Alert", "Failed!");
+            }
+        });
     }
 
     public class SwipeDeckAdapter extends ArrayAdapter<QuestionModel> {

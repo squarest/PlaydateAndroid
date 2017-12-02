@@ -1,8 +1,10 @@
 package com.prince.logan.playdate.Activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -71,14 +73,54 @@ public class QuestionSubCateActivity extends Activity{
         listSubCate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                subCate = subCateList.get(i);
-                Intent questionIntent = new Intent(QuestionSubCateActivity.this, QuestionActivity.class);
-                questionIntent.putExtra("cate_id", subCate.getSub_cate_id());
-                startActivity(questionIntent);
+                checkAnswer(i);
             }
         });
 
         gettingSubCategories();
+    }
+
+
+
+    private void checkAnswer(int index) {
+        subCate = subCateList.get(index);
+
+        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        loading.setIndeterminate(true);
+        loading.setMessage("Saving answers...");
+        loading.show();
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        String user_id = MainActivity.userFirebaseID;
+        if(user_id.equals("") || user_id == null){
+            user_id = MainActivity.userProfile.get_firebase_id();
+        }
+        Call<RequestModel> req = apiService.check_answers(questionCateId, subCate.getSub_cate_id(), user_id);
+        req.enqueue(new Callback<RequestModel>() {
+            @Override
+            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+                RequestModel responseData = response.body();
+
+                loading.dismiss();
+                if (responseData.getResult() == 1){
+                    Intent questionIntent = new Intent(QuestionSubCateActivity.this, QuestionActivity.class);
+                    questionIntent.putExtra("sub_cate_id", subCate.getSub_cate_id());
+                    questionIntent.putExtra("cate_id", questionCateId);
+                    questionIntent.putExtra("answer_id", -1);
+                    startActivity(questionIntent);
+                }
+                else{
+                    showAlertReanswer("", responseData.getMsg(), responseData.getAnswer_id());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RequestModel> call, Throwable t) {
+                t.printStackTrace();
+                loading.dismiss();
+                showAlert("Alert", "Failed!");
+            }
+        });
     }
 
     private void gettingSubCategories() {
@@ -104,7 +146,7 @@ public class QuestionSubCateActivity extends Activity{
                     subAdapter.notifyDataSetChanged();
                 }
                 else{
-//                    showAlert("Alert", "Failed!");
+                    showAlert("Alert", "Failed!");
                 }
             }
 
@@ -112,8 +154,56 @@ public class QuestionSubCateActivity extends Activity{
             public void onFailure(Call<RequestModel> call, Throwable t) {
                 t.printStackTrace();
                 loading.dismiss();
-//                showAlert("Alert", "Failed!");
+                showAlert("Alert", "Failed!");
             }
         });
+    }
+    public void showAlert(String title, String msg){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        // Dialog Title
+        alertDialog.setTitle(title);
+        // Dialog Message
+        alertDialog.setMessage(msg);
+        // on pressing cancel button
+        alertDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        // Showing Alert Message
+        alertDialog.show();
+    }
+
+    public void showAlertReanswer(String title, String msg, final int answer_id){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        // Dialog Title
+        alertDialog.setTitle(title);
+        // Dialog Message
+        alertDialog.setMessage(msg);
+        // on pressing cancel button
+        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent questionIntent = new Intent(QuestionSubCateActivity.this, QuestionActivity.class);
+                questionIntent.putExtra("sub_cate_id", subCate.getSub_cate_id());
+                questionIntent.putExtra("cate_id", questionCateId);
+                questionIntent.putExtra("answer_id", answer_id);
+                startActivity(questionIntent);
+            }
+        });
+        alertDialog.setNegativeButton("View answers", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                Intent viewAnswerIntent = new Intent(QuestionSubCateActivity.this, ViewAnswerActivity.class);
+                viewAnswerIntent.putExtra("answer_id", answer_id);
+                viewAnswerIntent.putExtra("sub_cate_id", subCate.getSub_cate_id());
+                viewAnswerIntent.putExtra("cate_id", questionCateId);
+                viewAnswerIntent.putExtra("sub_title", subCate.getSub_cate());
+                startActivity(viewAnswerIntent);
+            }
+        });
+        // Showing Alert Message
+        alertDialog.show();
     }
 }

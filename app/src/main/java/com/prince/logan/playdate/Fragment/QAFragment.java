@@ -39,7 +39,7 @@ import retrofit2.Callback;
 public class QAFragment extends Fragment{
 
     private View mRootView;
-    public static ArrayList<QuestionModel> questionCateList = new ArrayList<QuestionModel>();
+    public ArrayList<QuestionModel> questionCateList = new ArrayList<QuestionModel>();
     QaCateAdapter qaCateAdapter;
 
     @Bind(R.id.list_qa_category)

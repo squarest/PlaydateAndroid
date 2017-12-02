@@ -23,12 +23,14 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.prince.logan.playdate.Adapter.QaCateAdapter;
 import com.prince.logan.playdate.Fragment.ProfileFragment;
 import com.prince.logan.playdate.Fragment.MenuFragment;
 import com.prince.logan.playdate.Fragment.QAFragment;
 import com.prince.logan.playdate.Fragment.PlaydateFragment;
 import com.prince.logan.playdate.Interface.ApiClient;
 import com.prince.logan.playdate.Interface.ApiInterface;
+import com.prince.logan.playdate.Model.QuestionModel;
 import com.prince.logan.playdate.Model.RequestModel;
 import com.prince.logan.playdate.Model.UserModel;
 import com.prince.logan.playdate.R;
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Fragment> mFragmentList;
     private Class mClass[] = {ProfileFragment.class,QAFragment.class,PlaydateFragment.class,MenuFragment.class};
     private Fragment mFragment[] = {new ProfileFragment(),new QAFragment(),new PlaydateFragment(),new MenuFragment()};
-    private String mTitles[] = {"Profile","Q&A","Playdate","Menu"};
+    private String mTitles[] = {"Profile","Question & Answer","Playdate","Menu"};
     private int mImages[] = {
             R.drawable.tab_profile,
             R.drawable.tab_qa,
@@ -56,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static UserModel userProfile;
     public static String userFirebaseID;
-    public static boolean isFaq;
+    public static boolean isPlaydate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         userProfile = new UserModel();
-        isFaq = false;
+        isPlaydate = true;
         gettingProfile();
     }
 
@@ -103,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         req.enqueue(new Callback<RequestModel>() {
             @Override
             public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+
                 loading.dismiss();
                 RequestModel responseData = response.body();
 
@@ -129,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void signUpToServer() {
+
         String firebase_id = userProfile.get_firebase_id();
         String user_full_name = userProfile.get_user_full_name();
         String user_first_name = userProfile.get_user_first_name();
@@ -148,11 +153,9 @@ public class MainActivity extends AppCompatActivity {
         req.enqueue(new Callback<RequestModel>() {
             @Override
             public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
-                loading.dismiss();
                 RequestModel responseData = response.body();
 
                 if (responseData.getResult() == 1){
-                    showAlert("Welcome", "Welcome to Playdates!");
                     userProfile = responseData.getUser();
                     initView();
                     initEvent();
@@ -227,9 +230,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 1){
-                   isFaq = true;
-                }
                 mTabHost.setCurrentTab(position);
             }
 

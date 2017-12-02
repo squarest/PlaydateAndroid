@@ -1,6 +1,9 @@
 package com.prince.logan.playdate.Fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +16,7 @@ import android.widget.LinearLayout;
 import com.prince.logan.playdate.Activity.AboutActivity;
 import com.prince.logan.playdate.Activity.ChatListActivity;
 import com.prince.logan.playdate.Activity.FAQActivity;
+import com.prince.logan.playdate.Activity.MainActivity;
 import com.prince.logan.playdate.Activity.PlaydateListActivity;
 import com.prince.logan.playdate.Activity.PreferencesActivity;
 import com.prince.logan.playdate.R;
@@ -83,20 +87,46 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                 startActivity(faqIntent);
                 break;
             case R.id.lin_menu_playdate:
-                Intent playdateIntent = new Intent(getContext(), PlaydateListActivity.class);
-                startActivity(playdateIntent);
+                if(MainActivity.isPlaydate){
+                    Intent playdateIntent = new Intent(getContext(), PlaydateListActivity.class);
+                    startActivity(playdateIntent);
+                }
+                else{
+                    showAlert("Warning", "You can't receive playdates. Please enable playdates in order to receive the playdates");
+                }
                 break;
             case R.id.lin_menu_chats:
                 Intent chatIntent = new Intent(getContext(), ChatListActivity.class);
                 startActivity(chatIntent);
                 break;
             case R.id.lin_menu_feedback:
-
+                Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", "makeplaydate@gmail.com", null));
+                i.putExtra(android.content.Intent.EXTRA_SUBJECT, "Report a bug");
+                i.putExtra(android.content.Intent.EXTRA_TEXT, "");
+                startActivity(Intent.createChooser(i, "Send email"));
                 break;
             case R.id.lin_menu_preference:
                 Intent preferenceIntent = new Intent(getContext(), PreferencesActivity.class);
                 startActivity(preferenceIntent);
                 break;
         }
+    }
+
+    public void showAlert(String title, String msg){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+
+        // Dialog Title
+        alertDialog.setTitle(title);
+        // Dialog Message
+        alertDialog.setMessage(msg);
+        // on pressing cancel button
+        alertDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        // Showing Alert Message
+        alertDialog.show();
     }
 }

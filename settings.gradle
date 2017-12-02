@@ -1,1 +1,1 @@
-include ':app', ':pageindicatorview'
+include ':app', ':pageindicatorview', ':quickblox-android-sdk-chat-3.5.1', ':quickblox-android-sdk-core-3.5.1'

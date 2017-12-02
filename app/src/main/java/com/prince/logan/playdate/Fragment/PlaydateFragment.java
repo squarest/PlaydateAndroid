@@ -1,5 +1,7 @@
 package com.prince.logan.playdate.Fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -84,13 +86,35 @@ public class PlaydateFragment extends Fragment implements RippleView.OnRippleCom
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.lin_playdate:
-                Intent playdateIntent = new Intent(getContext(), PlaydateListActivity.class);
-                startActivity(playdateIntent);
+                if(MainActivity.isPlaydate){
+                    Intent playdateIntent = new Intent(getContext(), PlaydateListActivity.class);
+                    startActivity(playdateIntent);
+                }
+                else{
+                    showAlert("Warning", "You can't receive playdates. Please enable playdates in order to receive the playdates");
+                }
                 break;
             case R.id.lin_chat:
                 Intent chatIntent = new Intent(getContext(), ChatListActivity.class);
                 startActivity(chatIntent);
                 break;
         }
+    }
+
+    public void showAlert(String title, String msg){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+
+        // Dialog Title
+        alertDialog.setTitle(title);
+        // Dialog Message
+        alertDialog.setMessage(msg);
+        // on pressing cancel button
+        alertDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        // Showing Alert Message
+        alertDialog.show();
     }
 }

@@ -45,4 +45,29 @@ public interface ApiInterface {
     Call<RequestModel> report_bug(
             @Query("name") String name, @Query("mail") String mail, @Query("message") String message
     );
+
+    @POST("set_user_playdate")
+    Call<RequestModel> set_user_playdate(
+            @Query("firebase_id") String firebaseId, @Query("cate_id") int cateId
+    );
+
+    @POST("saving_answers")
+    Call<RequestModel> saving_answers(
+            @Query("cate_id") int cateId, @Query("sub_cate_id") int subId, @Query("user_id") String userId, @Query("answers") String answer
+    );
+
+    @POST("check_answers")
+    Call<RequestModel> check_answers(
+            @Query("cate_id") int cateId, @Query("sub_cate_id") int subId, @Query("user_id") String userId
+    );
+
+    @POST("update_answers")
+    Call<RequestModel> update_answers(
+            @Query("answer_id") int answerId, @Query("answers") String question
+    );
+
+    @GET("getting_answered_question/{id}")
+    Call<RequestModel> getting_answered_question(
+            @Path("id") int answerId
+    );
 }
