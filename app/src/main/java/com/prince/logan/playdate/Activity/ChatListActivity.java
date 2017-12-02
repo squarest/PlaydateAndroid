@@ -74,7 +74,7 @@ public class ChatListActivity extends Activity implements View.OnClickListener{
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<RequestModel> req = apiService.get_matched_users(MainActivity.userFirebaseID);
+        Call<RequestModel> req = apiService.get_all_users(MainActivity.userFirebaseID);
         req.enqueue(new Callback<RequestModel>() {
             @Override
             public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {

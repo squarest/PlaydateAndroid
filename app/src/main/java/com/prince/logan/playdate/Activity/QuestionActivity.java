@@ -263,7 +263,10 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         loading.show();
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<RequestModel> req = apiService.update_answers(answer_id, answers.toString());
+
+        String strAnswers = answers.toString().substring(0, answers.toString().length() - 1);
+
+        Call<RequestModel> req = apiService.update_answers(answer_id, strAnswers);
         req.enqueue(new Callback<RequestModel>() {
             @Override
             public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
@@ -298,7 +301,11 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         if(user_id.equals("") || user_id == null){
             user_id = MainActivity.userProfile.get_firebase_id();
         }
-        Call<RequestModel> req = apiService.saving_answers(questionCateId, questionSubCateId, user_id, answers.toString());
+
+        String strAnswers = answers.toString().substring(0, answers.toString().length() - 1);
+
+
+        Call<RequestModel> req = apiService.saving_answers(questionCateId, questionSubCateId, user_id, strAnswers);
         req.enqueue(new Callback<RequestModel>() {
             @Override
             public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {

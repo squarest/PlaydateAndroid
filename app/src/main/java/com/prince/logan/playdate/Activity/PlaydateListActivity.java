@@ -39,6 +39,7 @@ public class PlaydateListActivity extends Activity implements View.OnClickListen
 
     ArrayList<UserModel> arrayListUser = new ArrayList<UserModel>();
     PlaydateListAdapter playListAdapter;
+    int subCateId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,8 +47,13 @@ public class PlaydateListActivity extends Activity implements View.OnClickListen
         setContentView(R.layout.activity_playdate_list);
         ButterKnife.bind(this);
 
-        setEvent();
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            subCateId = bundle.getInt("sub_cate_id");
+        }
 
+        setEvent();
         gettingMatchedUser();
     }
 
@@ -74,7 +80,7 @@ public class PlaydateListActivity extends Activity implements View.OnClickListen
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<RequestModel> req = apiService.get_matched_users(MainActivity.userFirebaseID);
+        Call<RequestModel> req = apiService.get_matched_users(MainActivity.userFirebaseID, MainActivity.userProfile.getUser_playdate(), subCateId);
         req.enqueue(new Callback<RequestModel>() {
             @Override
             public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {

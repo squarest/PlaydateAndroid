@@ -31,6 +31,7 @@ import com.prince.logan.playdate.Interface.ApiClient;
 import com.prince.logan.playdate.Interface.ApiInterface;
 import com.prince.logan.playdate.Model.QuestionModel;
 import com.prince.logan.playdate.Model.RequestModel;
+import com.prince.logan.playdate.Model.SubCateModel;
 import com.prince.logan.playdate.R;
 import com.squareup.picasso.Picasso;
 
@@ -70,6 +71,7 @@ public class ProfileFragment extends Fragment implements RippleView.OnRippleComp
     AlertDialog optionMenu;
 
     public static ArrayList<QuestionModel> cateList = new ArrayList<QuestionModel>();
+    public ArrayList<SubCateModel> subCateList = new ArrayList<SubCateModel>();
 
     @Nullable
     @Override
@@ -245,8 +247,10 @@ public class ProfileFragment extends Fragment implements RippleView.OnRippleComp
                     showAlert("Warning", "You can't receive playdates. Please enable playdates in order to receive the playdates");
                 }
                 else{
-                    Intent intentPlaydate = new Intent(getContext(), PlaydateListActivity.class);
-                    startActivity(intentPlaydate);
+
+                    gettingSubCate();
+//                    Intent intentPlaydate = new Intent(getContext(), PlaydateListActivity.class);
+//                    startActivity(intentPlaydate);
                 }
                 break;
             case R.id.txt_profile_preference:
@@ -259,6 +263,57 @@ public class ProfileFragment extends Fragment implements RippleView.OnRippleComp
 
                 break;
         }
+    }
+
+    private void gettingSubCate() {
+        final ProgressDialog loading = new ProgressDialog(getContext(), R.style.AppTheme_Dark_Dialog);
+        loading.setIndeterminate(true);
+        loading.setMessage("Please wait...");
+        loading.show();
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<RequestModel> req = apiService.get_sub_category(MainActivity.userProfile.getUser_playdate());
+        req.enqueue(new Callback<RequestModel>() {
+            @Override
+            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+                RequestModel responseData = response.body();
+                loading.dismiss();
+                if (responseData.getResult() == 1){
+                    subCateList = responseData.getSubCategory();
+                    showingSubCateDialog();
+                }
+                else{
+                    Toast.makeText(getContext(), "There is no categories", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RequestModel> call, Throwable t) {
+                t.printStackTrace();
+                loading.dismiss();
+                Toast.makeText(getContext(), "Server problem!", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void showingSubCateDialog() {
+        final String[] option = new String[subCateList.size()];
+        for (int i = 0; i<subCateList.size(); i++){
+            option[i] = subCateList.get(i).getSub_cate();
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.select_dialog_item, option);
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+        builder.setTitle("Select Sub Category");
+        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent playdateIntent = new Intent(getContext(), PlaydateListActivity.class);
+                playdateIntent.putExtra("sub_cate_id", subCateList.get(which).getSub_cate_id());
+                startActivity(playdateIntent);
+            } });
+        optionMenu = builder.create();
+        optionMenu.show();
     }
 
     public void showAlert(String title, String msg){

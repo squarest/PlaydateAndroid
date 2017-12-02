@@ -28,6 +28,11 @@ public interface ApiInterface {
 
     @POST("get_matched_users")
     Call<RequestModel> get_matched_users(
+            @Query("user_id") String user_id, @Query("cate_id") int cate_id, @Query("sub_cate_id") int sub_cate_id
+    );
+
+    @POST("get_all_users")
+    Call<RequestModel> get_all_users(
             @Query("user_id") String user_id
     );
 

@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
     public static String userFirebaseID;
     public static boolean isPlaydate;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
