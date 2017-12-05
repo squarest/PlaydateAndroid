@@ -54,7 +54,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="1"
                 android:gravity="center">
                 <info.hoang8f.android.segmented.SegmentedGroup
                     android:id="@+id/segmented_look_for"
@@ -67,25 +67,33 @@
                     segmentedgroup:sc_tint_color="#009688">
 
                     <RadioButton
-                        android:id="@+id/radio_woman"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Woman"
-                        style="@style/RadioButton" />
-
-                    <RadioButton
                         android:id="@+id/radio_man"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Main"
+                        android:text="Male"
+                        style="@style/RadioButton" />
+
+                    <RadioButton
+                        android:id="@+id/radio_woman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Female"
+                        style="@style/RadioButton" />
+
+                    <RadioButton
+                        android:id="@+id/not_binary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Non-binary"
                         style="@style/RadioButton" />
 
                     <RadioButton
                         android:id="@+id/radio_both"
+                        style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Both"
-                        style="@style/RadioButton" />
+                        android:checked="true"
+                        android:text="All" />
                 </info.hoang8f.android.segmented.SegmentedGroup>
             </LinearLayout>
 
@@ -110,7 +118,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
@@ -184,7 +192,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
@@ -256,7 +264,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:paddingRight="30dp"
                 android:paddingLeft="30dp"
@@ -305,7 +313,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="1"
                 android:gravity="center|left"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp">
@@ -338,7 +346,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="1"
                 android:gravity="center|left"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp">
@@ -371,7 +379,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="1"
                 android:gravity="center|left"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp">

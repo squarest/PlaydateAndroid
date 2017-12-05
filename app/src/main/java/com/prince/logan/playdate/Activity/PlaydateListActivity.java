@@ -3,6 +3,7 @@ package com.prince.logan.playdate.Activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class PlaydateListActivity extends Activity implements View.OnClickListen
     ArrayList<UserModel> arrayListUser = new ArrayList<UserModel>();
     PlaydateListAdapter playListAdapter;
     int subCateId;
+    Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class PlaydateListActivity extends Activity implements View.OnClickListen
             subCateId = bundle.getInt("sub_cate_id");
         }
 
+        context = this;
         setEvent();
         gettingMatchedUser();
     }
@@ -120,6 +123,7 @@ public class PlaydateListActivity extends Activity implements View.OnClickListen
         alertDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
+                ((Activity)context).finish();
             }
         });
         // Showing Alert Message

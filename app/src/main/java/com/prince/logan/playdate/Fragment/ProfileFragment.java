@@ -147,6 +147,7 @@ public class ProfileFragment extends Fragment implements RippleView.OnRippleComp
             if(cateList.get(i).getCate_id() == MainActivity.userProfile.getUser_playdate()){
                 String cateName = cateList.get(i).getCategory();
                 txtWant.setText(cateName);
+                MainActivity.isPlaydate = true;
             }
             else if(MainActivity.userProfile.getUser_playdate() == -1){
                 MainActivity.isPlaydate = false;
@@ -158,10 +159,12 @@ public class ProfileFragment extends Fragment implements RippleView.OnRippleComp
         if(MainActivity.isPlaydate){
             linWant.setVisibility(View.VISIBLE);
             linBorder.setVisibility(View.VISIBLE);
+            switchPlaydateReceive.setChecked(true);
         }
         else {
             linWant.setVisibility(View.INVISIBLE);
             linBorder.setVisibility(View.INVISIBLE);
+            switchPlaydateReceive.setChecked(false);
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.select_dialog_item, option);

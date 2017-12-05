@@ -75,4 +75,9 @@ public interface ApiInterface {
     Call<RequestModel> getting_answered_question(
             @Path("id") int answerId
     );
+
+    @GET("delete_user/{id}")
+    Call<RequestModel> delete_user(
+            @Path("id") String firebase_id
+    );
 }

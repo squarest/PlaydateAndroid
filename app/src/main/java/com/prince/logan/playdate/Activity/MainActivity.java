@@ -23,6 +23,8 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
 import com.prince.logan.playdate.Adapter.QaCateAdapter;
 import com.prince.logan.playdate.Fragment.ProfileFragment;
 import com.prince.logan.playdate.Fragment.MenuFragment;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     public static UserModel userProfile;
     public static String userFirebaseID;
     public static boolean isPlaydate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
                 RequestModel responseData = response.body();
-
+                loading.dismiss();
                 if (responseData.getResult() == 1){
                     userProfile = responseData.getUser();
                     initView();
@@ -171,6 +174,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
+
+
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
 
@@ -257,7 +262,11 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            FirebaseAuth.getInstance().signOut();
+            LoginManager.getInstance().logOut();
+            Intent loginIntent = new Intent(this, LoginActivity.class);
+            startActivity(loginIntent);
+            this.finish();
         }
 
         return super.onOptionsItemSelected(item);
