@@ -81,7 +81,7 @@
                         style="@style/RadioButton" />
 
                     <RadioButton
-                        android:id="@+id/not_binary"
+                        android:id="@+id/radio_not_binary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Non-binary"
@@ -321,7 +321,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No Preference"
-                    android:textColor="@color/md_black_1000"/>
+                    android:textColor="@color/md_black_1000"
+                    android:id="@+id/txt_ethnicity"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -339,7 +340,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ethnicity:"
+                    android:text="Religion:"
                     />
             </LinearLayout>
 
@@ -354,6 +355,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No Preference"
+                    android:id="@+id/txt_religion"
                     android:textColor="@color/md_black_1000"/>
             </LinearLayout>
 
@@ -373,7 +375,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ethnicity:"/>
+                    android:text="Education:"/>
             </LinearLayout>
 
             <LinearLayout
@@ -387,6 +389,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No Preference"
+                    android:id="@+id/txt_education"
                     android:textColor="@color/md_black_1000"/>
             </LinearLayout>
 

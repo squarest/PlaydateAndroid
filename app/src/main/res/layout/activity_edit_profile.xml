@@ -29,7 +29,19 @@
                     android:text="Edit Profile"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:id="@+id/textView" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/update"
+                    android:layout_alignBottom="@+id/textView"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:id="@+id/img_edit_profile_save"/>
             </RelativeLayout>
         </LinearLayout>
         <ScrollView
@@ -55,6 +67,294 @@
                                 android:scaleType="fitCenter"
                                 android:id="@+id/img_edit_profile"
                                 android:background="@drawable/profile_sample"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_below="@+id/img_edit_profile"
+                                android:id="@+id/lin_edit_name"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:textColor="@color/md_black_1000"
+                                    android:text="Name:"
+                                    android:gravity="center|left"
+                                    android:textStyle="bold"
+                                    android:layout_marginLeft="25dp"
+                                    android:textSize="15dp"/>
+
+
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="5"
+                                    android:textColor="@color/md_black_1000"
+                                    android:gravity="center|right"
+                                    android:layout_marginRight="25dp"
+                                    android:textSize="15dp"
+                                    android:id="@+id/txt_edit_Name"
+                                    android:text="David Castillo"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/md_grey_400"
+                                android:layout_alignBottom="@+id/lin_edit_name"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"></LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_below="@+id/lin_edit_name"
+                                android:id="@+id/lin_edit_sex"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:textColor="@color/md_black_1000"
+                                    android:text="Sex:"
+                                    android:gravity="center|left"
+                                    android:textStyle="bold"
+                                    android:layout_marginLeft="25dp"
+                                    android:textSize="15dp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="5"
+                                    android:textColor="@color/md_black_1000"
+                                    android:gravity="center|right"
+                                    android:layout_marginRight="25dp"
+                                    android:textSize="15dp"
+                                    android:id="@+id/txt_edit_sex"
+                                    android:text="Female"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/md_grey_400"
+                                android:layout_alignBottom="@+id/lin_edit_sex"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"></LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_below="@+id/lin_edit_sex"
+                                android:id="@+id/lin_edit_age"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:textColor="@color/md_black_1000"
+                                    android:text="Age:"
+                                    android:gravity="center|left"
+                                    android:textStyle="bold"
+                                    android:layout_marginLeft="25dp"
+                                    android:textSize="15dp"/>
+
+                                <EditText
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="5"
+                                    android:gravity="center|right"
+                                    android:numeric="integer"
+                                    android:background="@color/md_white_1000"
+                                    android:hint="Your age"
+                                    android:textSize="15dp"
+                                    android:id="@+id/ed_edit_age"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="15dp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="(ages)"
+                                    android:layout_marginRight="20dp"/>
+
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/md_grey_400"
+                                android:layout_alignBottom="@+id/lin_edit_age"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"></LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_below="@+id/lin_edit_age"
+                                android:id="@+id/lin_edit_height"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:textColor="@color/md_black_1000"
+                                    android:text="Height:"
+                                    android:gravity="center|left"
+                                    android:textStyle="bold"
+                                    android:layout_marginLeft="25dp"
+                                    android:textSize="15dp"/>
+
+                                <EditText
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="5"
+                                    android:gravity="center|right"
+                                    android:id="@+id/ed_edit_height"
+                                    android:background="@color/md_white_1000"
+                                    android:hint="Your height"
+                                    android:numeric="decimal"
+                                    android:textSize="15dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="15dp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="(feets)"
+                                    android:layout_marginRight="20dp"/>
+
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/md_grey_400"
+                                android:layout_alignBottom="@+id/lin_edit_height"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"></LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/md_grey_400"
+                                android:layout_alignBottom="@+id/lin_edit_age"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"></LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_below="@+id/lin_edit_height"
+                                android:id="@+id/lin_edit_ethnicity"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:textColor="@color/md_black_1000"
+                                    android:text="Ethnicity:"
+                                    android:gravity="center|left"
+                                    android:textStyle="bold"
+                                    android:layout_marginLeft="25dp"
+                                    android:textSize="15dp"/>
+
+                                <com.jaredrummler.materialspinner.MaterialSpinner
+                                    android:id="@+id/spinner_edit_ethnicity"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="5"
+                                    android:gravity="center|right"
+                                    android:textColor="@color/md_black_1000"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="15dp"/>
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/md_grey_400"
+                                android:layout_alignBottom="@+id/lin_edit_ethnicity"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"></LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_below="@+id/lin_edit_ethnicity"
+                                android:id="@+id/lin_edit_religion"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:textColor="@color/md_black_1000"
+                                    android:text="Religion:"
+                                    android:gravity="center|left"
+                                    android:textStyle="bold"
+                                    android:layout_marginLeft="25dp"
+                                    android:textSize="15dp"/>
+
+
+                                <com.jaredrummler.materialspinner.MaterialSpinner
+                                    android:id="@+id/spinner_edit_religion"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="5"
+                                    android:gravity="center|right"
+                                    android:textColor="@color/md_black_1000"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="15dp"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/md_grey_400"
+                                android:layout_alignBottom="@+id/lin_edit_religion"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"></LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_below="@+id/lin_edit_religion"
+                                android:id="@+id/lin_edit_education"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:textColor="@color/md_black_1000"
+                                    android:text="Education:"
+                                    android:gravity="center|left"
+                                    android:textStyle="bold"
+                                    android:layout_marginLeft="25dp"
+                                    android:textSize="15dp"/>
+
+
+                                <com.jaredrummler.materialspinner.MaterialSpinner
+                                    android:id="@+id/spinner_edit_education"
+                                    android:layout_width="0dp"
+                                    android:textColor="@color/md_black_1000"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="5"
+                                    android:gravity="center|right"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="15dp"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/md_grey_400"
+                                android:layout_alignBottom="@+id/lin_edit_education"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"></LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_below="@+id/lin_edit_education"></LinearLayout>
 
                         </RelativeLayout>
                 </LinearLayout>

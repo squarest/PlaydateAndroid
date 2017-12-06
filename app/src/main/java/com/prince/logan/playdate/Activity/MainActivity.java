@@ -161,6 +161,11 @@ public class MainActivity extends AppCompatActivity {
                     userProfile = responseData.getUser();
                     initView();
                     initEvent();
+
+                    Intent profileIntent = new Intent(MainActivity.this, EditProfileActivity.class);
+                    startActivity(profileIntent);
+                    MainActivity.this.overridePendingTransition(R.anim.slide_in_from_right,
+                            R.anim.slide_out_to_left);
                 }
             }
 

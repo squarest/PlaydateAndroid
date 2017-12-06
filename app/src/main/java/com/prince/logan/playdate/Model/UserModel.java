@@ -19,6 +19,11 @@ public class UserModel implements Serializable {
     private String user_match;
     private float user_lati;
     private float user_longi;
+    private int user_age;
+    private String  user_height;
+    private String user_ethnicity;
+    private String user_religion;
+    private String user_education;
 
     public String get_firebase_id(){
         return firebase_id;
@@ -62,6 +67,26 @@ public class UserModel implements Serializable {
 
     public float getUser_longi(){
         return user_longi;
+    }
+
+    public int getUser_age(){
+        return user_age;
+    }
+
+    public String getUser_height(){
+        return user_height;
+    }
+
+    public String getUser_ethnicity(){
+        return user_ethnicity;
+    }
+
+    public String getUser_religion(){
+        return user_religion;
+    }
+
+    public String getUser_education(){
+        return user_education;
     }
 
     public void setUser_playdate(int cate_id){

@@ -80,4 +80,14 @@ public interface ApiInterface {
     Call<RequestModel> delete_user(
             @Path("id") String firebase_id
     );
+
+    @POST("edit_user")
+    Call<RequestModel>edit_user(
+            @Query("firebase_id") String firebase_id,
+            @Query("user_age") int user_age,
+            @Query("user_height") String user_height,
+            @Query("user_ethnicity") String user_ethnicity,
+            @Query("user_religion") String user_religion,
+            @Query("user_education") String user_education
+    );
 }
