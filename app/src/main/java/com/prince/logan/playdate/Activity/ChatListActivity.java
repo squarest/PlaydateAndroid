@@ -56,9 +56,11 @@ public class ChatListActivity extends Activity implements View.OnClickListener{
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 UserModel chatUser = arryChatUsers.get(i);
                 Intent playdateDetailIntent = new Intent(ChatListActivity.this, ChatActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("userModel", (Serializable) chatUser);
-                playdateDetailIntent.putExtras(bundle);
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("userModel", (Serializable) chatUser);
+//                playdateDetailIntent.putExtras(bundle);
+                playdateDetailIntent.putExtra("user_id", chatUser.get_firebase_id());
+                playdateDetailIntent.putExtra("user_name", chatUser.get_user_full_name());
                 startActivity(playdateDetailIntent);
             }
         });

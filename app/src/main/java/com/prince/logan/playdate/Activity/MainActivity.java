@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.prince.logan.playdate.Adapter.QaCateAdapter;
 import com.prince.logan.playdate.Fragment.ProfileFragment;
 import com.prince.logan.playdate.Fragment.MenuFragment;
@@ -45,7 +47,7 @@ import retrofit2.Callback;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FragmentTabHost mTabHost;
+    public static FragmentTabHost mTabHost;
     private ViewPager mViewPager;
     private List<Fragment> mFragmentList;
     private Class mClass[] = {ProfileFragment.class,QAFragment.class,PlaydateFragment.class,MenuFragment.class};
@@ -180,6 +182,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
 
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        // TODO: Implement this method to send any registration to your app's servers.
+        sendRegistrationToServer(refreshedToken);
 
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -275,6 +280,31 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void sendRegistrationToServer(final String token) {
+
+        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        loading.setIndeterminate(true);
+        loading.setMessage("Please wait...");
+        loading.show();
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<RequestModel> req = apiService.register_token(token, 0, MainActivity.userProfile.get_firebase_id());
+        req.enqueue(new Callback<RequestModel>() {
+            @Override
+            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+                RequestModel responseData = response.body();
+                loading.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<RequestModel> call, Throwable t) {
+                t.printStackTrace();
+                loading.dismiss();
+            }
+        });
     }
 
     public void showAlert(String title, String msg){

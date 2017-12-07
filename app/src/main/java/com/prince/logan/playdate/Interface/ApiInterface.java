@@ -81,6 +81,11 @@ public interface ApiInterface {
             @Path("id") String firebase_id
     );
 
+    @POST("register_token")
+    Call<RequestModel> register_token(
+            @Query("token") String token, @Query("platform") int platform, @Query("user_id") String user_id
+    );
+
     @POST("edit_user")
     Call<RequestModel>edit_user(
             @Query("firebase_id") String firebase_id,
@@ -89,5 +94,10 @@ public interface ApiInterface {
             @Query("user_ethnicity") String user_ethnicity,
             @Query("user_religion") String user_religion,
             @Query("user_education") String user_education
+    );
+
+    @POST("send_notification")
+    Call<RequestModel> send_notification(
+            @Query("own_name") String own_name, @Query("own_id") String own_id, @Query("user_id") String user_id, @Query("message") String message
     );
 }

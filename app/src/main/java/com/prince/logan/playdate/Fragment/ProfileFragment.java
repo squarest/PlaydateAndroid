@@ -251,9 +251,11 @@ public class ProfileFragment extends Fragment implements RippleView.OnRippleComp
                 }
                 else{
 
-                    gettingSubCate();
+//                    gettingSubCate();
 //                    Intent intentPlaydate = new Intent(getContext(), PlaydateListActivity.class);
 //                    startActivity(intentPlaydate);
+
+                    MainActivity.mTabHost.setCurrentTab(2);
                 }
                 break;
             case R.id.txt_profile_preference:

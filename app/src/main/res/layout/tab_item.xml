@@ -16,7 +16,7 @@
         android:id="@+id/title"
         android:text="Profile"
         android:gravity="center"
-        android:textSize="11dp"
+        android:textSize="10dp"
         android:textColor="@drawable/tab_title_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

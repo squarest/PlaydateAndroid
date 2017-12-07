@@ -102,6 +102,23 @@
             </intent-filter>
         </activity>
 
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDsf_ATR4E1PHNRpR6H9jzRinYxrUPcFv0" />
+
+        <!-- FCM -->
+        <service android:name="com.prince.logan.playdate.FCM.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service android:name="com.prince.logan.playdate.FCM.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
         
 
     </application>

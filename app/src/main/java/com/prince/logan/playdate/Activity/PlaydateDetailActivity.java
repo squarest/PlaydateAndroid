@@ -87,9 +87,12 @@ public class PlaydateDetailActivity extends Activity implements View.OnClickList
                 break;
             case R.id.btn_chat_start:
                 Intent startChattingIntent = new Intent(PlaydateDetailActivity.this, ChatActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("userModel", (Serializable) userDetail);
-                startChattingIntent.putExtras(bundle);
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("userModel", (Serializable) userDetail);
+//                startChattingIntent.putExtras(bundle);
+
+                startChattingIntent.putExtra("user_id", userDetail.get_firebase_id());
+                startChattingIntent.putExtra("user_name", userDetail.get_user_full_name());
                 startActivity(startChattingIntent);
                 break;
         }

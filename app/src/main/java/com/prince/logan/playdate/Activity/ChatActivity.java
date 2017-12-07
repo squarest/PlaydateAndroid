@@ -1,9 +1,11 @@
 package com.prince.logan.playdate.Activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -18,11 +20,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.prince.logan.playdate.Adapter.ChatAdapter;
+import com.prince.logan.playdate.Interface.ApiClient;
+import com.prince.logan.playdate.Interface.ApiInterface;
 import com.prince.logan.playdate.Model.ChatData;
+import com.prince.logan.playdate.Model.RequestModel;
 import com.prince.logan.playdate.Model.UserModel;
 import com.prince.logan.playdate.R;
 
 import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 /**
  * Created by PRINCE on 11/20/2017.
@@ -38,8 +46,10 @@ public class ChatActivity extends Activity implements View.OnClickListener{
     private ImageView back;
     private TextView txtUserName;
 
-    UserModel chatUserDetail;
+//    UserModel chatUserDetail;
     String roomId;
+    String userName;
+    String userFbId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +59,9 @@ public class ChatActivity extends Activity implements View.OnClickListener{
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
-            chatUserDetail = (UserModel)bundle.getSerializable("userModel");
+//            chatUserDetail = (UserModel)bundle.getSerializable("userModel");
+            userName = bundle.getString("user_name");
+            userFbId = bundle.getString("user_id");
         }
 
         initViews();
@@ -70,19 +82,19 @@ public class ChatActivity extends Activity implements View.OnClickListener{
         mEdtMessage = (EditText) findViewById(R.id.edit_message);
         back = (ImageView)findViewById(R.id.img_chat_back);
         txtUserName = (TextView)findViewById(R.id.txt_chat_user_name);
-        txtUserName.setText(chatUserDetail.get_user_full_name());
+        txtUserName.setText(userName);
         back.setOnClickListener(this);
         findViewById(R.id.btn_send).setOnClickListener(this);
     }
 
     private void initFirebaseDatabase() {
 
-        int compare = chatUserDetail.get_firebase_id().compareTo(MainActivity.userFirebaseID);
+        int compare = userFbId.compareTo(MainActivity.userFirebaseID);
         if (compare>0){
-            roomId = MainActivity.userFirebaseID + chatUserDetail.get_firebase_id();
+            roomId = MainActivity.userFirebaseID + userFbId;
         }
         else{
-            roomId = chatUserDetail.get_firebase_id() + MainActivity.userFirebaseID;
+            roomId = userFbId + MainActivity.userFirebaseID;
         }
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -149,8 +161,27 @@ public class ChatActivity extends Activity implements View.OnClickListener{
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss xxxx");
                     chatData.date= String.valueOf(new Date(time));
                     mDatabaseReference.push().setValue(chatData);
+
+                    send_notification(message);
                 }
                 break;
         }
+    }
+
+    private void send_notification(String message) {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<RequestModel> req = apiService.send_notification(MainActivity.userProfile.get_user_full_name(), MainActivity.userProfile.get_firebase_id(), userFbId, message);
+        req.enqueue(new Callback<RequestModel>() {
+            @Override
+            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+                RequestModel responseData = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<RequestModel> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }
