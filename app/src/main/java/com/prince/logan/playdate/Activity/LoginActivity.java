@@ -1,5 +1,6 @@
 package com.prince.logan.playdate.Activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,7 +8,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -77,9 +80,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     String fbUserId;
     ProgressDialog progressDialog;
 
+    public static String[] perms = {Manifest.permission.INTERNET,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_NETWORK_STATE};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!hasPermissions(this, perms)) {
+            ActivityCompat.requestPermissions(this, perms, 1);
+        }
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -122,6 +134,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initData();
         setEvent();
     }
+
+    //Check the permissions
+    public boolean hasPermissions(Context context, String... permissions) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 
     private void setEvent() {
         img_btn_facebook_login.setOnClickListener(this);

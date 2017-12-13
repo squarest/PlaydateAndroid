@@ -67,6 +67,12 @@ public class ViewAnswerActivity extends Activity implements View.OnClickListener
         back.setOnClickListener(this);
         btnReanswer.setOnClickListener(this);
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         gettingAnsweredQuestions();
     }
 

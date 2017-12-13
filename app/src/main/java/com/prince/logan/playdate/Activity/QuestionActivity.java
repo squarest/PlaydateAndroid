@@ -148,8 +148,9 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void cardSwipedRight(int position) {
                 Log.i("MainActivity", "card was swiped right, position in adapter: " + position);
-                cardIndex++;
+
                 questions.append(qaArrayList.get(position).getId()+",");
+                cardIndex++;
             }
 
             @Override
@@ -183,7 +184,6 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 cardStack.swipeTopCardLeft(180);
-                cardIndex++;
             }
         });
         Button btn2 = (Button) findViewById(R.id.button2);
@@ -191,8 +191,6 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 cardStack.swipeTopCardRight(180);
-                cardIndex++;
-                questions.append(qaArrayList.get(cardIndex).getId()+",");
             }
         });
     }

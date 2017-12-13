@@ -16,7 +16,7 @@ public class Preferences {
     public static float height_to;
     public static int distance;
 
-    public static ArrayList<PreferenceItemModel> listEthnicity;
-    public static ArrayList<PreferenceItemModel> listReligion;
-    public static ArrayList<PreferenceItemModel> listEducation;
+    public static String listEthnicity;
+    public static String listReligion;
+    public static String listEducation;
 }

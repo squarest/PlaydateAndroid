@@ -39,7 +39,7 @@ public class PreferenceItemActivity extends Activity implements View.OnClickList
 
     String[] arrayEthnicity = {"White/ Caucasian","Asian","South Asian","Hispanic/ Latino","Pacific Islander","Middle Eastern/ Arab","Black/ African-descent","Native American","Other"};
     String[] arrayReligion = {"Christian","Catholic","Jewish","Muslim","Unitarian/ Universalist","Buddhist","Hindu","Agnostic","Atheist","Other"};
-    String[] arrayEducation = {"High Selective","Selective"};
+    String[] arrayEducation = {"High Selective","Selective", "No Preference"};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,8 +56,19 @@ public class PreferenceItemActivity extends Activity implements View.OnClickList
             switch (indexItem){
                 case 1:
                     txtTitle.setText("Ethnicity");
-                    if (Preferences.listEthnicity != null){
-                        arrayPlist = Preferences.listEthnicity;
+                    if (!Preferences.listEthnicity.equals("-1")){
+                        for (int i=0; i<arrayEthnicity.length; i++){
+                            PreferenceItemModel item = new PreferenceItemModel();
+                            if (String.valueOf(i).contains(Preferences.listEthnicity)){
+                                item.setTitle(arrayEthnicity[i]);
+                                item.setChecked(1);
+                            }
+                            else{
+                                item.setTitle(arrayEthnicity[i]);
+                                item.setChecked(0);
+                            }
+                            arrayPlist.add(item);
+                        }
                     }
                     else{
                         for (int i=0; i<arrayEthnicity.length; i++){
@@ -71,8 +82,19 @@ public class PreferenceItemActivity extends Activity implements View.OnClickList
                     break;
                 case 2:
                     txtTitle.setText("Religion");
-                    if (Preferences.listReligion != null){
-                        arrayPlist = Preferences.listReligion;
+                    if (!Preferences.listReligion.equals("-1")){
+                        for (int i=0; i<arrayReligion.length; i++){
+                            PreferenceItemModel item = new PreferenceItemModel();
+                            if (String.valueOf(i).contains(Preferences.listReligion)){
+                                item.setTitle(arrayReligion[i]);
+                                item.setChecked(1);
+                            }
+                            else{
+                                item.setTitle(arrayReligion[i]);
+                                item.setChecked(0);
+                            }
+                            arrayPlist.add(item);
+                        }
                     }
                     else{
                         for (int i=0; i<arrayReligion.length; i++){
@@ -86,8 +108,19 @@ public class PreferenceItemActivity extends Activity implements View.OnClickList
                     break;
                 case 3:
                     txtTitle.setText("Education");
-                    if (Preferences.listEducation != null){
-                        arrayPlist = Preferences.listEducation;
+                    if (!Preferences.listEducation.equals("-1")){
+                        for (int i=0; i<arrayEducation.length; i++){
+                            PreferenceItemModel item = new PreferenceItemModel();
+                            if (String.valueOf(i).contains(Preferences.listEducation)){
+                                item.setTitle(arrayEducation[i]);
+                                item.setChecked(1);
+                            }
+                            else{
+                                item.setTitle(arrayEducation[i]);
+                                item.setChecked(0);
+                            }
+                            arrayPlist.add(item);
+                        }
                     }
                     else{
                         for (int i=0; i<arrayEducation.length; i++){
@@ -112,13 +145,13 @@ public class PreferenceItemActivity extends Activity implements View.OnClickList
             case R.id.img_preference_item_back:
                 switch (indexItem){
                     case 1:
-                        Preferences.listEthnicity = arrayPlist;
+//                        Preferences.listEthnicity = arrayPlist;
                         break;
                     case 2:
-                        Preferences.listReligion = arrayPlist;
+//                        Preferences.listReligion = arrayPlist;
                         break;
                     case 3:
-                        Preferences.listEducation = arrayPlist;
+//                        Preferences.listEducation = arrayPlist;
                         break;
                 }
 

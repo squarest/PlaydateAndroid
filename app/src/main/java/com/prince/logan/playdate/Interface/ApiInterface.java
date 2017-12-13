@@ -93,11 +93,17 @@ public interface ApiInterface {
             @Query("user_height") String user_height,
             @Query("user_ethnicity") String user_ethnicity,
             @Query("user_religion") String user_religion,
-            @Query("user_education") String user_education
+            @Query("user_education") String user_education,
+            @Query("height_option") int heightOption
     );
 
     @POST("send_notification")
     Call<RequestModel> send_notification(
             @Query("own_name") String own_name, @Query("own_id") String own_id, @Query("user_id") String user_id, @Query("message") String message
+    );
+
+    @POST("update_location")
+    Call<RequestModel> update_loaction(
+            @Query("user_id") String id, @Query("lati") String lati, @Query("longi") String longi
     );
 }

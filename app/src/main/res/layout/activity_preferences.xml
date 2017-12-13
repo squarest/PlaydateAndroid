@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto">
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +31,19 @@
                     android:text="Preferences"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:id="@+id/textviewPrefer"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/update"
+                    android:layout_alignBottom="@+id/textviewPrefer"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:id="@+id/img_preference_save"/>
             </RelativeLayout>
         </LinearLayout>
         <LinearLayout
@@ -120,36 +133,40 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:orientation="vertical"
                 android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:orientation="vertical">
+                android:paddingRight="30dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
+
                         <TextView
+                            android:id="@+id/txt_age_min"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="20"
-                            android:id="@+id/txt_age_min"
-                            android:textColor="@color/md_black_1000"/>
+                            android:textColor="@color/md_black_1000" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right">
+
                         <TextView
+                            android:id="@+id/txt_age_max"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="100"
-                            android:id="@+id/txt_age_max"
-                            android:textColor="@color/md_black_1000"/>
+                            android:textColor="@color/md_black_1000" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -167,6 +184,7 @@
                     segmentedgroup:max_start_value="100"
                     segmentedgroup:min_value="20"
                     segmentedgroup:max_value="100"
+                    segmentedgroup:data_type="_integer"
                     />
 
             </LinearLayout>
@@ -208,7 +226,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="5'"
+                            android:text="5.0'"
                             android:id="@+id/txt_height_min"
                             android:textColor="@color/md_black_1000"/>
                     </LinearLayout>
@@ -276,20 +294,14 @@
                     android:gravity="right"
                     android:textColor="@color/md_black_1000"
                     android:id="@+id/txt_distance_max"/>
-                <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
+                <SeekBar
                     android:id="@+id/rangeSeekbar_mile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    segmentedgroup:bar_color="@color/md_grey_400"
-                    segmentedgroup:bar_highlight_color="@color/colorPrimary"
-                    segmentedgroup:left_thumb_color_pressed="@color/colorPrimary"
-                    segmentedgroup:right_thumb_color_pressed="@color/colorPrimary"
-                    segmentedgroup:left_thumb_color="@color/colorPrimary"
-                    segmentedgroup:right_thumb_color="@color/colorPrimary"
-                    segmentedgroup:min_start_value="20"
-                    segmentedgroup:max_start_value="100"
-                    segmentedgroup:min_value="20"
-                    segmentedgroup:max_value="100"/>
+                    android:progressDrawable="@drawable/style"
+                    android:thumb="@drawable/thumb"
+                    android:min="20"
+                    android:max="100"/>
             </LinearLayout>
 
         </LinearLayout>

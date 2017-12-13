@@ -5,18 +5,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarChangeListener;
+import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarFinalValueListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar;
 import com.prince.logan.playdate.Global.Preferences;
 import com.prince.logan.playdate.R;
+
+import org.ielse.widget.RangeSeekBar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,7 +51,7 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
     @Bind(R.id.txt_distance_max)
     TextView txtDistMax;
     @Bind(R.id.rangeSeekbar_mile)
-    CrystalSeekbar rangeMile;
+    SeekBar rangeMile;
     @Bind(R.id.img_preference_back)
     ImageView back;
     @Bind(R.id.txt_ethnicity)
@@ -54,6 +60,16 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
     TextView txtReligion;
     @Bind(R.id.txt_education)
     TextView txtEducation;
+    @Bind(R.id.img_preference_save)
+    ImageView imgPreferSave;
+    @Bind(R.id.radio_man)
+    RadioButton ra_man;
+    @Bind(R.id.radio_woman)
+    RadioButton ra_woman;
+    @Bind(R.id.radio_not_binary)
+    RadioButton ra_non;
+    @Bind(R.id.radio_both)
+    RadioButton ra_both;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,39 +77,82 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
         setContentView(R.layout.activity_preferences);
         ButterKnife.bind(this);
 
-        setEvent();
     }
 
     private void setEvent() {
         segmentLookFor.setOnCheckedChangeListener(this);
+        imgPreferSave.setOnClickListener(this);
+
         rangeAge.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
             @Override
             public void valueChanged(Number minValue, Number maxValue) {
                 txtAgeMin.setText(String.valueOf(minValue));
                 txtAgeMax.setText(String.valueOf(maxValue));
-                Preferences.age_from = minValue.intValue();
-                Preferences.age_to = maxValue.intValue();
             }
         });
 
+
+        rangeHeight.setMinValue((float) 5.0);
+        rangeHeight.setMaxValue((float) 6.9);
+        rangeHeight.setMinValue((float)5.0);
+        rangeHeight.setMaxStartValue((float) 6.9);
         rangeHeight.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
             @Override
             public void valueChanged(Number minValue, Number maxValue) {
-                txtHeightMax.setText(String.valueOf(maxValue)+"'");
-                txtHeightMin.setText(String.valueOf(minValue)+"'");
-                Preferences.height_from = (float) minValue;
-                Preferences.height_to = (float) maxValue;
+                String min="";
+                String max = "";
+                if(String.valueOf(minValue).length()>4){
+                    min = String.valueOf(minValue).substring(0, String.valueOf(minValue).length() - 5);
+                    txtHeightMin.setText(min+"'");
+                }
+                else {
+                    txtHeightMin.setText(String.valueOf(minValue)+"'");
+                }
+                if(String.valueOf(maxValue).length()>4){
+                    max = String.valueOf(maxValue).substring(0, String.valueOf(maxValue).length() - 5);
+                    txtHeightMax.setText(max+"'");
+                }
+                else {
+                    txtHeightMax.setText(String.valueOf(maxValue)+"'");
+                }
+
             }
         });
 
-        rangeMile.setOnSeekbarChangeListener(new OnSeekbarChangeListener() {
+        rangeMile.setMax(100);
+
+        rangeMile.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                progress = progress+20;
+                if(progress <= 100){
+                    txtDistMax.setText(String.valueOf(progress)+"miles");
+                }
+            }
 
             @Override
-            public void valueChanged(Number value) {
-                txtDistMax.setText(String.valueOf(value)+"miles");
-                Preferences.distance = value.intValue();
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
+
+//        rangeMile.setOnSeekbarChangeListener(new OnSeekbarChangeListener() {
+//
+//            @Override
+//            public void valueChanged(Number value) {
+//                Preferences.distance = value.intValue();
+//                txtDistMax.setText(String.valueOf(Preferences.distance)+"miles");
+//            }
+//        });
+
+
+
+
 
         back.setOnClickListener(this);
         txtEducation.setOnClickListener(this);
@@ -105,10 +164,10 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
     public void onCheckedChanged(RadioGroup radioGroup, @IdRes int checkedId) {
         switch (checkedId) {
             case R.id.radio_woman:
-                Preferences.looking = 1;
+                Preferences.looking = 2;
                 break;
             case R.id.radio_man:
-                Preferences.looking = 2;
+                Preferences.looking = 1;
                 break;
             case R.id.radio_both:
                 Preferences.looking = 4;
@@ -116,9 +175,21 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
             case R.id.radio_not_binary:
                 Preferences.looking = 3;
                 break;
+
             default:
                 // Nothing to do
         }
+    }
+
+    private void savePreference() {
+        Preferences.age_from = Integer.valueOf(txtAgeMin.getText().toString());
+        Preferences.age_to = Integer.valueOf(txtAgeMax.getText().toString());
+        String[] heightF = (txtHeightMin.getText().toString()).split("'");
+        String[] heightT = (txtHeightMax.getText().toString()).split("'");
+        Preferences.height_from = Float.parseFloat(heightF[0]);
+        Preferences.height_to = Float.parseFloat(heightT[0]);
+        String[] distance = (txtDistMax.getText().toString()).split("miles");
+        Preferences.distance = Integer.valueOf(distance[0]);
     }
 
     @Override
@@ -143,6 +214,9 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
                 ethnicityIntent.putExtra("item", 1);
                 startActivity(ethnicityIntent);
                 break;
+            case R.id.img_preference_save:
+                savePreference();
+                break;
         }
     }
 
@@ -150,59 +224,65 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
     protected void onResume() {
         super.onResume();
 
+        setEvent();
+        init_data();
+    }
+
+    private void init_data() {
+
         txtAgeMin.setText(String.valueOf(Preferences.age_from));
         txtAgeMax.setText(String.valueOf(Preferences.age_to));
-        rangeAge.setMinValue(Float.valueOf(Preferences.age_from));
-        rangeAge.setMaxValue(Float.valueOf(Preferences.age_to));
 
-        txtHeightMin.setText(String.valueOf(Preferences.height_from));
-        txtHeightMax.setText(String.valueOf(Preferences.height_to));
-        rangeHeight.setMinValue(Float.valueOf(Preferences.height_from));
-        rangeHeight.setMaxValue(Float.valueOf(Preferences.height_to));
-
-        txtDistMax.setText(String.valueOf(Preferences.distance));
-        rangeMile.setMaxValue(Float.valueOf(Preferences.distance));
-
-        if (Preferences.listEthnicity != null){
-            int countEthnicity = 0;
-            for (int i=0; i<Preferences.listEthnicity.size(); i++){
-                if (Preferences.listEthnicity.get(i).getChecked() == 1){
-                    countEthnicity++;
-                }
-            }
-            if (countEthnicity == 9){
-                txtEthnicity.setText("No Preference");
-            }
-            else{
-                txtEthnicity.setText(String.valueOf(countEthnicity)+" ethnicities selected");
-            }
+        switch (Preferences.looking){
+            case 1:
+                ra_man.setChecked(true);
+                Preferences.looking = 1;
+                break;
+            case 2:
+                ra_woman.setChecked(true);
+                Preferences.looking = 2;
+                break;
+            case 3:
+                ra_non.setChecked(true);
+                Preferences.looking = 3;
+                break;
+            case 4:
+                ra_both.setChecked(true);
+                Preferences.looking = 4;
+                break;
+            default:
+                ra_both.setChecked(true);
+                Preferences.looking = 4;
+                break;
         }
-        if (Preferences.listReligion != null){
-            int countReligion = 0;
-            for (int i=0; i<Preferences.listReligion.size(); i++){
-                if (Preferences.listReligion.get(i).getChecked() == 1){
-                    countReligion++;
-                }
-            }
-            if (countReligion == 10){
-                txtReligion.setText("No Preference");
-            }else{
-                txtReligion.setText(String.valueOf(countReligion)+" religions selected");
-            }
+
+        txtHeightMin.setText(Preferences.height_from+"'");
+        txtHeightMax.setText(Preferences.height_to+"'");
+
+        txtDistMax.setText(String.valueOf(Preferences.distance)+"miles");
+        rangeMile.setProgress(Preferences.distance);
+
+
+        if (Preferences.listEthnicity.equals("-1")){
+            txtEthnicity.setText("No Preference");
         }
-        if (Preferences.listEducation != null){
-            int countEducation = 0;
-            for (int i=0; i<Preferences.listEducation.size(); i++){
-                if (Preferences.listEducation.get(i).getChecked() == 1){
-                    countEducation++;
-                }
-            }
-            if (countEducation == 2){
-                txtEducation.setText("No Preference");
-            }
-            else{
-                txtEducation.setText(String.valueOf(countEducation)+" educations selected");
-            }
+        else{
+            String[] ethnicity = Preferences.listEthnicity.split(",");
+            txtEthnicity.setText(String.valueOf(ethnicity.length)+" enthnicities selected");
+        }
+        if (Preferences.listReligion.equals("-1")){
+            txtReligion.setText("No Preference");
+        }
+        else{
+            String[] religion = Preferences.listReligion.split(",");
+            txtReligion.setText(String.valueOf(religion.length)+" religions selected");
+        }
+        if (Preferences.listEducation.equals("-1")){
+            txtEducation.setText("No Preference");
+        }
+        else{
+            String[] education = Preferences.listEducation.split(",");
+            txtEducation.setText(String.valueOf(education.length)+" educations selected");
         }
     }
 }

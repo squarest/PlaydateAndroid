@@ -87,7 +87,7 @@ public class QuestionSubCateActivity extends Activity{
 
         final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
         loading.setIndeterminate(true);
-        loading.setMessage("Saving answers...");
+        loading.setMessage("Checking answers...");
         loading.show();
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);

@@ -158,7 +158,7 @@ public class ChatActivity extends Activity implements View.OnClickListener{
                     chatData.senderId = MainActivity.userFirebaseID;
                     chatData.text = message;
                     long time = System.currentTimeMillis();
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss xxxx");
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
                     chatData.date= String.valueOf(new Date(time));
                     mDatabaseReference.push().setValue(chatData);
 
