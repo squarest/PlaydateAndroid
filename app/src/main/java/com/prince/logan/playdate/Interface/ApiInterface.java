@@ -106,4 +106,18 @@ public interface ApiInterface {
     Call<RequestModel> update_loaction(
             @Query("user_id") String id, @Query("lati") String lati, @Query("longi") String longi
     );
+
+    @POST("update_setting")
+    Call<RequestModel> update_setting(
+            @Query("user_id") String id,
+            @Query("looking_for") int looking_for,
+            @Query("age_from") int age_from,
+            @Query("age_to") int age_to,
+            @Query("height_from") float height_from,
+            @Query("height_to") float height_to,
+            @Query("distance") int distance,
+            @Query("ethnicity") String ethnicity,
+            @Query("religion") String religion,
+            @Query("education") String education
+    );
 }

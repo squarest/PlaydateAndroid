@@ -32,6 +32,8 @@ public class PreferenceItemActivity extends Activity implements View.OnClickList
     @Bind(R.id.txt_pItem_title)
     TextView txtTitle;
 
+    StringBuilder items = new StringBuilder();
+
     int indexItem;
 
     public static ArrayList<PreferenceItemModel> arrayPlist = new ArrayList<PreferenceItemModel>();
@@ -59,7 +61,7 @@ public class PreferenceItemActivity extends Activity implements View.OnClickList
                     if (!Preferences.listEthnicity.equals("-1")){
                         for (int i=0; i<arrayEthnicity.length; i++){
                             PreferenceItemModel item = new PreferenceItemModel();
-                            if (String.valueOf(i).contains(Preferences.listEthnicity)){
+                            if (Preferences.listEthnicity.contains(String.valueOf(i))){
                                 item.setTitle(arrayEthnicity[i]);
                                 item.setChecked(1);
                             }
@@ -85,7 +87,7 @@ public class PreferenceItemActivity extends Activity implements View.OnClickList
                     if (!Preferences.listReligion.equals("-1")){
                         for (int i=0; i<arrayReligion.length; i++){
                             PreferenceItemModel item = new PreferenceItemModel();
-                            if (String.valueOf(i).contains(Preferences.listReligion)){
+                            if (Preferences.listReligion.contains(String.valueOf(i))){
                                 item.setTitle(arrayReligion[i]);
                                 item.setChecked(1);
                             }
@@ -111,7 +113,7 @@ public class PreferenceItemActivity extends Activity implements View.OnClickList
                     if (!Preferences.listEducation.equals("-1")){
                         for (int i=0; i<arrayEducation.length; i++){
                             PreferenceItemModel item = new PreferenceItemModel();
-                            if (String.valueOf(i).contains(Preferences.listEducation)){
+                            if (Preferences.listEducation.contains(String.valueOf(i))){
                                 item.setTitle(arrayEducation[i]);
                                 item.setChecked(1);
                             }
@@ -145,13 +147,28 @@ public class PreferenceItemActivity extends Activity implements View.OnClickList
             case R.id.img_preference_item_back:
                 switch (indexItem){
                     case 1:
-//                        Preferences.listEthnicity = arrayPlist;
+                        for (int i=0; i<arrayPlist.size(); i++){
+                            if (arrayPlist.get(i).getChecked() == 1){
+                                items.append(String.valueOf(i)+",");
+                            }
+                        }
+                        Preferences.listEthnicity = items.toString().substring(0, items.toString().length() - 1);
                         break;
                     case 2:
-//                        Preferences.listReligion = arrayPlist;
+                        for (int i=0; i<arrayPlist.size(); i++){
+                            if (arrayPlist.get(i).getChecked() == 1){
+                                items.append(String.valueOf(i)+",");
+                            }
+                        }
+                        Preferences.listReligion = items.toString().substring(0, items.toString().length() - 1);
                         break;
                     case 3:
-//                        Preferences.listEducation = arrayPlist;
+                        for (int i=0; i<arrayPlist.size(); i++){
+                            if (arrayPlist.get(i).getChecked() == 1){
+                                items.append(String.valueOf(i)+",");
+                            }
+                        }
+                        Preferences.listEducation = items.toString().substring(0, items.toString().length() - 1);
                         break;
                 }
 

@@ -1,6 +1,8 @@
 package com.prince.logan.playdate.Activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -20,6 +22,9 @@ import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarFinalValueListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar;
 import com.prince.logan.playdate.Global.Preferences;
+import com.prince.logan.playdate.Interface.ApiClient;
+import com.prince.logan.playdate.Interface.ApiInterface;
+import com.prince.logan.playdate.Model.RequestModel;
 import com.prince.logan.playdate.R;
 
 import org.ielse.widget.RangeSeekBar;
@@ -27,6 +32,8 @@ import org.ielse.widget.RangeSeekBar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import info.hoang8f.android.segmented.SegmentedGroup;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 /**
  * Created by PRINCE on 11/17/2017.
@@ -71,12 +78,15 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
     @Bind(R.id.radio_both)
     RadioButton ra_both;
 
+    Context context;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
         ButterKnife.bind(this);
 
+        context=this;
     }
 
     private void setEvent() {
@@ -124,7 +134,6 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
         rangeMile.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                progress = progress+20;
                 if(progress <= 100){
                     txtDistMax.setText(String.valueOf(progress)+"miles");
                 }
@@ -140,19 +149,6 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
 
             }
         });
-
-//        rangeMile.setOnSeekbarChangeListener(new OnSeekbarChangeListener() {
-//
-//            @Override
-//            public void valueChanged(Number value) {
-//                Preferences.distance = value.intValue();
-//                txtDistMax.setText(String.valueOf(Preferences.distance)+"miles");
-//            }
-//        });
-
-
-
-
 
         back.setOnClickListener(this);
         txtEducation.setOnClickListener(this);
@@ -190,6 +186,38 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
         Preferences.height_to = Float.parseFloat(heightT[0]);
         String[] distance = (txtDistMax.getText().toString()).split("miles");
         Preferences.distance = Integer.valueOf(distance[0]);
+
+        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        loading.setIndeterminate(true);
+        loading.setMessage("Please wait...");
+        loading.show();
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<RequestModel> req = apiService.update_setting(MainActivity.userProfile.get_firebase_id(), Preferences.looking, Preferences.age_from,
+                                Preferences.age_to, Preferences.height_from, Preferences.height_to, Preferences.distance, Preferences.listEthnicity,
+                                Preferences.listReligion, Preferences.listEducation);
+        req.enqueue(new Callback<RequestModel>() {
+            @Override
+            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+                RequestModel responseData = response.body();
+                if (responseData.getResult() == 1){
+                    Toast.makeText(getApplicationContext(), "Update Success!", Toast.LENGTH_LONG).show();
+                    loading.dismiss();
+                    ((Activity)context).finish();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Update failed! Try again", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RequestModel> call, Throwable t) {
+                t.printStackTrace();
+                loading.dismiss();
+                Toast.makeText(getApplicationContext(), "Update failed! Try again", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
