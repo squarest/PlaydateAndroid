@@ -33,9 +33,9 @@ import retrofit2.Callback;
 
 public class EditProfileActivity extends Activity implements View.OnClickListener{
 
-    Spinner pEthnicity;
-    Spinner pEducation;
-    Spinner pReligion;
+    TextView pEthnicity;
+    TextView pEducation;
+    TextView pReligion;
     EditText pAge;
     EditText pHeight;
     TextView pName;
@@ -48,6 +48,10 @@ public class EditProfileActivity extends Activity implements View.OnClickListene
     ImageView btnUpdate;
     @Bind(R.id.pHeight)
     TextView txtPheight;
+
+    int indexEthnicity;
+    int indexEducation;
+    int indexReligion;
 
     int indexHeight;
 
@@ -72,13 +76,16 @@ public class EditProfileActivity extends Activity implements View.OnClickListene
         btnUpdate.setOnClickListener(this);
         back.setOnClickListener(this);
         txtPheight.setOnClickListener(this);
+        pEducation.setOnClickListener(this);
+        pEthnicity.setOnClickListener(this);
+        pReligion.setOnClickListener(this);
     }
 
     private void initView() {
 
-        pEthnicity = (Spinner) findViewById(R.id.spinner_edit_ethnicity);
-        pReligion = (Spinner) findViewById(R.id.spinner_edit_religion);
-        pEducation = (Spinner) findViewById(R.id.spinner_edit_education);
+        pEthnicity = (TextView) findViewById(R.id.spinner_edit_ethnicity);
+        pReligion = (TextView) findViewById(R.id.spinner_edit_religion);
+        pEducation = (TextView) findViewById(R.id.spinner_edit_education);
         pName = (TextView)findViewById(R.id.txt_edit_Name);
         pSex = (TextView)findViewById(R.id.txt_edit_sex);
         pAge = (EditText)findViewById(R.id.ed_edit_age);
@@ -90,37 +97,31 @@ public class EditProfileActivity extends Activity implements View.OnClickListene
         context = this;
         indexHeight = 0;
 
-        ArrayAdapter<String> educationAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, arrayEducation);
-        educationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        pEducation.setAdapter(educationAdapter);
-
-        ArrayAdapter<String> ethnicityAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, arrayEthnicity);
-        ethnicityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        pEthnicity.setAdapter(ethnicityAdapter);
-
-        ArrayAdapter<String> religionAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, arrayReligion);
-        religionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        pReligion.setAdapter(religionAdapter);
-
-        for (int i=0; i<arrayEthnicity.length; i++){
-            if (arrayEthnicity[i].equals(MainActivity.userProfile.getUser_ethnicity())){
-                pEthnicity.setSelection(i);
-            }
+        if(MainActivity.userProfile.getUser_ethnicity() == -1){
+            pEthnicity.setText("None Selected");
+            indexEthnicity = -1;
+        }
+        else{
+            pEthnicity.setText(arrayEthnicity[MainActivity.userProfile.getUser_ethnicity()]);
+            indexEthnicity = MainActivity.userProfile.getUser_ethnicity();
         }
 
-        for (int i=0; i<arrayReligion.length; i++){
-            if (arrayReligion[i].equals(MainActivity.userProfile.getUser_religion())){
-                pReligion.setSelection(i);
-            }
+        if(MainActivity.userProfile.getUser_education() == -1){
+            pEducation.setText("None Selected");
+            indexEducation = -1;
+        }
+        else{
+            pEducation.setText(arrayEthnicity[MainActivity.userProfile.getUser_education()]);
+            indexEducation = MainActivity.userProfile.getUser_education();
         }
 
-        for (int i=0; i<arrayEducation.length; i++){
-            if (arrayEducation[i].equals(MainActivity.userProfile.getUser_education())){
-                pEducation.setSelection(i);
-            }
+        if(MainActivity.userProfile.getUser_religion() == -1){
+            pReligion.setText("None Selected");
+            indexReligion = -1;
+        }
+        else{
+            pReligion.setText(arrayEthnicity[MainActivity.userProfile.getUser_religion()]);
+            indexReligion = MainActivity.userProfile.getUser_religion();
         }
 
         pName.setText(MainActivity.userProfile.get_user_full_name());
@@ -177,6 +178,45 @@ public class EditProfileActivity extends Activity implements View.OnClickListene
                 });
                 builder.show();
                 break;
+
+            case R.id.spinner_edit_ethnicity:
+                android.app.AlertDialog.Builder builderEthnicity = new android.app.AlertDialog.Builder(this);
+                builderEthnicity.setTitle("Select");
+                builderEthnicity.setItems(arrayEthnicity, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int item) {
+                        pEthnicity.setText(arrayEthnicity[item]);
+                        indexEthnicity = item;
+                    }
+                });
+                builderEthnicity.show();
+                break;
+
+            case R.id.spinner_edit_education:
+                android.app.AlertDialog.Builder builderEducation = new android.app.AlertDialog.Builder(this);
+                builderEducation.setTitle("Select");
+                builderEducation.setItems(arrayEducation, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int item) {
+                        pEducation.setText(arrayEducation[item]);
+                        indexEducation = item;
+                    }
+                });
+                builderEducation.show();
+                break;
+
+            case R.id.spinner_edit_religion:
+                android.app.AlertDialog.Builder builderReligion = new android.app.AlertDialog.Builder(this);
+                builderReligion.setTitle("Select");
+                builderReligion.setItems(arrayReligion, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int item) {
+                        pReligion.setText(arrayReligion[item]);
+                        indexReligion = item;
+                    }
+                });
+                builderReligion.show();
+                break;
         }
     }
 
@@ -191,9 +231,9 @@ public class EditProfileActivity extends Activity implements View.OnClickListene
         String firebase_id = MainActivity.userProfile.get_firebase_id();
         String user_age = pAge.getText().toString();
         String user_height = pHeight.getText().toString();
-        String user_ethnicity = pEthnicity.getSelectedItem().toString();
-        String user_religion = pReligion.getSelectedItem().toString();
-        String user_education = pEducation.getSelectedItem().toString();
+        int user_ethnicity = indexEthnicity;
+        int user_religion = indexReligion;
+        int user_education =indexEducation;
 
         final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
         loading.setIndeterminate(true);
@@ -234,15 +274,15 @@ public class EditProfileActivity extends Activity implements View.OnClickListene
             Toast.makeText(this, "Please enter your height", Toast.LENGTH_LONG).show();
             return false;
         }
-        if (pEthnicity.getSelectedItem().toString().equals("No Preference")){
+        if (pEthnicity.getText().toString().equals("None Selected")){
             Toast.makeText(this, "Select Ethnicity", Toast.LENGTH_LONG).show();
             return false;
         }
-        if (pReligion.getSelectedItem().toString().equals("No Preference")){
+        if (pReligion.getText().toString().equals("None Selected")){
             Toast.makeText(this, "Select Religion", Toast.LENGTH_LONG).show();
             return false;
         }
-        if(pEducation.getSelectedItem().toString().equals("No Preference")){
+        if(pEducation.getText().toString().equals("None Selected")){
             Toast.makeText(this, "Select Education", Toast.LENGTH_LONG).show();
             return false;
         }

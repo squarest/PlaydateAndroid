@@ -261,15 +261,16 @@
                                     android:layout_marginLeft="25dp"
                                     android:textSize="15dp"/>
 
-                                <Spinner
-                                    android:id="@+id/spinner_edit_ethnicity"
+                                <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="5"
-                                    android:gravity="center|right"
                                     android:textColor="@color/md_black_1000"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="15dp"/>
+                                    android:gravity="center|right"
+                                    android:layout_marginRight="25dp"
+                                    android:textSize="15dp"
+                                    android:id="@+id/spinner_edit_ethnicity"
+                                    android:text="None Selected"/>
 
                             </LinearLayout>
                             <LinearLayout
@@ -297,16 +298,17 @@
                                     android:layout_marginLeft="25dp"
                                     android:textSize="15dp"/>
 
-
-                                <Spinner
-                                    android:id="@+id/spinner_edit_religion"
+                                <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="5"
-                                    android:gravity="center|right"
                                     android:textColor="@color/md_black_1000"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="15dp"/>
+                                    android:gravity="center|right"
+                                    android:layout_marginRight="25dp"
+                                    android:textSize="15dp"
+                                    android:id="@+id/spinner_edit_religion"
+                                    android:text="None Selected"/>
+
                             </LinearLayout>
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -333,16 +335,17 @@
                                     android:layout_marginLeft="25dp"
                                     android:textSize="15dp"/>
 
-
-                                <Spinner
-                                    android:id="@+id/spinner_edit_education"
+                                <TextView
                                     android:layout_width="0dp"
-                                    android:textColor="@color/md_black_1000"
                                     android:layout_height="match_parent"
                                     android:layout_weight="5"
+                                    android:textColor="@color/md_black_1000"
                                     android:gravity="center|right"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="15dp"/>
+                                    android:layout_marginRight="25dp"
+                                    android:textSize="15dp"
+                                    android:id="@+id/spinner_edit_education"
+                                    android:text="None Selected"/>
+
                             </LinearLayout>
                             <LinearLayout
                                 android:layout_width="match_parent"

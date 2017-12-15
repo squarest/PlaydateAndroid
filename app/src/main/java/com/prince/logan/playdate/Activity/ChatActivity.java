@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
+import android.icu.util.TimeZone;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
@@ -159,7 +160,9 @@ public class ChatActivity extends Activity implements View.OnClickListener{
                     chatData.text = message;
                     long time = System.currentTimeMillis();
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
-                    chatData.date= String.valueOf(new Date(time));
+                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                    String date = sdf.format(time);
+                    chatData.date= date;
                     mDatabaseReference.push().setValue(chatData);
 
                     send_notification(message);

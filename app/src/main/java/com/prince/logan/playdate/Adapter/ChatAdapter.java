@@ -17,9 +17,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class ChatAdapter extends ArrayAdapter<ChatData> {
-    private final SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
+
     private final static int TYPE_MY_SELF = 0;
     private final static int TYPE_ANOTHER = 1;
 
@@ -100,14 +101,21 @@ public class ChatAdapter extends ArrayAdapter<ChatData> {
 
         private void setData(int position) {
             ChatData chatData = getItem(position);
-            Date date = new Date();
+            SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
+
+            TimeZone tz = TimeZone.getDefault();
+            mSimpleDateFormat.setTimeZone(tz);
+            Date date = null;
             try {
                 date = mSimpleDateFormat.parse(chatData.date);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+
+            String realDate = mSimpleDateFormat.format(date);
+
             mTxtMessage.setText(chatData.text);
-            mTxtTime.setText(String.valueOf(date));
+            mTxtTime.setText(realDate);
         }
     }
 
@@ -122,14 +130,22 @@ public class ChatAdapter extends ArrayAdapter<ChatData> {
 
         private void setData(int position) {
             ChatData chatData = getItem(position);
-            Date date = new Date();
+
+            SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
+
+            TimeZone tz = TimeZone.getDefault();
+            mSimpleDateFormat.setTimeZone(tz);
+            Date date = null;
             try {
                 date = mSimpleDateFormat.parse(chatData.date);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+
+            String realDate = mSimpleDateFormat.format(date);
+
             mTxtMessage.setText(chatData.text);
-            mTxtTime.setText(String.valueOf(date));
+            mTxtTime.setText(realDate);
         }
     }
 }

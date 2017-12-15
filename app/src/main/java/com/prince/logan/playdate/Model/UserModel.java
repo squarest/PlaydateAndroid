@@ -22,9 +22,9 @@ public class UserModel implements Serializable {
     private int user_age;
     private String  user_height;
     private int  height_option;
-    private String user_ethnicity;
-    private String user_religion;
-    private String user_education;
+    private int user_ethnicity;
+    private int user_religion;
+    private int user_education;
     private int looking_for;
     private int age_from;
     private int age_to;
@@ -34,6 +34,7 @@ public class UserModel implements Serializable {
     private String ethnicity;
     private String religion;
     private String education;
+    private int is_pushnotification;
 
     public String get_firebase_id(){
         return firebase_id;
@@ -91,15 +92,15 @@ public class UserModel implements Serializable {
         return height_option;
     }
 
-    public String getUser_ethnicity(){
+    public int getUser_ethnicity(){
         return user_ethnicity;
     }
 
-    public String getUser_religion(){
+    public int getUser_religion(){
         return user_religion;
     }
 
-    public String getUser_education(){
+    public int getUser_education(){
         return user_education;
     }
 
@@ -121,8 +122,14 @@ public class UserModel implements Serializable {
 
     public String getEducation(){return education;}
 
+    public int getIs_pushnotification(){return is_pushnotification;}
+
     public void setUser_playdate(int cate_id){
         this.user_playdate = cate_id;
+    }
+
+    public void setIs_pushnotification(int notification){
+        this.is_pushnotification = notification;
     }
 
     public void setUser_match(String match){

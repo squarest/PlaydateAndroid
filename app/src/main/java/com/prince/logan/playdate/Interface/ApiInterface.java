@@ -91,9 +91,9 @@ public interface ApiInterface {
             @Query("firebase_id") String firebase_id,
             @Query("user_age") int user_age,
             @Query("user_height") String user_height,
-            @Query("user_ethnicity") String user_ethnicity,
-            @Query("user_religion") String user_religion,
-            @Query("user_education") String user_education,
+            @Query("user_ethnicity") int user_ethnicity,
+            @Query("user_religion") int user_religion,
+            @Query("user_education") int user_education,
             @Query("height_option") int heightOption
     );
 
@@ -119,5 +119,11 @@ public interface ApiInterface {
             @Query("ethnicity") String ethnicity,
             @Query("religion") String religion,
             @Query("education") String education
+    );
+
+    @POST("update_notification_setting")
+    Call<RequestModel> update_notification(
+            @Query("notification") int notification,
+            @Query("user_id") String id
     );
 }

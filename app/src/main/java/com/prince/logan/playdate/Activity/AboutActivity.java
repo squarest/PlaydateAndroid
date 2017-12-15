@@ -2,18 +2,27 @@ package com.prince.logan.playdate.Activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.prince.logan.playdate.Interface.ApiClient;
+import com.prince.logan.playdate.Interface.ApiInterface;
+import com.prince.logan.playdate.Model.RequestModel;
 import com.prince.logan.playdate.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 /**
  * Created by PRINCE on 11/15/2017.
@@ -29,6 +38,8 @@ public class AboutActivity extends Activity implements ImageView.OnClickListener
     LinearLayout linVision;
     @Bind(R.id.lin_about_knowledge)
     LinearLayout linKnowledge;
+    @Bind(R.id.switch_push_notification)
+    Switch notification_enable;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +52,53 @@ public class AboutActivity extends Activity implements ImageView.OnClickListener
         linVision.setOnClickListener(this);
 
         txtTwitter.setText("@makeplaydate");
+
+        if(MainActivity.userProfile.getIs_pushnotification() == 0){
+            notification_enable.setChecked(false);
+        }
+        else{
+            notification_enable.setChecked(true);
+        }
+
+
+        notification_enable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.v("Switch State=", ""+isChecked);
+                if(isChecked){
+                    updateNotification(1, MainActivity.userProfile.get_firebase_id());
+                }
+                else{
+                    updateNotification(0, MainActivity.userProfile.get_firebase_id());
+                }
+            }
+
+        });
+    }
+
+    private void updateNotification(final int isChecked, String user_id) {
+        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        loading.setIndeterminate(true);
+        loading.setMessage("Please wait...");
+        loading.show();
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<RequestModel> req = apiService.update_notification(isChecked, user_id);
+        req.enqueue(new Callback<RequestModel>() {
+            @Override
+            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+                RequestModel responseData = response.body();
+                loading.dismiss();
+                MainActivity.userProfile.setIs_pushnotification(isChecked);
+            }
+
+            @Override
+            public void onFailure(Call<RequestModel> call, Throwable t) {
+                t.printStackTrace();
+                loading.dismiss();
+            }
+        });
     }
 
     @Override
