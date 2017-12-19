@@ -35,6 +35,7 @@ public class UserModel implements Serializable {
     private String religion;
     private String education;
     private int is_pushnotification;
+    private String user_id;
 
     public String get_firebase_id(){
         return firebase_id;

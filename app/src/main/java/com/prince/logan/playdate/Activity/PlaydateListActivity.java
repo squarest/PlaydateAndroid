@@ -98,9 +98,9 @@ public class PlaydateListActivity extends Activity implements View.OnClickListen
                     listPlaydate.setAdapter(playListAdapter);
                     playListAdapter.notifyDataSetChanged();
                 }
-                else{
-                    showAlert("Alert", responseData.getMsg());
-                }
+//                else{
+//                    showAlert("Alert", responseData.getMsg());
+//                }
             }
 
             @Override

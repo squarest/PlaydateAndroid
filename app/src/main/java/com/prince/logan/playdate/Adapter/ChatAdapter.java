@@ -101,21 +101,9 @@ public class ChatAdapter extends ArrayAdapter<ChatData> {
 
         private void setData(int position) {
             ChatData chatData = getItem(position);
-            SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
-
-            TimeZone tz = TimeZone.getDefault();
-            mSimpleDateFormat.setTimeZone(tz);
-            Date date = null;
-            try {
-                date = mSimpleDateFormat.parse(chatData.date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            String realDate = mSimpleDateFormat.format(date);
 
             mTxtMessage.setText(chatData.text);
-            mTxtTime.setText(realDate);
+            mTxtTime.setText(getDate(chatData.date));
         }
     }
 
@@ -131,21 +119,24 @@ public class ChatAdapter extends ArrayAdapter<ChatData> {
         private void setData(int position) {
             ChatData chatData = getItem(position);
 
-            SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
-
-            TimeZone tz = TimeZone.getDefault();
-            mSimpleDateFormat.setTimeZone(tz);
-            Date date = null;
-            try {
-                date = mSimpleDateFormat.parse(chatData.date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            String realDate = mSimpleDateFormat.format(date);
-
             mTxtMessage.setText(chatData.text);
-            mTxtTime.setText(realDate);
+            mTxtTime.setText(getDate(chatData.date));
         }
+    }
+
+    private String getDate(String dateString) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
+        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date value = null;
+        try {
+            value = formatter.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
+        dateFormatter.setTimeZone(TimeZone.getDefault());
+        String dt = dateFormatter.format(value);
+
+        return dt;
     }
 }

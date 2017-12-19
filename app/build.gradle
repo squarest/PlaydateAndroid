@@ -68,9 +68,10 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile project(':quickblox-android-sdk-chat-3.5.1')
     compile project(':quickblox-android-sdk-core-3.5.1')
-    compile project(':librangeseekbar')
+    compile project(':rangeseekbar')
 }
 
 
 
 apply plugin: 'com.google.gms.google-services'
+//apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'

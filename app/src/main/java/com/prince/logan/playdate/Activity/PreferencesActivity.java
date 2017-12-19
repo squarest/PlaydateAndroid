@@ -7,27 +7,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
-import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarChangeListener;
-import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarFinalValueListener;
-import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
-import com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar;
 import com.prince.logan.playdate.Global.Preferences;
 import com.prince.logan.playdate.Interface.ApiClient;
 import com.prince.logan.playdate.Interface.ApiInterface;
 import com.prince.logan.playdate.Model.RequestModel;
 import com.prince.logan.playdate.R;
+import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
+import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBarDistance;
+import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBarHeight;
 
-import org.ielse.widget.RangeSeekBar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,22 +37,15 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
 
     @Bind(R.id.segmented_look_for)
     SegmentedGroup segmentLookFor;
-    @Bind(R.id.txt_age_min)
-    TextView txtAgeMin;
-    @Bind(R.id.txt_age_max)
-    TextView txtAgeMax;
+
     @Bind(R.id.rangeSeekbar_age)
-    CrystalRangeSeekbar rangeAge;
-    @Bind(R.id.txt_height_min)
-    TextView txtHeightMin;
-    @Bind(R.id.txt_height_max)
-    TextView txtHeightMax;
+    RangeSeekBar rangeAge;
+
     @Bind(R.id.rangeSeekbar_height)
-    CrystalRangeSeekbar rangeHeight;
-    @Bind(R.id.txt_distance_max)
-    TextView txtDistMax;
+    RangeSeekBarHeight rangeHeight;
+
     @Bind(R.id.rangeSeekbar_mile)
-    SeekBar rangeMile;
+    RangeSeekBarDistance rangeMile;
     @Bind(R.id.img_preference_back)
     ImageView back;
     @Bind(R.id.txt_ethnicity)
@@ -92,64 +79,6 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
     private void setEvent() {
         segmentLookFor.setOnCheckedChangeListener(this);
         imgPreferSave.setOnClickListener(this);
-
-        rangeAge.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
-            @Override
-            public void valueChanged(Number minValue, Number maxValue) {
-                txtAgeMin.setText(String.valueOf(minValue));
-                txtAgeMax.setText(String.valueOf(maxValue));
-            }
-        });
-
-
-        rangeHeight.setMinValue((float) 5.0);
-        rangeHeight.setMaxValue((float) 6.9);
-        rangeHeight.setMinValue((float)5.0);
-        rangeHeight.setMaxStartValue((float) 6.9);
-        rangeHeight.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
-            @Override
-            public void valueChanged(Number minValue, Number maxValue) {
-                String min="";
-                String max = "";
-                if(String.valueOf(minValue).length()>4){
-                    min = String.valueOf(minValue).substring(0, String.valueOf(minValue).length() - 5);
-                    txtHeightMin.setText(min+"'");
-                }
-                else {
-                    txtHeightMin.setText(String.valueOf(minValue)+"'");
-                }
-                if(String.valueOf(maxValue).length()>4){
-                    max = String.valueOf(maxValue).substring(0, String.valueOf(maxValue).length() - 5);
-                    txtHeightMax.setText(max+"'");
-                }
-                else {
-                    txtHeightMax.setText(String.valueOf(maxValue)+"'");
-                }
-
-            }
-        });
-
-        rangeMile.setMax(100);
-
-        rangeMile.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                if(progress <= 100){
-                    txtDistMax.setText(String.valueOf(progress)+"miles");
-                }
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
         back.setOnClickListener(this);
         txtEducation.setOnClickListener(this);
         txtReligion.setOnClickListener(this);
@@ -178,14 +107,11 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
     }
 
     private void savePreference() {
-        Preferences.age_from = Integer.valueOf(txtAgeMin.getText().toString());
-        Preferences.age_to = Integer.valueOf(txtAgeMax.getText().toString());
-        String[] heightF = (txtHeightMin.getText().toString()).split("'");
-        String[] heightT = (txtHeightMax.getText().toString()).split("'");
-        Preferences.height_from = Float.parseFloat(heightF[0]);
-        Preferences.height_to = Float.parseFloat(heightT[0]);
-        String[] distance = (txtDistMax.getText().toString()).split("miles");
-        Preferences.distance = Integer.valueOf(distance[0]);
+        Preferences.age_from = rangeAge.getSelectedMinValue().intValue();
+        Preferences.age_to = rangeAge.getSelectedMaxValue().intValue();
+        Preferences.height_from = rangeHeight.getSelectedMinValue().floatValue();
+        Preferences.height_to = rangeHeight.getSelectedMaxValue().floatValue();
+        Preferences.distance  = rangeMile.getSelectedMaxValue().intValue();
 
         final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
         loading.setIndeterminate(true);
@@ -258,8 +184,14 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
 
     private void init_data() {
 
-        txtAgeMin.setText(String.valueOf(Preferences.age_from));
-        txtAgeMax.setText(String.valueOf(Preferences.age_to));
+        rangeAge.setRangeValues(0, 100);
+        rangeHeight.setRangeValues(5.5, 6.9);
+        rangeMile.setRangeValues(0,100);
+
+//        txtAgeMin.setText(String.valueOf(Preferences.age_from));
+//        txtAgeMax.setText(String.valueOf(Preferences.age_to));
+        rangeAge.setSelectedMinValue(Preferences.age_from);
+        rangeAge.setSelectedMaxValue(Preferences.age_to);
 
         switch (Preferences.looking){
             case 1:
@@ -284,12 +216,14 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
                 break;
         }
 
-        txtHeightMin.setText(Preferences.height_from+"'");
-        txtHeightMax.setText(Preferences.height_to+"'");
+//        txtHeightMin.setText(Preferences.height_from+"'");
+//        txtHeightMax.setText(Preferences.height_to+"'");
+        rangeHeight.setSelectedMinValue(Preferences.height_from);
+        rangeHeight.setSelectedMaxValue(Preferences.height_to);
 
-        txtDistMax.setText(String.valueOf(Preferences.distance)+"miles");
-        rangeMile.setProgress(Preferences.distance);
+//        txtDistMax.setText(String.valueOf(Preferences.distance)+"miles");
 
+        rangeMile.setSelectedMaxValue(Preferences.distance);
 
         if (Preferences.listEthnicity.equals("-1")){
             txtEthnicity.setText("No Preference");

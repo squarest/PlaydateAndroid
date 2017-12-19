@@ -113,11 +113,11 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.lin_menu_playdate:
                 if(MainActivity.isPlaydate){
-//                    Intent playdateIntent = new Intent(getContext(), PlaydateListActivity.class);
-//                    startActivity(playdateIntent);
-//                    getActivity().overridePendingTransition(R.anim.slide_in_from_right,
-//                            R.anim.slide_out_to_left);
-                    MainActivity.mTabHost.setCurrentTab(2);
+                    Intent playdateIntent = new Intent(getContext(), PlaydateListActivity.class);
+                    startActivity(playdateIntent);
+                    getActivity().overridePendingTransition(R.anim.slide_in_from_right,
+                            R.anim.slide_out_to_left);
+//                    MainActivity.mTabHost.setCurrentTab(2);
                 }
                 else{
                     showAlert("Warning", "You can't receive playdates. Please enable playdates in order to receive the playdates");
