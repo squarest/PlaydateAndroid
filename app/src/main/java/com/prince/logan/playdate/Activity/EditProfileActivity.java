@@ -6,16 +6,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.prince.logan.playdate.Interface.ApiClient;
 import com.prince.logan.playdate.Interface.ApiInterface;
 import com.prince.logan.playdate.Model.RequestModel;

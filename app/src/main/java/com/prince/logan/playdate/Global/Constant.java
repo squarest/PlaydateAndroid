@@ -5,7 +5,7 @@ package com.prince.logan.playdate.Global;
  */
 
 public class Constant {
-    public static String baseURL = "https://www.wozjobs.ca/playdate/public/api/";
+    public static String baseURL = "https://makeplaydate.info/playdate/public/api/";
 
     public static String MYREF = "user_id";
 }

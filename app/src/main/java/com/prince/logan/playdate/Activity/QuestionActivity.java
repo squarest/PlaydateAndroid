@@ -15,24 +15,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.daprlabs.cardstack.SwipeDeck;
-import com.prince.logan.playdate.Adapter.QaCateAdapter;
 import com.prince.logan.playdate.Interface.ApiClient;
 import com.prince.logan.playdate.Interface.ApiInterface;
 import com.prince.logan.playdate.Model.QuestionModel;
 import com.prince.logan.playdate.Model.RequestModel;
-import com.prince.logan.playdate.Model.UserModel;
 import com.prince.logan.playdate.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

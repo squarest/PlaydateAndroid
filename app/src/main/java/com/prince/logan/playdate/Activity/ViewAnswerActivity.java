@@ -14,7 +14,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.prince.logan.playdate.Adapter.AnswerAdapter;
-import com.prince.logan.playdate.Adapter.SubCateAdapter;
 import com.prince.logan.playdate.Interface.ApiClient;
 import com.prince.logan.playdate.Interface.ApiInterface;
 import com.prince.logan.playdate.Model.QuestionModel;

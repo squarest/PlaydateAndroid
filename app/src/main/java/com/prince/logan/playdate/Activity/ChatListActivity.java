@@ -9,19 +9,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.prince.logan.playdate.Adapter.ChatListAdapter;
-import com.prince.logan.playdate.Adapter.PlaydateListAdapter;
 import com.prince.logan.playdate.Interface.ApiClient;
 import com.prince.logan.playdate.Interface.ApiInterface;
 import com.prince.logan.playdate.Model.RequestModel;
 import com.prince.logan.playdate.Model.UserModel;
 import com.prince.logan.playdate.R;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import butterknife.Bind;

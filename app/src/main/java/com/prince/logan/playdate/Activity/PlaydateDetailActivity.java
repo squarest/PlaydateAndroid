@@ -16,7 +16,6 @@ import com.prince.logan.playdate.Model.UserModel;
 import com.prince.logan.playdate.R;
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import butterknife.Bind;
