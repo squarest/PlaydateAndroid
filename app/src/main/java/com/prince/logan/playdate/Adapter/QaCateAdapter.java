@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.prince.logan.playdate.Model.QuestionModel;
+import com.prince.logan.playdate.entities.QuestionModel;
 import com.prince.logan.playdate.R;
 import com.squareup.picasso.Picasso;
 

@@ -1,51 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:attrs="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#3D86FC"
-    android:orientation="vertical"
-    tools:context="com.prince.logan.playdate.Activity.LoginActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="#3D86FC"
+        android:orientation="vertical"
+        tools:context=".auth.presentation.LoginActivity">
 
-    <com.rd.PageIndicatorView
-        android:id="@+id/pageIndicatorView"
-        app:piv_selectedColor="@color/md_orange_300"
-        app:piv_unselectedColor="@color/md_white_1000"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:padding="15dp"
-        attrs:piv_padding="12dp"
-        attrs:piv_radius="4dp"
-        android:layout_above="@+id/btn_facebook_login"
-        android:layout_centerHorizontal="true"/>
 
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/btn_facebook_login"
-        android:layout_alignBottom="@id/viewPager"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:id="@+id/btn_facebook_login"/>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="50dp"
-        android:layout_alignBottom="@id/viewPager"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone"/>
+        <com.rd.PageIndicatorView
+            android:id="@+id/pageIndicatorView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/login_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:padding="15dp"
+            app:piv_selectedColor="@color/md_orange_300"
+            app:piv_unselectedColor="@color/md_white_1000"
+            attrs:piv_padding="12dp"
+            attrs:piv_radius="4dp" />
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/login_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/viewPager"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp"
+            android:src="@drawable/btn_facebook_login" />
+
+    </RelativeLayout>
+</layout>

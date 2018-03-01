@@ -1,198 +1,158 @@
 <?xml version="1.0"?>
-<LinearLayout
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:orientation="vertical"
-       android:background="@color/md_white_1000">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/md_white_1000"
+        android:orientation="vertical">
 
-       <ScrollView
-           android:layout_width="match_parent"
-           android:layout_height="match_parent">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-           <RelativeLayout
-               android:layout_width="match_parent"
-               android:layout_height="match_parent">
-               <ImageView
-                   android:layout_width="fill_parent"
-                   android:layout_height="wrap_content"
-                   android:adjustViewBounds="true"
-                   android:scaleType="fitCenter"
-                   android:id="@+id/img_profile"
-                   android:background="@drawable/user"/>
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="60dp"
-                   android:background="@drawable/rounded_bg"
-                   android:layout_alignTop="@+id/img_profile"
-                   android:layout_marginLeft="15dp"
-                   android:layout_marginRight="15dp"
-                   android:layout_marginTop="-20dp"
-                   android:paddingTop="20dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:text="Welcome, David Castillo!"
-                       android:gravity="center"
-                       android:textSize="17dp"
-                       android:id="@+id/txt_profile_fullname"
-                       android:textColor="@color/md_white_1000"/>
-               </LinearLayout>
+                <ImageView
+                    android:id="@+id/img_profile"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/user"
+                    android:scaleType="fitCenter" />
 
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="45dp"
-                   android:background="@drawable/rounded_bg_go"
-                   android:layout_alignBottom="@+id/img_profile"
-                   android:orientation="horizontal"
-                   android:layout_marginBottom="5dp"
-                   android:layout_marginLeft="5dp"
-                   android:layout_marginRight="5dp">
-                   <LinearLayout
-                       android:layout_width="0dp"
-                       android:layout_height="match_parent"
-                       android:layout_weight="5"
-                       android:gravity="center">
-                       <ImageView
-                           android:layout_width="30dp"
-                           android:layout_height="30dp"
-                           android:src="@drawable/preference1"/>
-                       <TextView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="PREFERENCE"
-                           android:id="@+id/txt_profile_preference"
-                           android:textColor="@color/md_white_1000"
-                           android:layout_marginLeft="20dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_alignTop="@+id/img_profile"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="-20dp"
+                    android:background="@drawable/rounded_bg"
+                    android:paddingTop="20dp">
 
-                   </LinearLayout>
-                   <LinearLayout
-                       android:layout_width="1dp"
-                       android:layout_height="match_parent"
-                       android:background="@color/md_white_1000"></LinearLayout>
-                   <LinearLayout
-                       android:layout_width="0dp"
-                       android:layout_height="match_parent"
-                       android:layout_weight="5"
-                       android:gravity="center">
-                       <ImageView
-                           android:layout_width="30dp"
-                           android:layout_height="30dp"
-                           android:src="@drawable/playdate1"/>
-                       <TextView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="PLAYDATES"
-                           android:id="@+id/txt_profile_playdate"
-                           android:textColor="@color/md_white_1000"
-                           android:layout_marginLeft="20dp"/>
-                   </LinearLayout>
-               </LinearLayout>
+                    <TextView
+                        android:id="@+id/txt_profile_fullname"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Welcome, David Castillo!"
+                        android:textColor="@color/md_white_1000"
+                        android:textSize="17dp" />
+                </LinearLayout>
 
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="45dp"
-                   android:layout_below="@+id/img_profile"
-                   android:id="@+id/lin_name"
-                   android:orientation="horizontal">
-                   <TextView
-                       android:layout_width="0dp"
-                       android:layout_height="match_parent"
-                       android:layout_weight="5"
-                       android:textColor="@color/md_black_1000"
-                       android:text="Receive Playdates"
-                       android:gravity="center|left"
-                       android:textStyle="bold"
-                       android:layout_marginLeft="25dp"
-                       android:textSize="15dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_alignBottom="@+id/img_profile"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/rounded_bg_go"
+                    android:orientation="horizontal">
 
-                   <LinearLayout
-                       android:layout_width="1dp"
-                       android:layout_height="match_parent"
-                       android:layout_marginTop="5dp"
-                       android:layout_marginBottom="5dp"
-                       android:background="@color/md_blue_grey_300"></LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:gravity="center">
 
-                   <Switch
-                       android:layout_width="0dp"
-                       android:layout_height="match_parent"
-                       android:layout_weight="5"
-                       android:textColor="@color/md_black_1000"
-                       android:id="@+id/switch_receive_playdate"
-                       android:gravity="center|left"
-                       android:layout_marginRight="25dp"
-                       android:textSize="15dp"
-                       android:checked="false"/>
-               </LinearLayout>
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="1dp"
-                   android:background="@color/md_grey_400"
-                   android:layout_alignBottom="@+id/lin_name"
-                   android:layout_marginLeft="10dp"
-                   android:layout_marginRight="10dp"></LinearLayout>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/preference1" />
 
+                        <TextView
+                            android:id="@+id/txt_profile_preference"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:text="PREFERENCE"
+                            android:textColor="@color/md_white_1000" />
 
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="45dp"
-                   android:layout_below="@+id/lin_name"
-                   android:id="@+id/lin_gender"
-                   android:orientation="horizontal">
-                   <TextView
-                       android:layout_width="0dp"
-                       android:layout_height="match_parent"
-                       android:layout_weight="5"
-                       android:textStyle="bold"
-                       android:textColor="@color/md_black_1000"
-                       android:text="Right now I want"
-                       android:gravity="center|left"
-                       android:layout_marginLeft="25dp"
-                       android:textSize="15dp"/>
+                    </LinearLayout>
 
-                   <LinearLayout
-                       android:layout_width="1dp"
-                       android:layout_height="match_parent"
-                       android:layout_marginTop="5dp"
-                       android:layout_marginBottom="5dp"
-                       android:background="@color/md_blue_grey_300"
-                       android:orientation="horizontal"></LinearLayout>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/md_white_1000" />
 
-                   <TextView
-                       android:layout_width="0dp"
-                       android:layout_height="match_parent"
-                       android:layout_weight="5"
-                       android:textColor="@color/md_black_1000"
-                       android:text=""
-                       android:id="@+id/txt_profile_want"
-                       android:gravity="center|right"
-                       android:layout_marginLeft="0dp"
-                       android:padding="5dp"
-                       android:layout_marginRight="25dp"
-                       android:textSize="15dp"/>
-               </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:gravity="center">
 
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="1dp"
-                   android:background="@color/md_grey_400"
-                   android:layout_alignBottom="@+id/lin_gender"
-                   android:layout_marginLeft="10dp"
-                   android:id="@+id/lin_border"
-                   android:layout_marginRight="10dp"
-                   android:orientation="horizontal"></LinearLayout>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/playdate1" />
+
+                        <TextView
+                            android:id="@+id/txt_profile_playdate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:text="PLAYDATES"
+                            android:textColor="@color/md_white_1000" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_below="@+id/img_profile"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="5"
+                        android:gravity="center|left"
+                        android:text="Receive Playdates"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/md_blue_grey_300" />
+
+                    <Switch
+                        android:id="@+id/switch_receive_playdate"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="25dp"
+                        android:layout_weight="5"
+                        android:checked="false"
+                        android:gravity="center|left"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignBottom="@+id/lin_name"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/md_grey_400" />
 
 
-           </RelativeLayout>
+            </RelativeLayout>
 
 
-       </ScrollView>
-   </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
 </LinearLayout>

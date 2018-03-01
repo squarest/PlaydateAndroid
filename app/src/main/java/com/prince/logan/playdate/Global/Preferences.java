@@ -1,9 +1,5 @@
 package com.prince.logan.playdate.Global;
 
-import com.prince.logan.playdate.Model.PreferenceItemModel;
-
-import java.util.ArrayList;
-
 /**
  * Created by PRINCE on 12/6/2017.
  */

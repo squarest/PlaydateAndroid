@@ -8,15 +8,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.prince.logan.playdate.Activity.MainActivity;
-import com.prince.logan.playdate.Model.ChatData;
+import com.prince.logan.playdate.main.MainActivity;
+import com.prince.logan.playdate.entities.ChatData;
 import com.prince.logan.playdate.R;
-import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.TimeZone;
 
 public class ChatAdapter extends ArrayAdapter<ChatData> {

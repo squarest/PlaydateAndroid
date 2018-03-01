@@ -5,11 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.prince.logan.playdate.Model.QuestionModel;
-import com.prince.logan.playdate.Model.SubCateModel;
+import com.prince.logan.playdate.entities.SubCateModel;
 import com.prince.logan.playdate.R;
 
 import java.util.ArrayList;

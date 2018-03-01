@@ -9,9 +9,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.prince.logan.playdate.Activity.MainActivity;
-import com.prince.logan.playdate.Activity.PreferenceItemActivity;
-import com.prince.logan.playdate.Model.PreferenceItemModel;
+import com.prince.logan.playdate.preference.PreferenceItemActivity;
+import com.prince.logan.playdate.entities.PreferenceItemModel;
 import com.prince.logan.playdate.R;
 
 import java.util.ArrayList;
