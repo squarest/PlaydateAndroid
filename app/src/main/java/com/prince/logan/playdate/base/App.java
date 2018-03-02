@@ -6,6 +6,8 @@ import com.facebook.FacebookSdk;
 import com.prince.logan.playdate.auth.di.LoginComponent;
 import com.prince.logan.playdate.auth.di.LoginModule;
 import com.prince.logan.playdate.dagger.AppComponent;
+import com.prince.logan.playdate.main.di.MainComponent;
+import com.prince.logan.playdate.main.di.MainModule;
 
 /**
  * Created by dmitrijfomenko on 27.02.2018.
@@ -14,6 +16,11 @@ import com.prince.logan.playdate.dagger.AppComponent;
 public class App extends Application {
     private static AppComponent appComponent;
     private static LoginComponent loginComponent;
+    private static MainComponent mainComponent;
+
+    public static MainComponent getMainComponent() {
+        return mainComponent;
+    }
 
     public static LoginComponent getLoginComponent() {
         return loginComponent;
@@ -41,5 +48,12 @@ public class App extends Application {
         if (loginComponent == null)
             loginComponent = appComponent.plusLoginComponent(new LoginModule());
         return loginComponent;
+    }
+
+    private MainComponent buildMainComponent() {
+        if (mainComponent == null) {
+            mainComponent = appComponent.plusMainComponent(new MainModule());
+        }
+        return mainComponent;
     }
 }

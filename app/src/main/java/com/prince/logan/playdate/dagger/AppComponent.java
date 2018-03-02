@@ -5,6 +5,8 @@ import com.prince.logan.playdate.auth.di.LoginModule;
 import com.prince.logan.playdate.dagger.modules.AppModule;
 import com.prince.logan.playdate.dagger.modules.DataModule;
 import com.prince.logan.playdate.dagger.modules.NetModule;
+import com.prince.logan.playdate.main.di.MainComponent;
+import com.prince.logan.playdate.main.di.MainModule;
 
 import javax.inject.Singleton;
 
@@ -17,4 +19,6 @@ import dagger.Component;
 @Singleton
 public interface AppComponent {
     LoginComponent plusLoginComponent(LoginModule loginModule);
+
+    MainComponent plusMainComponent(MainModule mainModule);
 }

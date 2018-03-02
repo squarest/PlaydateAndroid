@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.prince.logan.playdate.entities.RequestModel;
 import com.prince.logan.playdate.entities.UserModel;
 import com.prince.logan.playdate.network.ApiClient;
@@ -26,11 +27,18 @@ public class LoginRepo implements ILoginRepo {
         firebaseAuth = auth;
     }
 
+
     @Override
     public String getUserId() {
         if (firebaseAuth.getCurrentUser() != null) return firebaseAuth.getUid();
         else return null;
 
+    }
+
+    @Override
+    public Single<RequestModel> setTokenToServer() {
+        String token = FirebaseInstanceId.getInstance().getToken();
+        return apiClient.getApi().register_token(token, 0, getUserId());
     }
 
     @Override

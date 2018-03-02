@@ -84,7 +84,7 @@ public interface API {
     );
 
     @POST("register_token")
-    Call<RequestModel> register_token(
+    Single<RequestModel> register_token(
             @Query("token") String token, @Query("platform") int platform, @Query("user_id") String user_id
     );
 
@@ -105,7 +105,7 @@ public interface API {
     );
 
     @POST("update_location")
-    Call<RequestModel> update_loaction(
+    Single<RequestModel> update_location(
             @Query("user_id") String id, @Query("lati") String lati, @Query("longi") String longi
     );
 

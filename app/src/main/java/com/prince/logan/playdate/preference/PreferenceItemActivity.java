@@ -10,7 +10,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.prince.logan.playdate.Adapter.PreferenceItemAdapter;
-import com.prince.logan.playdate.Global.Preferences;
 import com.prince.logan.playdate.entities.PreferenceItemModel;
 import com.prince.logan.playdate.R;
 

@@ -13,7 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.prince.logan.playdate.main.MainActivity;
+import com.prince.logan.playdate.main.presentation.main.MainActivity;
 import com.prince.logan.playdate.Adapter.PlaydateListAdapter;
 import com.prince.logan.playdate.network.ApiClient;
 import com.prince.logan.playdate.network.API;
@@ -121,11 +121,9 @@ public class PlaydateListActivity extends Activity implements View.OnClickListen
         // Dialog Message
         alertDialog.setMessage(msg);
         // on pressing cancel button
-        alertDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                ((Activity)context).finish();
-            }
+        alertDialog.setNegativeButton("OK", (dialog, which) -> {
+            dialog.cancel();
+            ((Activity)context).finish();
         });
         // Showing Alert Message
         alertDialog.show();

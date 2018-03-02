@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.prince.logan.playdate.main.MainActivity;
+import com.prince.logan.playdate.main.presentation.main.MainActivity;
 import com.prince.logan.playdate.entities.ChatData;
 import com.prince.logan.playdate.R;
 

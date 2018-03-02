@@ -6,13 +6,17 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.prince.logan.playdate.main.MainActivity;
+import com.prince.logan.playdate.main.presentation.main.MainActivity;
 import com.prince.logan.playdate.Adapter.ChatListAdapter;
 import com.prince.logan.playdate.network.ApiClient;
 import com.prince.logan.playdate.network.API;
@@ -31,43 +35,41 @@ import retrofit2.Callback;
  * Created by PRINCE on 11/14/2017.
  */
 
-public class ChatListActivity extends Activity implements View.OnClickListener{
+public class ChatListFragment extends Fragment {
 
     @Bind(R.id.list_chat)
     ListView listChat;
-    @Bind(R.id.img_chatlist_back)
-    ImageView back;
 
     ChatListAdapter chatListAdapter;
     ArrayList<UserModel> arryChatUsers = new ArrayList<UserModel>();
 
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_list);
-        ButterKnife.bind(this);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
 
-        back.setOnClickListener(this);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(view);
 
-        listChat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                UserModel chatUser = arryChatUsers.get(i);
-                Intent playdateDetailIntent = new Intent(ChatListActivity.this, ChatActivity.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putSerializable("userModel", (Serializable) chatUser);
-//                playdateDetailIntent.putExtras(bundle);
-                playdateDetailIntent.putExtra("user_id", chatUser.get_firebase_id());
-                playdateDetailIntent.putExtra("user_name", chatUser.get_user_full_name());
-                startActivity(playdateDetailIntent);
-            }
+
+        listChat.setOnItemClickListener((adapterView, v, i, l) -> {
+            UserModel chatUser = arryChatUsers.get(i);
+            Intent playdateDetailIntent = new Intent(getContext(), ChatActivity.class);
+            playdateDetailIntent.putExtra("user_id", chatUser.get_firebase_id());
+            playdateDetailIntent.putExtra("user_name", chatUser.get_user_full_name());
+            startActivity(playdateDetailIntent);
         });
 
         gettingChatLists();
     }
 
+
+
     private void gettingChatLists() {
-        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        final ProgressDialog loading = new ProgressDialog(getContext(), R.style.AppTheme_Dark_Dialog);
         loading.setIndeterminate(true);
         loading.setMessage("Please wait...");
         loading.show();
@@ -81,15 +83,14 @@ public class ChatListActivity extends Activity implements View.OnClickListener{
                 loading.dismiss();
                 RequestModel responseData = response.body();
 
-                if (responseData.getResult() == 1){
+                if (responseData.getResult() == 1) {
 
                     arryChatUsers = responseData.getMatchedUser();
 
-                    chatListAdapter = new ChatListAdapter(getApplicationContext(), R.layout.adapter_playdate_list, arryChatUsers);
+                    chatListAdapter = new ChatListAdapter(getContext(), R.layout.adapter_playdate_list, arryChatUsers);
                     listChat.setAdapter(chatListAdapter);
                     chatListAdapter.notifyDataSetChanged();
-                }
-                else{
+                } else {
                     showAlert("Alert", responseData.getMsg());
                 }
             }
@@ -103,29 +104,18 @@ public class ChatListActivity extends Activity implements View.OnClickListener{
         });
     }
 
-    public void showAlert(String title, String msg){
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+    public void showAlert(String title, String msg) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
 
         // Dialog Title
         alertDialog.setTitle(title);
         // Dialog Message
         alertDialog.setMessage(msg);
         // on pressing cancel button
-        alertDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        alertDialog.setNegativeButton("OK", (dialog, which) -> dialog.cancel());
         // Showing Alert Message
         alertDialog.show();
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.img_chatlist_back:
-                this.finish();
-                break;
-        }
-    }
+
 }

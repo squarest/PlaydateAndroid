@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.prince.logan.playdate.main.MainActivity;
+import com.prince.logan.playdate.main.presentation.main.MainActivity;
 import com.prince.logan.playdate.network.ApiClient;
 import com.prince.logan.playdate.network.API;
 import com.prince.logan.playdate.entities.RequestModel;

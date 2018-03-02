@@ -5,7 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
-import com.prince.logan.playdate.main.MainActivity;
+import com.prince.logan.playdate.main.presentation.main.MainActivity;
 import com.prince.logan.playdate.network.ApiClient;
 import com.prince.logan.playdate.network.API;
 import com.prince.logan.playdate.entities.RequestModel;

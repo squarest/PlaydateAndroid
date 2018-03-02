@@ -1,94 +1,63 @@
-package com.prince.logan.playdate.main;
+package com.prince.logan.playdate.main.presentation.main;
 
-import android.Manifest;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Location;
 import android.os.Bundle;
-
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.facebook.login.LoginManager;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.prince.logan.playdate.auth.presentation.LoginActivity;
-import com.prince.logan.playdate.preference.EditProfileActivity;
-import com.prince.logan.playdate.Global.Preferences;
-import com.prince.logan.playdate.network.ApiClient;
-import com.prince.logan.playdate.network.API;
-import com.prince.logan.playdate.entities.RequestModel;
-import com.prince.logan.playdate.entities.UserModel;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.prince.logan.playdate.R;
+import com.prince.logan.playdate.base.BaseActivity;
+import com.prince.logan.playdate.chat.ChatListFragment;
+import com.prince.logan.playdate.main.presentation.menu.MenuFragment;
+import com.prince.logan.playdate.main.presentation.profile.ProfileFragment;
+import com.prince.logan.playdate.playdate.PlaydateFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
+public class MainActivity extends BaseActivity implements  MainView{
 
-public class MainActivity extends AppCompatActivity {
-
-    public static FragmentTabHost mTabHost;
+    private FragmentTabHost mTabHost;
     private ViewPager mViewPager;
     private List<Fragment> mFragmentList;
-    private Class mClass[] = {ProfileFragment.class, QAFragment.class, PlaydateFragment.class, MenuFragment.class};
-    private Fragment mFragment[] = {new ProfileFragment(), new QAFragment(), new PlaydateFragment(), new MenuFragment()};
-    private String mTitles[] = {"Profile", "Question & Answer", "Playdate", "Menu"};
+    private Class mClass[] = {ProfileFragment.class, PlaydateFragment.class, ChatListFragment.class, MenuFragment.class};
+    private Fragment mFragment[] = {new ProfileFragment(), new PlaydateFragment(), new ChatListFragment(), new MenuFragment()};
+    private String mTitles[] = {"Profile", "Chat", "Playdate", "Menu"};
     private int mImages[] = {
             R.drawable.tab_profile,
-            R.drawable.tab_qa,
             R.drawable.tab_playdate,
+            R.drawable.chat_icon,
             R.drawable.tab_menu
     };
 
-    public static String userFirebaseID;
-    public static boolean isPlaydate;
-
-
+    @InjectPresenter
+    public MainPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        initView();
+        initEvent();
+        presenter.viewCreated();
     }
-
 
     private void initView() {
 
-
         mTabHost = findViewById(android.R.id.tabhost);
         mViewPager = findViewById(R.id.view_pager);
-
         mFragmentList = new ArrayList<>();
-
         mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
         mTabHost.getTabWidget().setDividerDrawable(null);
 
@@ -146,34 +115,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
-    private void sendRegistrationToServer(final String token) {
-
-        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
-        loading.setIndeterminate(true);
-        loading.setMessage("Please wait...");
-        loading.show();
-
-        API apiService = ApiClient.getApi().create(API.class);
-
-        Call<RequestModel> req = apiService.register_token(token, 0, MainActivity.userProfile.get_firebase_id());
-        req.enqueue(new Callback<RequestModel>() {
-            @Override
-            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
-                RequestModel responseData = response.body();
-                loading.dismiss();
-            }
-
-            @Override
-            public void onFailure(Call<RequestModel> call, Throwable t) {
-                t.printStackTrace();
-                loading.dismiss();
-            }
-        });
-    }
-
-
-}
-
 }

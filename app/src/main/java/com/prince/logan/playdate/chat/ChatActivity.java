@@ -18,7 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.prince.logan.playdate.main.MainActivity;
+import com.prince.logan.playdate.main.presentation.main.MainActivity;
 import com.prince.logan.playdate.Adapter.ChatAdapter;
 import com.prince.logan.playdate.network.ApiClient;
 import com.prince.logan.playdate.network.API;
@@ -72,13 +72,13 @@ public class ChatActivity extends Activity implements View.OnClickListener{
 
 
     private void initViews() {
-        mListView = (ListView) findViewById(R.id.list_message);
+        mListView = findViewById(R.id.list_message);
         mAdapter = new ChatAdapter(this, 0);
         mListView.setAdapter(mAdapter);
 
-        mEdtMessage = (EditText) findViewById(R.id.edit_message);
-        back = (ImageView)findViewById(R.id.img_chat_back);
-        txtUserName = (TextView)findViewById(R.id.txt_chat_user_name);
+        mEdtMessage = findViewById(R.id.edit_message);
+        back = findViewById(R.id.img_chat_back);
+        txtUserName = findViewById(R.id.txt_chat_user_name);
         txtUserName.setText(userName);
         back.setOnClickListener(this);
         findViewById(R.id.btn_send).setOnClickListener(this);

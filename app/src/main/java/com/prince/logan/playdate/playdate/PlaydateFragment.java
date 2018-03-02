@@ -1,4 +1,4 @@
-package com.prince.logan.playdate.main;
+package com.prince.logan.playdate.playdate;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -16,8 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.andexert.library.RippleView;
-import com.prince.logan.playdate.chat.ChatListActivity;
-import com.prince.logan.playdate.playdate.PlaydateListActivity;
+import com.prince.logan.playdate.chat.ChatListFragment;
+import com.prince.logan.playdate.main.presentation.main.MainActivity;
 import com.prince.logan.playdate.network.ApiClient;
 import com.prince.logan.playdate.network.API;
 import com.prince.logan.playdate.entities.RequestModel;
@@ -88,7 +88,7 @@ public class PlaydateFragment extends Fragment implements RippleView.OnRippleCom
                 startActivity(playdateIntent);
                 break;
             case R.id.btn_chat:
-                Intent chatIntent = new Intent(getContext(), ChatListActivity.class);
+                Intent chatIntent = new Intent(getContext(), ChatListFragment.class);
                 startActivity(chatIntent);
                 break;
         }
@@ -106,7 +106,7 @@ public class PlaydateFragment extends Fragment implements RippleView.OnRippleCom
                 }
                 break;
             case R.id.lin_chat:
-                Intent chatIntent = new Intent(getContext(), ChatListActivity.class);
+                Intent chatIntent = new Intent(getContext(), ChatListFragment.class);
                 startActivity(chatIntent);
                 break;
         }

@@ -23,7 +23,7 @@ import com.facebook.login.LoginResult;
 import com.prince.logan.playdate.R;
 import com.prince.logan.playdate.base.BaseActivity;
 import com.prince.logan.playdate.databinding.ActivityLoginBinding;
-import com.prince.logan.playdate.main.MainActivity;
+import com.prince.logan.playdate.main.presentation.main.MainActivity;
 import com.rd.animation.type.AnimationType;
 
 import java.util.ArrayList;

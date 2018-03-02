@@ -18,8 +18,10 @@ public class LoginInteractor implements ILoginInteractor {
 
     @Override
     public Single<Boolean> checkUser() {
+
         if (loginRepo.getUserId() != null) {
             return loginRepo.loginToServer()
+                    .flatMap(requestModel -> loginRepo.setTokenToServer())
                     .map(requestModel -> true);
         } else return Single.just(false);
     }
@@ -28,6 +30,7 @@ public class LoginInteractor implements ILoginInteractor {
     public Completable login() {
         return loginRepo.getUserFromFacebook()
                 .flatMap(loginRepo::signUpToServer)
+                .flatMap(requestModel -> loginRepo.setTokenToServer())
                 .toCompletable();
     }
 }

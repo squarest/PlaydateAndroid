@@ -18,7 +18,7 @@ import com.prince.logan.playdate.network.ApiClient;
 import com.prince.logan.playdate.network.API;
 import com.prince.logan.playdate.entities.RequestModel;
 import com.prince.logan.playdate.R;
-import com.prince.logan.playdate.main.MainActivity;
+import com.prince.logan.playdate.main.presentation.main.MainActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

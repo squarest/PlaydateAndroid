@@ -1,4 +1,4 @@
-package com.prince.logan.playdate.main;
+package com.prince.logan.playdate.main.presentation.menu;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -18,7 +18,8 @@ import android.widget.Toast;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.prince.logan.playdate.help.AboutActivity;
-import com.prince.logan.playdate.chat.ChatListActivity;
+import com.prince.logan.playdate.chat.ChatListFragment;
+import com.prince.logan.playdate.main.presentation.main.MainActivity;
 import com.prince.logan.playdate.preference.EditProfileActivity;
 import com.prince.logan.playdate.help.faq.FAQActivity;
 import com.prince.logan.playdate.auth.presentation.LoginActivity;
@@ -43,14 +44,10 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
     private View mRootView;
     @Bind(R.id.lin_menu_about)
     LinearLayout btnAbout;
-    @Bind(R.id.lin_menu_chats)
-    LinearLayout btnChats;
     @Bind(R.id.lin_menu_faq)
     LinearLayout btnFaq;
     @Bind(R.id.lin_menu_feedback)
     LinearLayout btnFeedback;
-    @Bind(R.id.lin_menu_playdate)
-    LinearLayout btnPlaydate;
     @Bind(R.id.lin_menu_preference)
     LinearLayout btnPreference;
     @Bind(R.id.lin_menu_user_profile)
@@ -84,9 +81,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
     public void setEvent(){
         btnAbout.setOnClickListener(this);
-        btnChats.setOnClickListener(this);
         btnFaq.setOnClickListener(this);
-        btnPlaydate.setOnClickListener(this);
         btnPreference.setOnClickListener(this);
         btnFeedback.setOnClickListener(this);
         btnEditProfile.setOnClickListener(this);
@@ -109,24 +104,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                 getActivity().overridePendingTransition(R.anim.slide_in_from_right,
                         R.anim.slide_out_to_left);
                 break;
-            case R.id.lin_menu_playdate:
-                if(MainActivity.isPlaydate){
-                    Intent playdateIntent = new Intent(getContext(), PlaydateListActivity.class);
-                    startActivity(playdateIntent);
-                    getActivity().overridePendingTransition(R.anim.slide_in_from_right,
-                            R.anim.slide_out_to_left);
-//                    MainActivity.mTabHost.setCurrentTab(2);
-                }
-                else{
-                    showAlert("Warning", "You can't receive playdates. Please enable playdates in order to receive the playdates");
-                }
-                break;
-            case R.id.lin_menu_chats:
-                Intent chatIntent = new Intent(getContext(), ChatListActivity.class);
-                startActivity(chatIntent);
-                getActivity().overridePendingTransition(R.anim.slide_in_from_right,
-                        R.anim.slide_out_to_left);
-                break;
+
             case R.id.lin_menu_feedback:
                 Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                         "mailto", "makeplaydate@gmail.com", null));
@@ -206,11 +184,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
         // Dialog Message
         alertDialog.setMessage(msg);
         // on pressing cancel button
-        alertDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        alertDialog.setNegativeButton("OK", (dialog, which) -> dialog.cancel());
         // Showing Alert Message
         alertDialog.show();
     }

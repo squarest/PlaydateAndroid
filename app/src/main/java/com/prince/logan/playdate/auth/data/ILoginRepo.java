@@ -12,6 +12,8 @@ import io.reactivex.Single;
 public interface ILoginRepo {
     String getUserId();
 
+    Single<RequestModel>setTokenToServer();
+
     Single<UserModel> getUserFromFacebook();
 
     Single<RequestModel> loginToServer();
