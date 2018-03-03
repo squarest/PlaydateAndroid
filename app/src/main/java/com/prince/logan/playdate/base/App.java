@@ -5,6 +5,8 @@ import android.app.Application;
 import com.facebook.FacebookSdk;
 import com.prince.logan.playdate.auth.di.LoginComponent;
 import com.prince.logan.playdate.auth.di.LoginModule;
+import com.prince.logan.playdate.chat.di.ChatComponent;
+import com.prince.logan.playdate.chat.di.ChatModule;
 import com.prince.logan.playdate.dagger.AppComponent;
 import com.prince.logan.playdate.main.di.MainComponent;
 import com.prince.logan.playdate.main.di.MainModule;
@@ -17,6 +19,7 @@ public class App extends Application {
     private static AppComponent appComponent;
     private static LoginComponent loginComponent;
     private static MainComponent mainComponent;
+    private static ChatComponent chatComponent;
 
     public static MainComponent getMainComponent() {
         return mainComponent;
@@ -30,12 +33,19 @@ public class App extends Application {
         return appComponent;
     }
 
+    public static ChatComponent getChatComponent() {
+        return chatComponent;
+    }
+
     @Override
+
     public void onCreate() {
         super.onCreate();
         FacebookSdk.sdkInitialize(getApplicationContext());
         appComponent = buildAppComponent();
         loginComponent = buildLoginComponent();
+        mainComponent = buildMainComponent();
+        chatComponent = buildChatComponent();
     }
 
     private AppComponent buildAppComponent() {
@@ -55,5 +65,12 @@ public class App extends Application {
             mainComponent = appComponent.plusMainComponent(new MainModule());
         }
         return mainComponent;
+    }
+
+    private ChatComponent buildChatComponent() {
+        if (chatComponent == null) {
+            chatComponent = appComponent.plusChatComponent(new ChatModule());
+        }
+        return chatComponent;
     }
 }

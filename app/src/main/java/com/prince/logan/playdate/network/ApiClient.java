@@ -1,6 +1,6 @@
 package com.prince.logan.playdate.network;
 
-import com.prince.logan.playdate.Global.Constant;
+import com.prince.logan.playdate.global.Constant;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -29,7 +29,7 @@ public class ApiClient {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constant.baseURL)
+                .baseUrl(Constant.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)

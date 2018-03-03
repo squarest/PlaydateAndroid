@@ -4,4 +4,10 @@
     <string name="fb_login_protocol_scheme">fb276324066222471</string>
 
     <string name="failed_to_start_app">Failed to start app</string>
+    <string name="edit_profile_button"><u>edit profile</u></string>
+    <string name="preference_button"><u>preference</u></string>
+    <string name="welcome_title">Welcome,</string>
+    <string name="answer_questions_title">Answer questions</string>
+    <string name="delete_dialod_msg">Are you sure?</string>
+    <string name="delete_dialog_title">Delete user</string>
 </resources>

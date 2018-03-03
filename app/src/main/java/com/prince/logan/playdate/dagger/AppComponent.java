@@ -2,6 +2,8 @@ package com.prince.logan.playdate.dagger;
 
 import com.prince.logan.playdate.auth.di.LoginComponent;
 import com.prince.logan.playdate.auth.di.LoginModule;
+import com.prince.logan.playdate.chat.di.ChatComponent;
+import com.prince.logan.playdate.chat.di.ChatModule;
 import com.prince.logan.playdate.dagger.modules.AppModule;
 import com.prince.logan.playdate.dagger.modules.DataModule;
 import com.prince.logan.playdate.dagger.modules.NetModule;
@@ -21,4 +23,6 @@ public interface AppComponent {
     LoginComponent plusLoginComponent(LoginModule loginModule);
 
     MainComponent plusMainComponent(MainModule mainModule);
+
+    ChatComponent plusChatComponent(ChatModule chatModule);
 }

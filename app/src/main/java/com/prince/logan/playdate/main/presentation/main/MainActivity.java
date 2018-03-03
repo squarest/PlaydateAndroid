@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.prince.logan.playdate.R;
 import com.prince.logan.playdate.base.BaseActivity;
-import com.prince.logan.playdate.chat.ChatListFragment;
+import com.prince.logan.playdate.chat.presentation.chatlist.ChatListFragment;
 import com.prince.logan.playdate.main.presentation.menu.MenuFragment;
 import com.prince.logan.playdate.main.presentation.profile.ProfileFragment;
 import com.prince.logan.playdate.playdate.PlaydateFragment;

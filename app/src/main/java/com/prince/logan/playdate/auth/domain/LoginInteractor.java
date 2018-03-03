@@ -19,11 +19,7 @@ public class LoginInteractor implements ILoginInteractor {
     @Override
     public Single<Boolean> checkUser() {
 
-        if (loginRepo.getUserId() != null) {
-            return loginRepo.loginToServer()
-                    .flatMap(requestModel -> loginRepo.setTokenToServer())
-                    .map(requestModel -> true);
-        } else return Single.just(false);
+        return Single.just(loginRepo.isCurrentUserExist());
     }
 
     @Override

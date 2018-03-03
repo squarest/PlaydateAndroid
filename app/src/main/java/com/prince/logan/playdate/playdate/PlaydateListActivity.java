@@ -63,16 +63,13 @@ public class PlaydateListActivity extends Activity implements View.OnClickListen
 
     private void setEvent() {
         back.setOnClickListener(this);
-        listPlaydate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                UserModel chatUser = arrayListUser.get(i);
-                Intent playdateDetailIntent = new Intent(PlaydateListActivity.this, PlaydateDetailActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("userModel", (Serializable) chatUser);
-                playdateDetailIntent.putExtras(bundle);
-                startActivity(playdateDetailIntent);
-            }
+        listPlaydate.setOnItemClickListener((adapterView, view, i, l) -> {
+            UserModel chatUser = arrayListUser.get(i);
+            Intent playdateDetailIntent = new Intent(PlaydateListActivity.this, PlaydateDetailActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("userModel", (Serializable) chatUser);
+            playdateDetailIntent.putExtras(bundle);
+            startActivity(playdateDetailIntent);
         });
     }
 

@@ -1,4 +1,4 @@
-package com.prince.logan.playdate.chat;
+package com.prince.logan.playdate.chat.presentation.chat;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.prince.logan.playdate.base.BaseActivity;
 import com.prince.logan.playdate.main.presentation.main.MainActivity;
 import com.prince.logan.playdate.Adapter.ChatAdapter;
 import com.prince.logan.playdate.network.ApiClient;
@@ -33,7 +34,7 @@ import retrofit2.Callback;
  * Created by PRINCE on 11/20/2017.
  */
 
-public class ChatActivity extends Activity implements View.OnClickListener{
+public class ChatActivity extends BaseActivity implements View.OnClickListener, ChatView{
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;

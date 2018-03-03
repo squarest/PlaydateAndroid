@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.prince.logan.playdate.chat.ChatActivity;
+import com.prince.logan.playdate.chat.presentation.chat.ChatActivity;
 import com.prince.logan.playdate.Adapter.QuestionAdapter;
 import com.prince.logan.playdate.entities.QuestionModel;
 import com.prince.logan.playdate.entities.UserModel;

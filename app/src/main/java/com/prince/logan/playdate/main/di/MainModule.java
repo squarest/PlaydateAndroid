@@ -2,6 +2,8 @@ package com.prince.logan.playdate.main.di;
 
 import android.content.Context;
 
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
 import com.prince.logan.playdate.main.data.IMainRepo;
 import com.prince.logan.playdate.main.data.MainRepo;
 import com.prince.logan.playdate.main.domain.IMainInteractor;
@@ -25,8 +27,15 @@ public class MainModule {
 
     @Provides
     @MainScope
-    public IMainRepo provideMainRepo(LocationProvider locationProvider, ApiClient apiClient) {
-        return new MainRepo(apiClient, locationProvider);
+    public LoginManager provideLoginManager() {
+        return LoginManager.getInstance();
+    }
+
+    @Provides
+    @MainScope
+    public IMainRepo provideMainRepo(LocationProvider locationProvider, ApiClient apiClient,
+                                     FirebaseAuth firebaseAuth, LoginManager loginManager) {
+        return new MainRepo(apiClient, locationProvider, firebaseAuth, loginManager);
     }
 
     @Provides

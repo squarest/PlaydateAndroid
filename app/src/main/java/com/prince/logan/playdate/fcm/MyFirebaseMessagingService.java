@@ -11,7 +11,7 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.prince.logan.playdate.chat.ChatActivity;
+import com.prince.logan.playdate.chat.presentation.chat.ChatActivity;
 import com.prince.logan.playdate.R;
 
 import org.json.JSONObject;

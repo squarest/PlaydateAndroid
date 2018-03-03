@@ -1,7 +1,11 @@
 package com.prince.logan.playdate.main.domain;
 
+import com.prince.logan.playdate.entities.QuestionModel;
+import com.prince.logan.playdate.entities.UserModel;
 import com.prince.logan.playdate.main.data.IMainRepo;
 
+import io.reactivex.Completable;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -26,4 +30,30 @@ public class MainInteractor implements IMainInteractor {
 
 
     }
+
+    @Override
+    public Single<UserModel> loadUser() {
+        return mainRepo.getUser();
+    }
+
+    @Override
+    public Single<QuestionModel> loadQuestion() {
+        return mainRepo.getQuestion();
+    }
+
+    @Override
+    public Completable deleteUser() {
+        return mainRepo.removeUserFromServer()
+                .subscribeOn(Schedulers.io())
+                .doOnSuccess(requestModel -> mainRepo.removeUserFromDevice())
+                .observeOn(AndroidSchedulers.mainThread())
+                .toCompletable();
+    }
+
+    @Override
+    public Completable logout() {
+        mainRepo.removeUserFromDevice();
+        return Completable.complete();
+    }
+
 }

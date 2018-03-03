@@ -1,6 +1,6 @@
 package com.prince.logan.playdate.utils;
 
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 
@@ -33,6 +33,20 @@ public class DialogUtil {
         alertDialog.setMessage(msg);
         // on pressing cancel button
         alertDialog.setNegativeButton("OK", (dialog, which) -> dialog.cancel());
+
+        return alertDialog.create();
+    }
+
+    public AlertDialog getAlertDialog(String title, String msg, AlertDialog.OnClickListener positiveClickListener) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+
+        // Dialog Title
+        alertDialog.setTitle(title);
+        // Dialog Message
+        alertDialog.setMessage(msg);
+        alertDialog.setPositiveButton("OK", positiveClickListener);
+        // on pressing cancel button
+        alertDialog.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
 
         return alertDialog.create();
     }

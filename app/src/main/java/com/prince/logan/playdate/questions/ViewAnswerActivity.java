@@ -118,11 +118,7 @@ public class ViewAnswerActivity extends Activity implements View.OnClickListener
         // Dialog Message
         alertDialog.setMessage(msg);
         // on pressing cancel button
-        alertDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        alertDialog.setNegativeButton("OK", (dialog, which) -> dialog.cancel());
         // Showing Alert Message
         alertDialog.show();
     }

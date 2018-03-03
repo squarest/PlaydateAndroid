@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.andexert.library.RippleView;
-import com.prince.logan.playdate.chat.ChatListFragment;
+import com.prince.logan.playdate.chat.presentation.chatlist.ChatListFragment;
 import com.prince.logan.playdate.main.presentation.main.MainActivity;
 import com.prince.logan.playdate.network.ApiClient;
 import com.prince.logan.playdate.network.API;

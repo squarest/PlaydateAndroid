@@ -1,9 +1,7 @@
-package com.prince.logan.playdate.chat;
+package com.prince.logan.playdate.chat.presentation.chatlist;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,10 +10,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.prince.logan.playdate.chat.presentation.chat.ChatActivity;
 import com.prince.logan.playdate.main.presentation.main.MainActivity;
 import com.prince.logan.playdate.Adapter.ChatListAdapter;
 import com.prince.logan.playdate.network.ApiClient;
@@ -35,7 +32,7 @@ import retrofit2.Callback;
  * Created by PRINCE on 11/14/2017.
  */
 
-public class ChatListFragment extends Fragment {
+public class ChatListFragment extends Fragment implements ChatListView{
 
     @Bind(R.id.list_chat)
     ListView listChat;
@@ -53,8 +50,6 @@ public class ChatListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(view);
-
-
         listChat.setOnItemClickListener((adapterView, v, i, l) -> {
             UserModel chatUser = arryChatUsers.get(i);
             Intent playdateDetailIntent = new Intent(getContext(), ChatActivity.class);
@@ -104,18 +99,21 @@ public class ChatListFragment extends Fragment {
         });
     }
 
-    public void showAlert(String title, String msg) {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
 
-        // Dialog Title
-        alertDialog.setTitle(title);
-        // Dialog Message
-        alertDialog.setMessage(msg);
-        // on pressing cancel button
-        alertDialog.setNegativeButton("OK", (dialog, which) -> dialog.cancel());
-        // Showing Alert Message
-        alertDialog.show();
+    @Override
+    public void showLoading() {
+
     }
 
+    @Override
+    public void dismissLoading() {
 
+    }
+
+    @Override
+    public void setChatList(ArrayList<UserModel> userModels) {
+        chatListAdapter = new ChatListAdapter(getContext(), R.layout.adapter_playdate_list, arryChatUsers);
+        listChat.setAdapter(chatListAdapter);
+        chatListAdapter.notifyDataSetChanged();
+    }
 }

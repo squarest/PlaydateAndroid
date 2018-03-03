@@ -6,5 +6,5 @@ import com.prince.logan.playdate.base.BaseView;
  * Created by dmitrijfomenko on 01.03.2018.
  */
 
-interface MainView extends BaseView {
+public interface MainView extends BaseView {
 }

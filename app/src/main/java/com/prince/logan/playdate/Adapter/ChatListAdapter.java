@@ -20,15 +20,12 @@ import java.util.ArrayList;
 
 public class ChatListAdapter extends ArrayAdapter<UserModel> {
     private Context context;
-    private int mResource;
     private ArrayList<UserModel> itemName;
-    UserModel chatUser;
+    private UserModel chatUser;
 
-    public ChatListAdapter(Context context, int itemResourceId,
-                               ArrayList<UserModel> list) {
-        super(context, itemResourceId, list);
+    public ChatListAdapter(Context context, ArrayList<UserModel> list) {
+        super(context, list);
         this.context = context;
-        this.mResource = itemResourceId;
         this.itemName = list;
     }
 
@@ -36,7 +33,6 @@ public class ChatListAdapter extends ArrayAdapter<UserModel> {
     public View getView(final int position, View convertView, ViewGroup parent) {
         View v = null;
         if (null == convertView) {
-//            LayoutInflater inflater = context.getLayoutInflater();
             v =  LayoutInflater.from(context).inflate(R.layout.adapter_chat_list, null);
 
         } else {
@@ -44,8 +40,8 @@ public class ChatListAdapter extends ArrayAdapter<UserModel> {
         }
         chatUser = itemName.get(position);
 
-        TextView userName = (TextView) v.findViewById(R.id.chat_person);
-        ImageView imgPlaydate = (ImageView)v.findViewById(R.id.chat_image);
+        TextView userName = v.findViewById(R.id.chat_person);
+        ImageView imgPlaydate = v.findViewById(R.id.chat_image);
 
         String avatar_url = chatUser.get_user_avatar();
         String profileImage = avatar_url.replace("http://", "https://");

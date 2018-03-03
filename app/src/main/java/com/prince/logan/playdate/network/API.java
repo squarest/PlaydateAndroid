@@ -26,7 +26,7 @@ public interface API {
     Single<RequestModel> signup(@Body UserModel userModel);
 
     @GET("get_category")
-    Call<RequestModel> get_category();
+    Single<RequestModel> get_category();
 
     @POST("get_matched_users")
     Call<RequestModel> get_matched_users(
@@ -34,7 +34,7 @@ public interface API {
     );
 
     @POST("get_all_users")
-    Call<RequestModel> get_all_users(
+    Single<RequestModel> get_all_users(
             @Query("user_id") String user_id
     );
 
@@ -79,7 +79,7 @@ public interface API {
     );
 
     @GET("delete_user/{id}")
-    Call<RequestModel> delete_user(
+    Single<RequestModel> delete_user(
             @Path("id") String firebase_id
     );
 

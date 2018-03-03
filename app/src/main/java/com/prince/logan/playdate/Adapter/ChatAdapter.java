@@ -91,10 +91,10 @@ public class ChatAdapter extends ArrayAdapter<ChatData> {
         private TextView mTxtTime;
 
         private void bindView(View convertView) {
-            mImgProfile = (ImageView) convertView.findViewById(R.id.img_profile);
-            mTxtUserName = (TextView) convertView.findViewById(R.id.txt_userName);
-            mTxtMessage = (TextView) convertView.findViewById(R.id.txt_message);
-            mTxtTime = (TextView) convertView.findViewById(R.id.txt_time);
+            mImgProfile = convertView.findViewById(R.id.img_profile);
+            mTxtUserName = convertView.findViewById(R.id.txt_userName);
+            mTxtMessage = convertView.findViewById(R.id.txt_message);
+            mTxtTime = convertView.findViewById(R.id.txt_time);
         }
 
         private void setData(int position) {
@@ -110,8 +110,8 @@ public class ChatAdapter extends ArrayAdapter<ChatData> {
         private TextView mTxtTime;
 
         private void bindView(View convertView) {
-            mTxtMessage = (TextView) convertView.findViewById(R.id.txt_message);
-            mTxtTime = (TextView) convertView.findViewById(R.id.txt_time);
+            mTxtMessage = convertView.findViewById(R.id.txt_message);
+            mTxtTime = convertView.findViewById(R.id.txt_time);
         }
 
         private void setData(int position) {

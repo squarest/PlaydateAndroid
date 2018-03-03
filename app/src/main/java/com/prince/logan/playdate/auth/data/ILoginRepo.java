@@ -10,13 +10,11 @@ import io.reactivex.Single;
  */
 
 public interface ILoginRepo {
-    String getUserId();
+    boolean isCurrentUserExist();
 
     Single<RequestModel>setTokenToServer();
 
     Single<UserModel> getUserFromFacebook();
-
-    Single<RequestModel> loginToServer();
 
     Single<RequestModel> signUpToServer(UserModel userModel);
 }

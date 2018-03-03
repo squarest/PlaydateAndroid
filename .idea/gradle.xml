@@ -9,10 +9,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/pageindicatorview" />
-            <option value="$PROJECT_DIR$/quickblox-android-sdk-chat-3.5.1" />
-            <option value="$PROJECT_DIR$/quickblox-android-sdk-core-3.5.1" />
-            <option value="$PROJECT_DIR$/rangeseekbar" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
