@@ -22,7 +22,9 @@ public class MainInteractor implements IMainInteractor {
 
     @Override
     public void startLocationTracking() {
-        mainRepo.getUserLocation().subscribeOn(Schedulers.io())
+        mainRepo.getUserLocation()
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(Schedulers.io())
                 .flatMapSingle(location -> mainRepo.updateLocation(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude())))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(requestModel -> {

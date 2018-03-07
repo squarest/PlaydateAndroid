@@ -11,7 +11,7 @@ public interface Constant {
 
     String IS_PLAYDATE_KEY = "isPlaydate";
 
-    int QUESTION_CATEGORY_ID = 8;
+    int QUESTION_CATEGORY_ID = 7;
 
     int QUESTION_SUBCATEGORY_ID = 25;
 }

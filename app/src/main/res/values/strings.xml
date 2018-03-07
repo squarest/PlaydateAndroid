@@ -10,4 +10,5 @@
     <string name="answer_questions_title">Answer questions</string>
     <string name="delete_dialod_msg">Are you sure?</string>
     <string name="delete_dialog_title">Delete user</string>
+    <string name="chat">Chat</string>
 </resources>

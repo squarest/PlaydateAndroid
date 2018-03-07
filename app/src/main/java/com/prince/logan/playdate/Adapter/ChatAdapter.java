@@ -8,9 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.prince.logan.playdate.main.presentation.main.MainActivity;
-import com.prince.logan.playdate.entities.ChatData;
 import com.prince.logan.playdate.R;
+import com.prince.logan.playdate.entities.ChatData;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,8 +21,11 @@ public class ChatAdapter extends ArrayAdapter<ChatData> {
     private final static int TYPE_MY_SELF = 0;
     private final static int TYPE_ANOTHER = 1;
 
-    public ChatAdapter(Context context, int resource) {
+    private String ownId;
+
+    public ChatAdapter(Context context, int resource, String ownId) {
         super(context, resource);
+        this.ownId = ownId;
     }
 
     private View setAnotherView(LayoutInflater inflater) {
@@ -76,8 +78,8 @@ public class ChatAdapter extends ArrayAdapter<ChatData> {
 
     @Override
     public int getItemViewType(int position) {
-         ChatData user = getItem(position);
-        if (MainActivity.userFirebaseID.equals(user.senderId)) {
+        ChatData user = getItem(position);
+        if (ownId.equals(user.senderId)) {
             return TYPE_MY_SELF;
         } else {
             return TYPE_ANOTHER;

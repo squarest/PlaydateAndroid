@@ -10,16 +10,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.prince.logan.playdate.chat.presentation.chat.ChatActivity;
 import com.prince.logan.playdate.Adapter.QuestionAdapter;
+import com.prince.logan.playdate.R;
+import com.prince.logan.playdate.chat.presentation.chat.ChatActivity;
 import com.prince.logan.playdate.entities.QuestionModel;
 import com.prince.logan.playdate.entities.UserModel;
-import com.prince.logan.playdate.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -28,15 +28,15 @@ import butterknife.ButterKnife;
 
 public class PlaydateDetailActivity extends Activity implements View.OnClickListener{
 
-    @Bind(R.id.img_playdate_detail_back)
+    @BindView(R.id.img_playdate_detail_back)
     ImageView back;
-    @Bind(R.id.txt_playdate_user_name)
+    @BindView(R.id.txt_playdate_user_name)
     TextView txtUserName;
-    @Bind(R.id.img_playdate_profile)
+    @BindView(R.id.img_playdate_profile)
     ImageView imgProfileImage;
-    @Bind(R.id.playdate_detail_list)
+    @BindView(R.id.playdate_detail_list)
     ListView playdateDetailList;
-    @Bind(R.id.btn_chat_start)
+    @BindView(R.id.btn_chat_start)
     Button btn_start_chat;
 
     UserModel userDetail;

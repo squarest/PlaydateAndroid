@@ -88,8 +88,8 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileView
     public void setQuestionImage(String imageUrl) {
         Picasso.with(getContext())
                 .load(imageUrl)
-                .placeholder(R.drawable.user)
-                .error(R.drawable.user)
+                .placeholder(R.drawable.qa_placeholder)
+                .error(R.drawable.qa_placeholder)
                 .into(binding.questionsImage);
     }
 

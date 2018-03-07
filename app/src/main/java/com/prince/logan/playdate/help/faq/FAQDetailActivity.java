@@ -5,13 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.prince.logan.playdate.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -21,11 +20,11 @@ import butterknife.ButterKnife;
 public class FAQDetailActivity extends Activity {
 
     Context context;
-    @Bind(R.id.img_faq_detail_back)
+    @BindView(R.id.img_faq_detail_back)
     ImageView back;
-    @Bind(R.id.txt_faq_title)
+    @BindView(R.id.txt_faq_title)
     TextView txtFaqTitle;
-    @Bind(R.id.txt_faq_content)
+    @BindView(R.id.txt_faq_content)
     TextView txtFaqConent;
 
     @Override
@@ -38,12 +37,7 @@ public class FAQDetailActivity extends Activity {
 
         initView();
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((Activity)context).finish();
-            }
-        });
+        back.setOnClickListener(view -> ((Activity)context).finish());
     }
 
     private void initView() {

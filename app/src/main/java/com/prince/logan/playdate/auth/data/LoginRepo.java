@@ -3,6 +3,7 @@ package com.prince.logan.playdate.auth.data;
 import android.os.Bundle;
 
 import com.facebook.AccessToken;
+import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
@@ -11,8 +12,6 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.prince.logan.playdate.entities.RequestModel;
 import com.prince.logan.playdate.entities.UserModel;
 import com.prince.logan.playdate.network.ApiClient;
-
-import org.json.JSONException;
 
 import io.reactivex.Single;
 import io.reactivex.SingleEmitter;
@@ -60,14 +59,15 @@ public class LoginRepo implements ILoginRepo {
                         {
                             if (task.isSuccessful()) {
                                 loadDataFromFacebook(accessToken, e);
-                            }
+                            } else e.onError(new Exception());
 
                         });
-            }
+            } else e.onError(new FacebookException());
         });
     }
 
     private void loadDataFromFacebook(AccessToken accessToken, SingleEmitter<UserModel> e) {
+        UserModel userModel = new UserModel();
         GraphRequest request = GraphRequest.newMeRequest(
                 accessToken,
                 (object, response) -> {
@@ -78,20 +78,24 @@ public class LoginRepo implements ILoginRepo {
                         String lastName = object.getString("last_name");
                         String email = object.getString("email");
                         String fullName = response.getJSONObject().getString("name");
-                        String gender = response.getJSONObject().getString("gender");
+                        String gender = "";
+                        if (response.getJSONObject().has("gender")) {
+                            gender = response.getJSONObject().getString("gender");
+                        }
                         String image_url = "https://graph.facebook.com/" + facebook_id + "/picture?type=large";
-                        UserModel userModel = new UserModel();
+
                         userModel.setUserModel(getUserId(), fullName, firstName, lastName, gender, image_url, email);
                         e.onSuccess(userModel);
 
-                    } catch (JSONException ex) {
+                    } catch (Exception ex) {
                         e.onError(ex);
                     }
                 });
         Bundle parameters = new Bundle();
         parameters.putString("fields", "email, name, birthday, education, hometown, gender, inspirational_people, languages, first_name, last_name, relationship_status, friends,photos");
         request.setParameters(parameters);
-        request.executeAndWait();
+        request.executeAsync();
+
     }
 
     @Override

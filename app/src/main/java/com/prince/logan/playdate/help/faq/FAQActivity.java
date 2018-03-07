@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -15,7 +14,7 @@ import com.prince.logan.playdate.R;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -24,11 +23,11 @@ import butterknife.ButterKnife;
 
 public class FAQActivity extends Activity implements View.OnClickListener{
 
-    @Bind(R.id.list_faq)
+    @BindView(R.id.list_faq)
     ListView listFaq;
-    @Bind(R.id.search_faq)
+    @BindView(R.id.search_faq)
     SearchView searchFaq;
-    @Bind(R.id.img_faq_back)
+    @BindView(R.id.img_faq_back)
     ImageView back;
 
     FaqAdapter adapter_faq;
@@ -43,13 +42,10 @@ public class FAQActivity extends Activity implements View.OnClickListener{
 
         back.setOnClickListener(this);
 
-        listFaq.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent detailIntent = new Intent(FAQActivity.this, FAQDetailActivity.class);
-                detailIntent.putExtra("faq_id", i);
-                startActivity(detailIntent);
-            }
+        listFaq.setOnItemClickListener((adapterView, view, i, l) -> {
+            Intent detailIntent = new Intent(FAQActivity.this, FAQDetailActivity.class);
+            detailIntent.putExtra("faq_id", i);
+            startActivity(detailIntent);
         });
 
         initView();

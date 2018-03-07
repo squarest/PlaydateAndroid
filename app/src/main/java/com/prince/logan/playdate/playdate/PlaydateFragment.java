@@ -1,7 +1,6 @@
 package com.prince.logan.playdate.playdate;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,23 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.andexert.library.RippleView;
-import com.prince.logan.playdate.chat.presentation.chatlist.ChatListFragment;
-import com.prince.logan.playdate.main.presentation.main.MainActivity;
-import com.prince.logan.playdate.network.ApiClient;
-import com.prince.logan.playdate.network.API;
-import com.prince.logan.playdate.entities.RequestModel;
-import com.prince.logan.playdate.entities.SubCateModel;
 import com.prince.logan.playdate.R;
+import com.prince.logan.playdate.chat.presentation.chatlist.ChatListFragment;
+import com.prince.logan.playdate.entities.SubCateModel;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
 
 /**
  * Created by Adib on 13-Apr-17.
@@ -38,13 +30,13 @@ import retrofit2.Callback;
 public class PlaydateFragment extends Fragment implements RippleView.OnRippleCompleteListener, View.OnClickListener{
 
     private View mRootView;
-    @Bind(R.id.btn_playdate)
+    @BindView(R.id.btn_playdate)
     RippleView btnPlaydate;
-    @Bind(R.id.btn_chat)
+    @BindView(R.id.btn_chat)
     RippleView btnChat;
-    @Bind(R.id.lin_playdate)
+    @BindView(R.id.lin_playdate)
     LinearLayout linPlaydate;
-    @Bind(R.id.lin_chat)
+    @BindView(R.id.lin_chat)
     LinearLayout linChat;
 
     ArrayList<SubCateModel> listSubCategory = new ArrayList<SubCateModel>();
@@ -96,53 +88,53 @@ public class PlaydateFragment extends Fragment implements RippleView.OnRippleCom
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.lin_playdate:
-                if(MainActivity.isPlaydate){
-                    gettingSubCate();
-                }
-                else{
-                    showAlert("Warning", "You can't receive playdates. Please enable playdates in order to receive the playdates");
-                }
-                break;
-            case R.id.lin_chat:
-                Intent chatIntent = new Intent(getContext(), ChatListFragment.class);
-                startActivity(chatIntent);
-                break;
-        }
+//        switch (view.getId()){
+//            case R.id.lin_playdate:
+//                if(MainActivity.isPlaydate){
+//                    gettingSubCate();
+//                }
+//                else{
+//                    showAlert("Warning", "You can't receive playdates. Please enable playdates in order to receive the playdates");
+//                }
+//                break;
+//            case R.id.lin_chat:
+//                Intent chatIntent = new Intent(getContext(), ChatListFragment.class);
+//                startActivity(chatIntent);
+//                break;
+//        }
     }
 
-    private void gettingSubCate() {
-        final ProgressDialog loading = new ProgressDialog(getContext(), R.style.AppTheme_Dark_Dialog);
-        loading.setIndeterminate(true);
-        loading.setMessage("Please wait...");
-        loading.show();
-
-        API apiService = ApiClient.getApi().create(API.class);
-
-        Call<RequestModel> req = apiService.get_sub_category(MainActivity.userProfile.getUser_playdate());
-        req.enqueue(new Callback<RequestModel>() {
-            @Override
-            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
-                RequestModel responseData = response.body();
-                loading.dismiss();
-                if (responseData.getResult() == 1){
-                    listSubCategory = responseData.getSubCategory();
-                    showingSubCateDialog();
-                }
-                else{
-                    Toast.makeText(getContext(), "There is no categories", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RequestModel> call, Throwable t) {
-                t.printStackTrace();
-                loading.dismiss();
-                Toast.makeText(getContext(), "Server problem!", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
+//    private void gettingSubCate() {
+//        final ProgressDialog loading = new ProgressDialog(getContext(), R.style.AppTheme_Dark_Dialog);
+//        loading.setIndeterminate(true);
+//        loading.setMessage("Please wait...");
+//        loading.show();
+//
+//        API apiService = ApiClient.getApi().create(API.class);
+//
+//        Call<RequestModel> req = apiService.get_sub_category(MainActivity.userProfile.getUser_playdate());
+//        req.enqueue(new Callback<RequestModel>() {
+//            @Override
+//            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+//                RequestModel responseData = response.body();
+//                loading.dismiss();
+//                if (responseData.getResult() == 1){
+//                    listSubCategory = responseData.getSubCategory();
+//                    showingSubCateDialog();
+//                }
+//                else{
+//                    Toast.makeText(getContext(), "There is no categories", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<RequestModel> call, Throwable t) {
+//                t.printStackTrace();
+//                loading.dismiss();
+//                Toast.makeText(getContext(), "Server problem!", Toast.LENGTH_LONG).show();
+//            }
+//        });
+//    }
 
     private void showingSubCateDialog() {
         final String[] option = new String[listSubCategory.size()];

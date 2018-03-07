@@ -4,6 +4,7 @@ import com.prince.logan.playdate.auth.data.ILoginRepo;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by dmitrijfomenko on 27.02.2018.
@@ -25,6 +26,7 @@ public class LoginInteractor implements ILoginInteractor {
     @Override
     public Completable login() {
         return loginRepo.getUserFromFacebook()
+                .observeOn(Schedulers.io())
                 .flatMap(loginRepo::signUpToServer)
                 .flatMap(requestModel -> loginRepo.setTokenToServer())
                 .toCompletable();

@@ -1,18 +1,9 @@
 package com.prince.logan.playdate.fcm;
 
-import android.app.ProgressDialog;
 import android.util.Log;
-import android.widget.Toast;
+
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
-import com.prince.logan.playdate.main.presentation.main.MainActivity;
-import com.prince.logan.playdate.network.ApiClient;
-import com.prince.logan.playdate.network.API;
-import com.prince.logan.playdate.entities.RequestModel;
-import com.prince.logan.playdate.R;
-
-import retrofit2.Call;
-import retrofit2.Callback;
 
 /**
  * Created by Developer on 6/29/2016.
@@ -46,34 +37,34 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
      *
      * @param token The new token.
      */
-    private void sendRegistrationToServer(final String token) {
-
-        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
-        loading.setIndeterminate(true);
-        loading.setMessage("Please wait...");
-        loading.show();
-
-        API apiService = ApiClient.getApi().create(API.class);
-
-        Call<RequestModel> req = apiService.register_token(token, 0, MainActivity.userFirebaseID);
-        req.enqueue(new Callback<RequestModel>() {
-            @Override
-            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
-                RequestModel responseData = response.body();
-                loading.dismiss();
-                if (responseData.getResult() == 1){
-                    Toast.makeText(getApplicationContext(), "Token Registered!", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "Token Registration Failed", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RequestModel> call, Throwable t) {
-                t.printStackTrace();
-                loading.dismiss();
-            }
-        });
-    }
+//    private void sendRegistrationToServer(final String token) {
+//
+//        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+//        loading.setIndeterminate(true);
+//        loading.setMessage("Please wait...");
+//        loading.show();
+//
+//        API apiService = ApiClient.getApi().create(API.class);
+//
+//        Call<RequestModel> req = apiService.register_token(token, 0, MainActivity.userFirebaseID);
+//        req.enqueue(new Callback<RequestModel>() {
+//            @Override
+//            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+//                RequestModel responseData = response.body();
+//                loading.dismiss();
+//                if (responseData.getResult() == 1){
+//                    Toast.makeText(getApplicationContext(), "Token Registered!", Toast.LENGTH_SHORT).show();
+//                }
+//                else{
+//                    Toast.makeText(getApplicationContext(), "Token Registration Failed", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<RequestModel> call, Throwable t) {
+//                t.printStackTrace();
+//                loading.dismiss();
+//            }
+//        });
+//    }
 }

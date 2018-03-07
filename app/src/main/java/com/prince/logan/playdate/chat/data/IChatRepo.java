@@ -1,7 +1,13 @@
 package com.prince.logan.playdate.chat.data;
 
+import com.prince.logan.playdate.entities.ChatData;
+import com.prince.logan.playdate.entities.PlaydateModel;
 import com.prince.logan.playdate.entities.RequestModel;
+import com.prince.logan.playdate.entities.UserModel;
 
+import java.util.List;
+
+import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
@@ -9,5 +15,17 @@ import io.reactivex.Single;
  */
 
 public interface IChatRepo {
-    Single<RequestModel> getAllChats();
+    String getUid();
+
+    Single<List<List<PlaydateModel>>> getAllChats();
+
+    Observable<ChatData> getMessages(String conversationId);
+
+    void pushMessage(ChatData chatData);
+
+    Single<RequestModel> sendNotification(String conversationId, ChatData chatData);
+
+    Single<UserModel> getUser();
+
+    void removeChat();
 }

@@ -33,6 +33,10 @@ public interface API {
             @Query("user_id") String user_id, @Query("cate_id") int cate_id, @Query("sub_cate_id") int sub_cate_id
     );
 
+    @GET("get_grouped_matched_users")
+    Single<RequestModel> get_matched_users(
+            @Query("user_id") String user_id);
+
     @POST("get_all_users")
     Single<RequestModel> get_all_users(
             @Query("user_id") String user_id
@@ -89,7 +93,7 @@ public interface API {
     );
 
     @POST("edit_user")
-    Call<RequestModel>edit_user(
+    Call<RequestModel> edit_user(
             @Query("firebase_id") String firebase_id,
             @Query("user_age") int user_age,
             @Query("user_height") String user_height,
@@ -100,7 +104,7 @@ public interface API {
     );
 
     @POST("send_notification")
-    Call<RequestModel> send_notification(
+    Single<RequestModel> send_notification(
             @Query("own_name") String own_name, @Query("own_id") String own_id, @Query("user_id") String user_id, @Query("message") String message
     );
 

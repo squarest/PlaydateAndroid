@@ -1,18 +1,19 @@
 package com.prince.logan.playdate.main.presentation.menu;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.prince.logan.playdate.R;
 import com.prince.logan.playdate.auth.presentation.LoginActivity;
+import com.prince.logan.playdate.databinding.FragmentMenuBinding;
 import com.prince.logan.playdate.help.AboutActivity;
 import com.prince.logan.playdate.help.faq.FAQActivity;
 import com.prince.logan.playdate.main.presentation.main.MainView;
@@ -20,31 +21,13 @@ import com.prince.logan.playdate.preference.EditProfileActivity;
 import com.prince.logan.playdate.preference.PreferencesActivity;
 import com.prince.logan.playdate.utils.DialogUtil;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 /**
  * Created by Adib on 13-Apr-17.
  */
 
 public class MenuFragment extends MvpAppCompatFragment implements View.OnClickListener, MenuView {
-
-    @Bind(R.id.lin_menu_about)
-    private LinearLayout btnAbout;
-    @Bind(R.id.lin_menu_faq)
-    private LinearLayout btnFaq;
-    @Bind(R.id.lin_menu_feedback)
-    private LinearLayout btnFeedback;
-    @Bind(R.id.lin_menu_preference)
-    private LinearLayout btnPreference;
-    @Bind(R.id.lin_menu_user_profile)
-    private LinearLayout btnEditProfile;
-    @Bind(R.id.lin_menu_logout)
-    private LinearLayout btnLogout;
-    @Bind(R.id.lin_menu_delete)
-    private LinearLayout btnDelete;
     private DialogUtil dialogUtil;
-
+    private FragmentMenuBinding binding;
     private MainView mainView;
     @InjectPresenter
     public MenuPresenter presenter;
@@ -52,25 +35,25 @@ public class MenuFragment extends MvpAppCompatFragment implements View.OnClickLi
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_menu, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(view);
         mainView = (MainView) getActivity();
         setEvent();
     }
 
     public void setEvent() {
-        btnAbout.setOnClickListener(this);
-        btnFaq.setOnClickListener(this);
-        btnPreference.setOnClickListener(this);
-        btnFeedback.setOnClickListener(this);
-        btnEditProfile.setOnClickListener(this);
-        btnLogout.setOnClickListener(this);
-        btnDelete.setOnClickListener(this);
+        binding.linMenuAbout.setOnClickListener(this);
+        binding.linMenuFaq.setOnClickListener(this);
+        binding.linMenuPreference.setOnClickListener(this);
+        binding.linMenuFeedback.setOnClickListener(this);
+        binding.linMenuUserProfile.setOnClickListener(this);
+        binding.linMenuLogout.setOnClickListener(this);
+        binding.linMenuDelete.setOnClickListener(this);
     }
 
     @Override

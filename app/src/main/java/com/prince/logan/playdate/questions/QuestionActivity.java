@@ -2,10 +2,8 @@ package com.prince.logan.playdate.questions;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,19 +18,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daprlabs.cardstack.SwipeDeck;
-import com.prince.logan.playdate.main.presentation.main.MainActivity;
-import com.prince.logan.playdate.network.ApiClient;
-import com.prince.logan.playdate.network.API;
-import com.prince.logan.playdate.entities.QuestionModel;
-import com.prince.logan.playdate.entities.RequestModel;
 import com.prince.logan.playdate.R;
+import com.prince.logan.playdate.entities.QuestionModel;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
 
 /**
  * Created by PRINCE on 11/14/2017.
@@ -54,7 +46,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
 
     StringBuilder questions = new StringBuilder();
 
-    @Bind(R.id.img_questions_back)
+    @BindView(R.id.img_questions_back)
     ImageView back;
 
     @Override
@@ -65,49 +57,49 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
 
         back.setOnClickListener(this);
         cardIndex = 0;
-        getQuestions();
+//        getQuestions();
     }
 
-    private void getQuestions() {
-        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
-        loading.setIndeterminate(true);
-        loading.setMessage("Please wait...");
-        loading.show();
-
-        Intent intent = this.getIntent();
-        Bundle bundle = intent.getExtras();
-        if (bundle != null) {
-            questionCateId = bundle.getInt("cate_id");
-            questionSubCateId = bundle.getInt("sub_cate_id");
-            isAnswered = bundle.getInt("answer_id");
-        }
-
-        API apiService = ApiClient.getApi().create(API.class);
-
-        Call<RequestModel> req = apiService.get_questions(questionSubCateId);
-        req.enqueue(new Callback<RequestModel>() {
-            @Override
-            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
-                RequestModel responseData = response.body();
-
-                loading.dismiss();
-                if (responseData.getResult() == 1){
-                    qaArrayList = responseData.getCateQuestion();
-                    initView();
-                }
-                else{
-                    showAlert("Alert", "Failed!");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RequestModel> call, Throwable t) {
-                t.printStackTrace();
-                loading.dismiss();
-                showAlert("Alert", "Failed!");
-            }
-        });
-    }
+//    private void getQuestions() {
+//        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+//        loading.setIndeterminate(true);
+//        loading.setMessage("Please wait...");
+//        loading.show();
+//
+//        Intent intent = this.getIntent();
+//        Bundle bundle = intent.getExtras();
+//        if (bundle != null) {
+//            questionCateId = bundle.getInt("cate_id");
+//            questionSubCateId = bundle.getInt("sub_cate_id");
+//            isAnswered = bundle.getInt("answer_id");
+//        }
+//
+//        API apiService = ApiClient.getApi().create(API.class);
+//
+//        Call<RequestModel> req = apiService.get_questions(questionSubCateId);
+//        req.enqueue(new Callback<RequestModel>() {
+//            @Override
+//            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+//                RequestModel responseData = response.body();
+//
+//                loading.dismiss();
+//                if (responseData.getResult() == 1){
+//                    qaArrayList = responseData.getCateQuestion();
+//                    initView();
+//                }
+//                else{
+//                    showAlert("Alert", "Failed!");
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<RequestModel> call, Throwable t) {
+//                t.printStackTrace();
+//                loading.dismiss();
+//                showAlert("Alert", "Failed!");
+//            }
+//        });
+//    }
 
     public void showAlert(String title, String msg){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -231,12 +223,12 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         // on pressing cancel button
         alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                if (isAnswered >0){
-                    updateAnswers(answers, isAnswered);
-                }
-                else{
-                    savingAnswers(answers);
-                }
+//                if (isAnswered >0){
+//                    updateAnswers(answers, isAnswered);
+//                }
+//                else{
+//                    savingAnswers(answers);
+//                }
             }
         });
         alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -249,78 +241,78 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         alertDialog.show();
     }
 
-    private void updateAnswers(StringBuilder answers, int answer_id) {
-        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
-        loading.setIndeterminate(true);
-        loading.setMessage("Updating answers...");
-        loading.show();
+//    private void updateAnswers(StringBuilder answers, int answer_id) {
+//        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+//        loading.setIndeterminate(true);
+//        loading.setMessage("Updating answers...");
+//        loading.show();
+//
+//        API apiService = ApiClient.getApi().create(API.class);
+//
+//        String strAnswers = answers.toString().substring(0, answers.toString().length() - 1);
+//
+//        Call<RequestModel> req = apiService.update_answers(answer_id, strAnswers);
+//        req.enqueue(new Callback<RequestModel>() {
+//            @Override
+//            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+//                RequestModel responseData = response.body();
+//
+//                loading.dismiss();
+//                if (responseData.getResult() == 1){
+//                    ((Activity)context).finish();
+//                }
+//                else{
+//                    showAlert("Alert", responseData.getMsg());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<RequestModel> call, Throwable t) {
+//                t.printStackTrace();
+//                loading.dismiss();
+//                showAlert("Alert", "Failed!");
+//            }
+//        });
+//    }
 
-        API apiService = ApiClient.getApi().create(API.class);
-
-        String strAnswers = answers.toString().substring(0, answers.toString().length() - 1);
-
-        Call<RequestModel> req = apiService.update_answers(answer_id, strAnswers);
-        req.enqueue(new Callback<RequestModel>() {
-            @Override
-            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
-                RequestModel responseData = response.body();
-
-                loading.dismiss();
-                if (responseData.getResult() == 1){
-                    ((Activity)context).finish();
-                }
-                else{
-                    showAlert("Alert", responseData.getMsg());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RequestModel> call, Throwable t) {
-                t.printStackTrace();
-                loading.dismiss();
-                showAlert("Alert", "Failed!");
-            }
-        });
-    }
-
-    private void savingAnswers(StringBuilder answers) {
-        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
-        loading.setIndeterminate(true);
-        loading.setMessage("Saving answers...");
-        loading.show();
-
-        API apiService = ApiClient.getApi().create(API.class);
-        String user_id = MainActivity.userFirebaseID;
-        if(user_id.equals("") || user_id == null){
-            user_id = MainActivity.userProfile.get_firebase_id();
-        }
-
-        String strAnswers = answers.toString().substring(0, answers.toString().length() - 1);
-
-
-        Call<RequestModel> req = apiService.saving_answers(questionCateId, questionSubCateId, user_id, strAnswers);
-        req.enqueue(new Callback<RequestModel>() {
-            @Override
-            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
-                RequestModel responseData = response.body();
-
-                loading.dismiss();
-                if (responseData.getResult() == 1){
-                    ((Activity)context).finish();
-                }
-                else{
-                    showAlert("Alert", responseData.getMsg());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RequestModel> call, Throwable t) {
-                t.printStackTrace();
-                loading.dismiss();
-                showAlert("Alert", "Failed!");
-            }
-        });
-    }
+//    private void savingAnswers(StringBuilder answers) {
+//        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+//        loading.setIndeterminate(true);
+//        loading.setMessage("Saving answers...");
+//        loading.show();
+//
+//        API apiService = ApiClient.getApi().create(API.class);
+//        String user_id = MainActivity.userFirebaseID;
+//        if(user_id.equals("") || user_id == null){
+//            user_id = MainActivity.userProfile.get_firebase_id();
+//        }
+//
+//        String strAnswers = answers.toString().substring(0, answers.toString().length() - 1);
+//
+//
+//        Call<RequestModel> req = apiService.saving_answers(questionCateId, questionSubCateId, user_id, strAnswers);
+//        req.enqueue(new Callback<RequestModel>() {
+//            @Override
+//            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+//                RequestModel responseData = response.body();
+//
+//                loading.dismiss();
+//                if (responseData.getResult() == 1){
+//                    ((Activity)context).finish();
+//                }
+//                else{
+//                    showAlert("Alert", responseData.getMsg());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<RequestModel> call, Throwable t) {
+//                t.printStackTrace();
+//                loading.dismiss();
+//                showAlert("Alert", "Failed!");
+//            }
+//        });
+//    }
 
     public class SwipeDeckAdapter extends ArrayAdapter<QuestionModel> {
 

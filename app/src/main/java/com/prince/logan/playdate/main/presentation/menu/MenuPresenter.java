@@ -3,7 +3,7 @@ package com.prince.logan.playdate.main.presentation.menu;
 import com.arellomobile.mvp.InjectViewState;
 import com.prince.logan.playdate.base.App;
 import com.prince.logan.playdate.base.BasePresenter;
-import com.prince.logan.playdate.main.domain.MainInteractor;
+import com.prince.logan.playdate.main.domain.IMainInteractor;
 
 import javax.inject.Inject;
 
@@ -13,7 +13,7 @@ import javax.inject.Inject;
 @InjectViewState
 public class MenuPresenter extends BasePresenter<MenuView> {
     @Inject
-    public MainInteractor interactor;
+    public IMainInteractor interactor;
 
     public MenuPresenter() {
         App.getMainComponent().inject(this);

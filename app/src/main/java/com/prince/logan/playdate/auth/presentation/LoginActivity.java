@@ -50,7 +50,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         super.onCreate(savedInstanceState);
         if (!hasPermissions(this, perms)) {
             ActivityCompat.requestPermissions(this, perms, 1);
-        }
+        } else presenter.activityCreated();
 
     }
 

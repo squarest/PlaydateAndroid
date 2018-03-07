@@ -1,7 +1,6 @@
 package com.prince.logan.playdate.preference;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -12,17 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.prince.logan.playdate.main.presentation.main.MainActivity;
-import com.prince.logan.playdate.network.ApiClient;
-import com.prince.logan.playdate.network.API;
-import com.prince.logan.playdate.entities.RequestModel;
 import com.prince.logan.playdate.R;
-import com.squareup.picasso.Picasso;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
 
 /**
  * Created by PRINCE on 12/4/2017.
@@ -37,13 +29,13 @@ public class EditProfileActivity extends Activity implements View.OnClickListene
     EditText pHeight;
     TextView pName;
     TextView pSex;
-    @Bind(R.id.img_edit_profile_back)
+    @BindView(R.id.img_edit_profile_back)
     ImageView back;
-    @Bind(R.id.img_edit_profile)
+    @BindView(R.id.img_edit_profile)
     ImageView imgProfileImage;
-    @Bind(R.id.img_edit_profile_save)
+    @BindView(R.id.img_edit_profile_save)
     ImageView btnUpdate;
-    @Bind(R.id.pHeight)
+    @BindView(R.id.pHeight)
     TextView txtPheight;
 
     int indexEthnicity;
@@ -65,7 +57,7 @@ public class EditProfileActivity extends Activity implements View.OnClickListene
         ButterKnife.bind(this);
 
         initView();
-        initData();
+//        initData();
         setEvent();
     }
 
@@ -80,72 +72,72 @@ public class EditProfileActivity extends Activity implements View.OnClickListene
 
     private void initView() {
 
-        pEthnicity = (TextView) findViewById(R.id.spinner_edit_ethnicity);
-        pReligion = (TextView) findViewById(R.id.spinner_edit_religion);
-        pEducation = (TextView) findViewById(R.id.spinner_edit_education);
-        pName = (TextView)findViewById(R.id.txt_edit_Name);
-        pSex = (TextView)findViewById(R.id.txt_edit_sex);
-        pAge = (EditText)findViewById(R.id.ed_edit_age);
-        pHeight = (EditText)findViewById(R.id.ed_edit_height);
+        pEthnicity = findViewById(R.id.spinner_edit_ethnicity);
+        pReligion = findViewById(R.id.spinner_edit_religion);
+        pEducation = findViewById(R.id.spinner_edit_education);
+        pName = findViewById(R.id.txt_edit_Name);
+        pSex = findViewById(R.id.txt_edit_sex);
+        pAge = findViewById(R.id.ed_edit_age);
+        pHeight = findViewById(R.id.ed_edit_height);
     }
 
-    private void initData() {
-
-        context = this;
-        indexHeight = 0;
-
-        if(MainActivity.userProfile.getUser_ethnicity() == -1){
-            pEthnicity.setText("None Selected");
-            indexEthnicity = -1;
-        }
-        else{
-            pEthnicity.setText(arrayEthnicity[MainActivity.userProfile.getUser_ethnicity()]);
-            indexEthnicity = MainActivity.userProfile.getUser_ethnicity();
-        }
-
-        if(MainActivity.userProfile.getUser_education() == -1){
-            pEducation.setText("None Selected");
-            indexEducation = -1;
-        }
-        else{
-            pEducation.setText(arrayEthnicity[MainActivity.userProfile.getUser_education()]);
-            indexEducation = MainActivity.userProfile.getUser_education();
-        }
-
-        if(MainActivity.userProfile.getUser_religion() == -1){
-            pReligion.setText("None Selected");
-            indexReligion = -1;
-        }
-        else{
-            pReligion.setText(arrayEthnicity[MainActivity.userProfile.getUser_religion()]);
-            indexReligion = MainActivity.userProfile.getUser_religion();
-        }
-
-        pName.setText(MainActivity.userProfile.get_user_full_name());
-        pSex.setText(MainActivity.userProfile.get_user_gender());
-        if (MainActivity.userProfile.getUser_age() == 0){
-            pAge.setText("");
-        }
-        else{
-            pAge.setText(String.valueOf(MainActivity.userProfile.getUser_age()));
-        }
-        if (MainActivity.userProfile.getHeight_option() == 0){
-            txtPheight.setText("Feets");
-            indexHeight = 0;
-        }
-        else{
-            txtPheight.setText("Inches");
-            indexHeight = 1;
-        }
-        pHeight.setText(String.valueOf(MainActivity.userProfile.getUser_height()));
-
-        Picasso.with(this)
-                .load(MainActivity.userProfile.get_user_avatar())
-                .placeholder(R.drawable.user) // optional
-                .error(R.drawable.user)         // optional
-                .into(imgProfileImage);
-
-    }
+//    private void initData() {
+//
+//        context = this;
+//        indexHeight = 0;
+//
+//        if(MainActivity.userProfile.getUser_ethnicity() == -1){
+//            pEthnicity.setText("None Selected");
+//            indexEthnicity = -1;
+//        }
+//        else{
+//            pEthnicity.setText(arrayEthnicity[MainActivity.userProfile.getUser_ethnicity()]);
+//            indexEthnicity = MainActivity.userProfile.getUser_ethnicity();
+//        }
+//
+//        if(MainActivity.userProfile.getUser_education() == -1){
+//            pEducation.setText("None Selected");
+//            indexEducation = -1;
+//        }
+//        else{
+//            pEducation.setText(arrayEthnicity[MainActivity.userProfile.getUser_education()]);
+//            indexEducation = MainActivity.userProfile.getUser_education();
+//        }
+//
+//        if(MainActivity.userProfile.getUser_religion() == -1){
+//            pReligion.setText("None Selected");
+//            indexReligion = -1;
+//        }
+//        else{
+//            pReligion.setText(arrayEthnicity[MainActivity.userProfile.getUser_religion()]);
+//            indexReligion = MainActivity.userProfile.getUser_religion();
+//        }
+//
+//        pName.setText(MainActivity.userProfile.get_user_full_name());
+//        pSex.setText(MainActivity.userProfile.get_user_gender());
+//        if (MainActivity.userProfile.getUser_age() == 0){
+//            pAge.setText("");
+//        }
+//        else{
+//            pAge.setText(String.valueOf(MainActivity.userProfile.getUser_age()));
+//        }
+//        if (MainActivity.userProfile.getHeight_option() == 0){
+//            txtPheight.setText("Feets");
+//            indexHeight = 0;
+//        }
+//        else{
+//            txtPheight.setText("Inches");
+//            indexHeight = 1;
+//        }
+//        pHeight.setText(String.valueOf(MainActivity.userProfile.getUser_height()));
+//
+//        Picasso.with(this)
+//                .load(MainActivity.userProfile.get_user_avatar())
+//                .placeholder(R.drawable.user) // optional
+//                .error(R.drawable.user)         // optional
+//                .into(imgProfileImage);
+//
+//    }
 
     @Override
     public void onClick(View view) {
@@ -221,45 +213,45 @@ public class EditProfileActivity extends Activity implements View.OnClickListene
         if(!validate()){
             return;
         }
-        updateUserProfile();
+//        updateUserProfile();
     }
 
-    private void updateUserProfile() {
-        String firebase_id = MainActivity.userProfile.get_firebase_id();
-        String user_age = pAge.getText().toString();
-        String user_height = pHeight.getText().toString();
-        int user_ethnicity = indexEthnicity;
-        int user_religion = indexReligion;
-        int user_education =indexEducation;
-
-        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
-        loading.setIndeterminate(true);
-        loading.setMessage("Please wait...");
-        loading.show();
-
-        API apiService = ApiClient.getApi().create(API.class);
-
-        Call<RequestModel> req = apiService.edit_user(firebase_id, Integer.valueOf(user_age), user_height, user_ethnicity, user_religion, user_education, indexHeight);
-        req.enqueue(new Callback<RequestModel>() {
-            @Override
-            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
-                RequestModel responseData = response.body();
-                loading.dismiss();
-                if (responseData.getResult() == 1){
-                    MainActivity.userProfile = responseData.getUser();
-                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
-                    ((Activity)context).finish();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RequestModel> call, Throwable t) {
-                t.printStackTrace();
-                loading.dismiss();
-//                showAlert("Alert", "Failed!");
-            }
-        });
-    }
+//    private void updateUserProfile() {
+//        String firebase_id = MainActivity.userProfile.get_firebase_id();
+//        String user_age = pAge.getText().toString();
+//        String user_height = pHeight.getText().toString();
+//        int user_ethnicity = indexEthnicity;
+//        int user_religion = indexReligion;
+//        int user_education =indexEducation;
+//
+//        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+//        loading.setIndeterminate(true);
+//        loading.setMessage("Please wait...");
+//        loading.show();
+//
+//        API apiService = ApiClient.getApi().create(API.class);
+//
+//        Call<RequestModel> req = apiService.edit_user(firebase_id, Integer.valueOf(user_age), user_height, user_ethnicity, user_religion, user_education, indexHeight);
+//        req.enqueue(new Callback<RequestModel>() {
+//            @Override
+//            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+//                RequestModel responseData = response.body();
+//                loading.dismiss();
+//                if (responseData.getResult() == 1){
+//                    MainActivity.userProfile = responseData.getUser();
+//                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+//                    ((Activity)context).finish();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<RequestModel> call, Throwable t) {
+//                t.printStackTrace();
+//                loading.dismiss();
+////                showAlert("Alert", "Failed!");
+//            }
+//        });
+//    }
 
     private boolean validate() {
         boolean valid = true;

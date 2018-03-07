@@ -2,8 +2,6 @@ package com.prince.logan.playdate.questions;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,31 +12,26 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.prince.logan.playdate.Adapter.AnswerAdapter;
-import com.prince.logan.playdate.network.ApiClient;
-import com.prince.logan.playdate.network.API;
-import com.prince.logan.playdate.entities.QuestionModel;
-import com.prince.logan.playdate.entities.RequestModel;
 import com.prince.logan.playdate.R;
+import com.prince.logan.playdate.entities.QuestionModel;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
 
 /**
  * Created by PRINCE on 11/28/2017.
  */
 
 public class ViewAnswerActivity extends Activity implements View.OnClickListener{
-    @Bind(R.id.img_answer_back)
+    @BindView(R.id.img_answer_back)
     ImageView back;
-    @Bind(R.id.list_answer_question)
+    @BindView(R.id.list_answer_question)
     ListView listAnswerView;
-    @Bind(R.id.txt_answer_title)
+    @BindView(R.id.txt_answer_title)
     TextView txtTitle;
-    @Bind(R.id.btn_reanswer)
+    @BindView(R.id.btn_reanswer)
     Button btnReanswer;
 
     int answerId;
@@ -72,44 +65,44 @@ public class ViewAnswerActivity extends Activity implements View.OnClickListener
     @Override
     protected void onResume() {
         super.onResume();
-        gettingAnsweredQuestions();
+//        gettingAnsweredQuestions();
     }
 
-    private void gettingAnsweredQuestions() {
-        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
-        loading.setIndeterminate(true);
-        loading.setMessage("Please wait...");
-        loading.show();
-
-        API apiService = ApiClient.getApi().create(API.class);
-
-        Call<RequestModel> req = apiService.getting_answered_question(answerId);
-        req.enqueue(new Callback<RequestModel>() {
-            @Override
-            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
-                RequestModel responseData = response.body();
-
-                loading.dismiss();
-                if (responseData.getResult() == 1){
-                    arrayQuestion= responseData.getAnswers();
-
-                    answerAdapter = new AnswerAdapter(getApplicationContext(), R.layout.adapter_playdate_detail, arrayQuestion);
-                    listAnswerView.setAdapter(answerAdapter);
-                    answerAdapter.notifyDataSetChanged();
-                }
-                else{
-                    showAlert("Alert", "Failed!");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RequestModel> call, Throwable t) {
-                t.printStackTrace();
-                loading.dismiss();
-                showAlert("Alert", "Failed!");
-            }
-        });
-    }
+//    private void gettingAnsweredQuestions() {
+//        final ProgressDialog loading = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+//        loading.setIndeterminate(true);
+//        loading.setMessage("Please wait...");
+//        loading.show();
+//
+//        API apiService = ApiClient.getApi().create(API.class);
+//
+//        Call<RequestModel> req = apiService.getting_answered_question(answerId);
+//        req.enqueue(new Callback<RequestModel>() {
+//            @Override
+//            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+//                RequestModel responseData = response.body();
+//
+//                loading.dismiss();
+//                if (responseData.getResult() == 1){
+//                    arrayQuestion= responseData.getAnswers();
+//
+//                    answerAdapter = new AnswerAdapter(getApplicationContext(), R.layout.adapter_playdate_detail, arrayQuestion);
+//                    listAnswerView.setAdapter(answerAdapter);
+//                    answerAdapter.notifyDataSetChanged();
+//                }
+//                else{
+//                    showAlert("Alert", "Failed!");
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<RequestModel> call, Throwable t) {
+//                t.printStackTrace();
+//                loading.dismiss();
+//                showAlert("Alert", "Failed!");
+//            }
+//        });
+//    }
     public void showAlert(String title, String msg){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 

@@ -8,6 +8,8 @@ import com.prince.logan.playdate.auth.di.LoginModule;
 import com.prince.logan.playdate.chat.di.ChatComponent;
 import com.prince.logan.playdate.chat.di.ChatModule;
 import com.prince.logan.playdate.dagger.AppComponent;
+import com.prince.logan.playdate.dagger.DaggerAppComponent;
+import com.prince.logan.playdate.dagger.modules.AppModule;
 import com.prince.logan.playdate.main.di.MainComponent;
 import com.prince.logan.playdate.main.di.MainModule;
 

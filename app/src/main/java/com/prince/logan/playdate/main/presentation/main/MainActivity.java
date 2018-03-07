@@ -25,14 +25,14 @@ import com.prince.logan.playdate.playdate.PlaydateFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements  MainView{
+public class MainActivity extends BaseActivity implements MainView {
 
     private FragmentTabHost mTabHost;
     private ViewPager mViewPager;
     private List<Fragment> mFragmentList;
     private Class mClass[] = {ProfileFragment.class, PlaydateFragment.class, ChatListFragment.class, MenuFragment.class};
     private Fragment mFragment[] = {new ProfileFragment(), new PlaydateFragment(), new ChatListFragment(), new MenuFragment()};
-    private String mTitles[] = {"Profile", "Chat", "Playdate", "Menu"};
+    private String mTitles[] = {"Profile", "Playdate", "Chat", "Menu"};
     private int mImages[] = {
             R.drawable.tab_profile,
             R.drawable.tab_playdate,
@@ -42,6 +42,7 @@ public class MainActivity extends BaseActivity implements  MainView{
 
     @InjectPresenter
     public MainPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
