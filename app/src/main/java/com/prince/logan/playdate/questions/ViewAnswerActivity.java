@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.prince.logan.playdate.Adapter.AnswerAdapter;
 import com.prince.logan.playdate.R;
 import com.prince.logan.playdate.entities.QuestionModel;
 
@@ -79,7 +78,7 @@ public class ViewAnswerActivity extends Activity implements View.OnClickListener
 //        Call<RequestModel> req = apiService.getting_answered_question(answerId);
 //        req.enqueue(new Callback<RequestModel>() {
 //            @Override
-//            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+//            public void onResponse(Call<ResponseModel> call, retrofit2.Response<ResponseModel> response) {
 //                RequestModel responseData = response.body();
 //
 //                loading.dismiss();

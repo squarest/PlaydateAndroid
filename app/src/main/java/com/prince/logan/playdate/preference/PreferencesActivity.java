@@ -115,7 +115,7 @@ public class PreferencesActivity extends Activity implements RadioGroup.OnChecke
 //                                Preferences.listReligion, Preferences.listEducation);
 //        req.enqueue(new Callback<RequestModel>() {
 //            @Override
-//            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+//            public void onResponse(Call<ResponseModel> call, retrofit2.Response<ResponseModel> response) {
 //                RequestModel responseData = response.body();
 //                if (responseData.getResult() == 1){
 //                    Toast.makeText(getApplicationContext(), "Update Success!", Toast.LENGTH_LONG).show();

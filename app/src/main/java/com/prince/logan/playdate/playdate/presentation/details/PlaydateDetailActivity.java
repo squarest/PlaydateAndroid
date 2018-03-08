@@ -1,4 +1,4 @@
-package com.prince.logan.playdate.playdate;
+package com.prince.logan.playdate.playdate.presentation.details;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,14 +10,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.prince.logan.playdate.Adapter.QuestionAdapter;
 import com.prince.logan.playdate.R;
 import com.prince.logan.playdate.chat.presentation.chat.ChatActivity;
-import com.prince.logan.playdate.entities.QuestionModel;
 import com.prince.logan.playdate.entities.UserModel;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,8 +37,6 @@ public class PlaydateDetailActivity extends Activity implements View.OnClickList
 
     UserModel userDetail;
 
-    ArrayList<QuestionModel> arrayQuestion = new ArrayList<QuestionModel>();
-    QuestionAdapter questionAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

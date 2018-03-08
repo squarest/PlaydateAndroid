@@ -79,7 +79,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
 //        Call<RequestModel> req = apiService.get_questions(questionSubCateId);
 //        req.enqueue(new Callback<RequestModel>() {
 //            @Override
-//            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+//            public void onResponse(Call<ResponseModel> call, retrofit2.Response<ResponseModel> response) {
 //                RequestModel responseData = response.body();
 //
 //                loading.dismiss();
@@ -254,7 +254,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
 //        Call<RequestModel> req = apiService.update_answers(answer_id, strAnswers);
 //        req.enqueue(new Callback<RequestModel>() {
 //            @Override
-//            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+//            public void onResponse(Call<ResponseModel> call, retrofit2.Response<ResponseModel> response) {
 //                RequestModel responseData = response.body();
 //
 //                loading.dismiss();
@@ -293,7 +293,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
 //        Call<RequestModel> req = apiService.saving_answers(questionCateId, questionSubCateId, user_id, strAnswers);
 //        req.enqueue(new Callback<RequestModel>() {
 //            @Override
-//            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+//            public void onResponse(Call<ResponseModel> call, retrofit2.Response<ResponseModel> response) {
 //                RequestModel responseData = response.body();
 //
 //                loading.dismiss();

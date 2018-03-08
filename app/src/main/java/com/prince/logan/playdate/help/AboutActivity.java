@@ -76,7 +76,7 @@ public class AboutActivity extends Activity implements ImageView.OnClickListener
 //        Call<RequestModel> req = apiService.update_notification(isChecked, user_id);
 //        req.enqueue(new Callback<RequestModel>() {
 //            @Override
-//            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+//            public void onResponse(Call<ResponseModel> call, retrofit2.Response<ResponseModel> response) {
 //                RequestModel responseData = response.body();
 //                loading.dismiss();
 //                MainActivity.userProfile.setIs_pushnotification(isChecked);

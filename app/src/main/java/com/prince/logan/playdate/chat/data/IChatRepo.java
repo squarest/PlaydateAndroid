@@ -2,7 +2,7 @@ package com.prince.logan.playdate.chat.data;
 
 import com.prince.logan.playdate.entities.ChatData;
 import com.prince.logan.playdate.entities.PlaydateModel;
-import com.prince.logan.playdate.entities.RequestModel;
+import com.prince.logan.playdate.entities.ResponseModel;
 import com.prince.logan.playdate.entities.UserModel;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public interface IChatRepo {
 
     void pushMessage(ChatData chatData);
 
-    Single<RequestModel> sendNotification(String conversationId, ChatData chatData);
+    Single<ResponseModel> sendNotification(String conversationId, ChatData chatData);
 
     Single<UserModel> getUser();
 

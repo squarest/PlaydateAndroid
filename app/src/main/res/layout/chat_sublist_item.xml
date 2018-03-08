@@ -1,37 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center|left"
-        android:layout_marginTop="3dp">
+        android:layout_marginTop="3dp"
+        android:gravity="center|left">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
-            <com.pkmmte.view.CircularImageView
-                android:id="@+id/chat_image"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/user" />
-        </LinearLayout>
+        <com.pkmmte.view.CircularImageView
+            android:id="@+id/chat_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/user" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/chat_image"
-            android:layout_toEndOf="@+id/chat_image"
-            android:layout_toRightOf="@+id/chat_image"
+            android:layout_marginLeft="10dp"
             android:gravity="center|left"
-            android:orientation="vertical"
-            android:layout_marginLeft="10dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/chat_person"
@@ -49,11 +43,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_marginTop="5dp"
         android:background="@color/md_grey_400"
-        android:orientation="vertical"
-        android:layout_marginTop="5dp"></LinearLayout>
+        android:orientation="vertical" />
 </LinearLayout>
 

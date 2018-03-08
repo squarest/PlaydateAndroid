@@ -234,7 +234,7 @@ public class EditProfileActivity extends Activity implements View.OnClickListene
 //        Call<RequestModel> req = apiService.edit_user(firebase_id, Integer.valueOf(user_age), user_height, user_ethnicity, user_religion, user_education, indexHeight);
 //        req.enqueue(new Callback<RequestModel>() {
 //            @Override
-//            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+//            public void onResponse(Call<ResponseModel> call, retrofit2.Response<ResponseModel> response) {
 //                RequestModel responseData = response.body();
 //                loading.dismiss();
 //                if (responseData.getResult() == 1){

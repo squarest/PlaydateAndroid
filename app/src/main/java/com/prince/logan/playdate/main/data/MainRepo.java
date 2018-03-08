@@ -5,7 +5,7 @@ import android.location.Location;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.prince.logan.playdate.entities.QuestionModel;
-import com.prince.logan.playdate.entities.RequestModel;
+import com.prince.logan.playdate.entities.ResponseModel;
 import com.prince.logan.playdate.entities.UserModel;
 import com.prince.logan.playdate.global.Constant;
 import com.prince.logan.playdate.network.ApiClient;
@@ -41,14 +41,14 @@ public class MainRepo implements IMainRepo {
     }
 
     @Override
-    public Single<RequestModel> updateLocation(String loti, String longi) {
+    public Single<ResponseModel> updateLocation(String loti, String longi) {
         return apiClient.getApi().update_location(getUserId(), loti, longi);
     }
 
     @Override
     public Single<UserModel> getUser() {
         return apiClient.getApi().login(getUserId())
-                .map(RequestModel::getUser);
+                .map(ResponseModel::getUser);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class MainRepo implements IMainRepo {
     }
 
     @Override
-    public Single<RequestModel> removeUserFromServer() {
+    public Single<ResponseModel> removeUserFromServer() {
         return apiClient.getApi().delete_user(getUserId());
     }
 

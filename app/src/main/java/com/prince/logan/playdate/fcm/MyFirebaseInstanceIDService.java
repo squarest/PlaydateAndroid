@@ -49,7 +49,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 //        Call<RequestModel> req = apiService.register_token(token, 0, MainActivity.userFirebaseID);
 //        req.enqueue(new Callback<RequestModel>() {
 //            @Override
-//            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+//            public void onResponse(Call<ResponseModel> call, retrofit2.Response<ResponseModel> response) {
 //                RequestModel responseData = response.body();
 //                loading.dismiss();
 //                if (responseData.getResult() == 1){

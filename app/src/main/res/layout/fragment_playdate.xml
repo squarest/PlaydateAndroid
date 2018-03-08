@@ -1,92 +1,94 @@
 <?xml version="1.0"?>
-<LinearLayout
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/playdate_name"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5"
-            android:background="@drawable/playdate_bg"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:id="@+id/lin_playdate">
-            <com.andexert.library.RippleView
-                android:id="@+id/btn_playdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                rv_centered="true">
+            android:layout_height="wrap_content"
+            android:background="@color/md_purple_700"
+            android:padding="16dp"
+            android:textAlignment="center"
+            android:textColor="@color/md_white_1000"
+            tools:text="Meet Playdate!" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/md_white_1000"
-                android:text="Play Date"
-                android:textSize="30dp"
-                android:textStyle="bold"/>
-            </com.andexert.library.RippleView>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/md_white_1000"
-                android:layout_marginLeft="80dp"
-                android:layout_marginRight="80dp"></LinearLayout>
+        <com.yarolegovich.discretescrollview.DiscreteScrollView
+            android:id="@+id/avatars_slider"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:visibility="gone"
+            tools:listitem="@layout/playdate_slider_item" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Please describe the description"
-                android:textColor="@color/colorPrimary"/>
-        </LinearLayout>
+        <com.pkmmte.view.CircularImageView
+            android:id="@+id/avatars_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="16dp"
+            android:src="@drawable/user"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/md_white_1000"></LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5"
-            android:background="@drawable/chatting_bg"
-            android:gravity="center"
-            android:id="@+id/lin_chat"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1.5"
             android:orientation="vertical">
-            <com.andexert.library.RippleView
-                android:id="@+id/btn_chat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                rv_centered="true">
+
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/playdate_description"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chat"
-                android:textColor="@color/md_white_1000"
-                android:textSize="30dp"
-                android:textStyle="bold"
-                />
-            </com.andexert.library.RippleView>
-            <LinearLayout
+                android:layout_marginBottom="8dp"
+                android:text="@string/playdate_descr_1" />
+
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/md_white_1000"
-                android:layout_marginLeft="80dp"
-                android:layout_marginRight="80dp"></LinearLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Please describe the description"
-                android:textColor="@color/colorPrimary"/>
+                android:layout_marginBottom="8dp"
+                android:background="@color/md_blue_grey_300" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/playdate_descr_2" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/md_blue_grey_300" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/playdate_descr_3" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/md_blue_grey_300" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/make_playdate_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:padding="16dp"
+            android:text="@string/make_playdate_button"
+            android:textAlignment="center"
+            android:textColor="@color/md_white_1000" />
     </LinearLayout>
-
-</LinearLayout>
+</layout>

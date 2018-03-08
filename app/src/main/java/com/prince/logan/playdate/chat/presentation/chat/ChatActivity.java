@@ -8,7 +8,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.prince.logan.playdate.Adapter.ChatAdapter;
 import com.prince.logan.playdate.R;
 import com.prince.logan.playdate.base.BaseActivity;
 import com.prince.logan.playdate.entities.ChatData;

@@ -9,7 +9,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.prince.logan.playdate.entities.RequestModel;
+import com.prince.logan.playdate.entities.ResponseModel;
 import com.prince.logan.playdate.entities.UserModel;
 import com.prince.logan.playdate.network.ApiClient;
 
@@ -42,7 +42,7 @@ public class LoginRepo implements ILoginRepo {
     }
 
     @Override
-    public Single<RequestModel> setTokenToServer() {
+    public Single<ResponseModel> setTokenToServer() {
         String token = FirebaseInstanceId.getInstance().getToken();
         return apiClient.getApi().register_token(token, 0, getUserId());
     }
@@ -99,7 +99,7 @@ public class LoginRepo implements ILoginRepo {
     }
 
     @Override
-    public Single<RequestModel> signUpToServer(UserModel userModel) {
+    public Single<ResponseModel> signUpToServer(UserModel userModel) {
         return apiClient.getApi().signup(userModel);
     }
 

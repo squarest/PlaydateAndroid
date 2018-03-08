@@ -7,13 +7,18 @@ import java.util.List;
  * Created by PRINCESS on 10/15/2017.
  */
 
-public class RequestModel {
-    UserModel user;
+public class ResponseModel {
+    private UserModel user;
     private ArrayList<QuestionModel> cateQuestion;
-    private ArrayList<UserModel> userList;
+    private ArrayList<PlaydateModel> playdates;
     private ArrayList<SubCateModel> subCategory;
     private ArrayList<QuestionModel> answers;
     private List<List<PlaydateModel>> groupedPlaydates;
+    private PlaydateModel playdate;
+
+    public PlaydateModel getPlaydate() {
+        return playdate;
+    }
 
     private String msg;
     private int result;
@@ -31,8 +36,8 @@ public class RequestModel {
         return answers;
     }
 
-    public ArrayList<UserModel> getMatchedUser() {
-        return userList;
+    public ArrayList<PlaydateModel> getMatchedUsers() {
+        return playdates;
     }
 
     public List<List<PlaydateModel>> getGroupedPlaydates() {

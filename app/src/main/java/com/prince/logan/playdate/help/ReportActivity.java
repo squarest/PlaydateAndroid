@@ -58,7 +58,7 @@ public class ReportActivity extends Activity {
 //        Call<RequestModel> req = apiService.report_bug(name, mail, message);
 //        req.enqueue(new Callback<RequestModel>() {
 //            @Override
-//            public void onResponse(Call<RequestModel> call, retrofit2.Response<RequestModel> response) {
+//            public void onResponse(Call<ResponseModel> call, retrofit2.Response<ResponseModel> response) {
 //                loading.dismiss();
 //                RequestModel responseData = response.body();
 //

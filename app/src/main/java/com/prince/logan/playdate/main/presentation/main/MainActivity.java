@@ -20,7 +20,7 @@ import com.prince.logan.playdate.base.BaseActivity;
 import com.prince.logan.playdate.chat.presentation.chatlist.ChatListFragment;
 import com.prince.logan.playdate.main.presentation.menu.MenuFragment;
 import com.prince.logan.playdate.main.presentation.profile.ProfileFragment;
-import com.prince.logan.playdate.playdate.PlaydateFragment;
+import com.prince.logan.playdate.playdate.presentation.list.PlaydateFragment;
 
 import java.util.ArrayList;
 import java.util.List;

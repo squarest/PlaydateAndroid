@@ -38,17 +38,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <activity android:name=".playdate.PlaydateDetailActivity"
+        <activity android:name=".playdate.presentation.details.PlaydateDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <activity android:name=".playdate.PlaydateListActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
-        <activity android:name=".chat.presentation.chatlist.ChatListFragment"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity android:name=".help.AboutActivity"
             android:screenOrientation="portrait"

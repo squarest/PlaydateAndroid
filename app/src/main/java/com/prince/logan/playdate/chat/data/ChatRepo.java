@@ -8,7 +8,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.prince.logan.playdate.entities.ChatData;
 import com.prince.logan.playdate.entities.PlaydateModel;
-import com.prince.logan.playdate.entities.RequestModel;
+import com.prince.logan.playdate.entities.ResponseModel;
 import com.prince.logan.playdate.entities.UserModel;
 import com.prince.logan.playdate.network.ApiClient;
 
@@ -39,8 +39,8 @@ public class ChatRepo implements IChatRepo {
 
     @Override
     public Single<List<List<PlaydateModel>>> getAllChats() {
-        return apiClient.getApi().get_matched_users(getUid())
-                .map(RequestModel::getGroupedPlaydates);
+        return apiClient.getApi().getGroupedMatchedUsers(getUid())
+                .map(ResponseModel::getGroupedPlaydates);
     }
 
     private DatabaseReference mDatabaseReference;
@@ -97,7 +97,7 @@ public class ChatRepo implements IChatRepo {
     }
 
     @Override
-    public Single<RequestModel> sendNotification(String conversationId, ChatData chatData) {
+    public Single<ResponseModel> sendNotification(String conversationId, ChatData chatData) {
         return getUser().flatMap(userModel -> apiClient.getApi().send_notification(userModel.get_user_full_name(),
                 userModel.get_firebase_id(), conversationId, chatData.text));
     }
@@ -105,7 +105,7 @@ public class ChatRepo implements IChatRepo {
     @Override
     public Single<UserModel> getUser() {
         return apiClient.getApi().login(getUid())
-                .map(RequestModel::getUser);
+                .map(ResponseModel::getUser);
     }
 
     @Override

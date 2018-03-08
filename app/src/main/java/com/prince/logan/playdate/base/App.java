@@ -12,6 +12,8 @@ import com.prince.logan.playdate.dagger.DaggerAppComponent;
 import com.prince.logan.playdate.dagger.modules.AppModule;
 import com.prince.logan.playdate.main.di.MainComponent;
 import com.prince.logan.playdate.main.di.MainModule;
+import com.prince.logan.playdate.playdate.di.PlaydateComponent;
+import com.prince.logan.playdate.playdate.di.PlaydateModule;
 
 /**
  * Created by dmitrijfomenko on 27.02.2018.
@@ -22,6 +24,7 @@ public class App extends Application {
     private static LoginComponent loginComponent;
     private static MainComponent mainComponent;
     private static ChatComponent chatComponent;
+    private static PlaydateComponent playdateComponent;
 
     public static MainComponent getMainComponent() {
         return mainComponent;
@@ -31,12 +34,13 @@ public class App extends Application {
         return loginComponent;
     }
 
-    public static AppComponent getAppComponent() {
-        return appComponent;
-    }
 
     public static ChatComponent getChatComponent() {
         return chatComponent;
+    }
+
+    public static PlaydateComponent getPlaydateComponent() {
+        return playdateComponent;
     }
 
     @Override
@@ -48,6 +52,7 @@ public class App extends Application {
         loginComponent = buildLoginComponent();
         mainComponent = buildMainComponent();
         chatComponent = buildChatComponent();
+        playdateComponent = buildPlaydateComponent();
     }
 
     private AppComponent buildAppComponent() {
@@ -74,5 +79,12 @@ public class App extends Application {
             chatComponent = appComponent.plusChatComponent(new ChatModule());
         }
         return chatComponent;
+    }
+
+    private PlaydateComponent buildPlaydateComponent() {
+        if (playdateComponent == null) {
+            playdateComponent = appComponent.plusPlaydateComponent(new PlaydateModule());
+        }
+        return playdateComponent;
     }
 }

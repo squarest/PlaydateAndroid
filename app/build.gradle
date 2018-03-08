@@ -101,6 +101,9 @@ dependencies {
 
     //time
     compile 'com.jakewharton.threetenabp:threetenabp:1.0.5'
+
+    //discrete scrollview
+    compile 'com.yarolegovich:discrete-scrollview:1.4.4'
 }
 
 

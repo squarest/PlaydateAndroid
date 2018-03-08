@@ -9,6 +9,8 @@ import com.prince.logan.playdate.dagger.modules.DataModule;
 import com.prince.logan.playdate.dagger.modules.NetModule;
 import com.prince.logan.playdate.main.di.MainComponent;
 import com.prince.logan.playdate.main.di.MainModule;
+import com.prince.logan.playdate.playdate.di.PlaydateComponent;
+import com.prince.logan.playdate.playdate.di.PlaydateModule;
 
 import javax.inject.Singleton;
 
@@ -25,4 +27,6 @@ public interface AppComponent {
     MainComponent plusMainComponent(MainModule mainModule);
 
     ChatComponent plusChatComponent(ChatModule chatModule);
+
+    PlaydateComponent plusPlaydateComponent(PlaydateModule playdateModule);
 }

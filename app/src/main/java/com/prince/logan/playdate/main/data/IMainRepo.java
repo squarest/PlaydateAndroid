@@ -3,7 +3,7 @@ package com.prince.logan.playdate.main.data;
 import android.location.Location;
 
 import com.prince.logan.playdate.entities.QuestionModel;
-import com.prince.logan.playdate.entities.RequestModel;
+import com.prince.logan.playdate.entities.ResponseModel;
 import com.prince.logan.playdate.entities.UserModel;
 
 import io.reactivex.Observable;
@@ -16,7 +16,7 @@ import io.reactivex.Single;
 public interface IMainRepo {
     Observable<Location> getUserLocation();
 
-    Single<RequestModel> updateLocation(String loti, String longi);
+    Single<ResponseModel> updateLocation(String loti, String longi);
 
     Single<UserModel> getUser();
 
@@ -24,5 +24,5 @@ public interface IMainRepo {
 
     void removeUserFromDevice();
 
-    Single<RequestModel> removeUserFromServer();
+    Single<ResponseModel> removeUserFromServer();
 }

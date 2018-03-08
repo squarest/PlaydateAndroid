@@ -1,96 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/colorPrimary">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@color/colorPrimary">
 
-                <ImageView
-                    android:id="@+id/img_playdate_detail_back"
-                    android:layout_width="30dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/back" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/colorPrimary">
 
-                <TextView
-                    android:id="@+id/txt_playdate_user_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="David Castillo"
-                    android:textColor="@color/md_white_1000"
-                    android:textSize="20dp" />
-            </RelativeLayout>
-        </LinearLayout>
+                    <ImageView
+                        android:id="@+id/img_playdate_detail_back"
+                        android:layout_width="30dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/back" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/txt_playdate_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="David Castillo"
+                        android:textColor="@color/md_white_1000"
+                        android:textSize="20dp" />
+                </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/md_white_1000"
-                android:orientation="vertical">
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-                <ScrollView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/md_white_1000"
+                    android:orientation="vertical">
 
-                    <RelativeLayout
+                    <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
-                            android:id="@+id/img_playdate_profile"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:background="@drawable/profile_sample"
-                            android:scaleType="fitCenter" />
-
-                        <ListView
-                            android:id="@+id/playdate_detail_list"
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:overScrollMode="never"
-                            android:layout_below="@+id/img_playdate_profile" />
+                            android:layout_height="match_parent">
 
-                    </RelativeLayout>
-                </ScrollView>
+                            <ImageView
+                                android:id="@+id/img_playdate_profile"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:adjustViewBounds="true"
+                                android:background="@drawable/profile_sample"
+                                android:scaleType="fitCenter" />
+
+                            <ListView
+                                android:id="@+id/playdate_detail_list"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/img_playdate_profile"
+                                android:overScrollMode="never" />
+
+                        </RelativeLayout>
+                    </ScrollView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <Button
+                    android:id="@+id/btn_chat_start"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    android:text="Chat"
+                    android:textColor="@color/md_white_1000">
+
+                </Button>
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-            <Button
-                android:id="@+id/btn_chat_start"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
-                android:text="Chat"
-                android:textColor="@color/md_white_1000">
-
-            </Button>
-        </LinearLayout>
     </LinearLayout>
-
-</LinearLayout>
+</layout>

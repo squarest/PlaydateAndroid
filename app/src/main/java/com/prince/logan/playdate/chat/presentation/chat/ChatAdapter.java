@@ -1,4 +1,4 @@
-package com.prince.logan.playdate.Adapter;
+package com.prince.logan.playdate.chat.presentation.chat;
 
 import android.content.Context;
 import android.view.LayoutInflater;

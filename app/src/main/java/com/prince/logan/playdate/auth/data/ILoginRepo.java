@@ -1,6 +1,6 @@
 package com.prince.logan.playdate.auth.data;
 
-import com.prince.logan.playdate.entities.RequestModel;
+import com.prince.logan.playdate.entities.ResponseModel;
 import com.prince.logan.playdate.entities.UserModel;
 
 import io.reactivex.Single;
@@ -12,9 +12,9 @@ import io.reactivex.Single;
 public interface ILoginRepo {
     boolean isCurrentUserExist();
 
-    Single<RequestModel>setTokenToServer();
+    Single<ResponseModel>setTokenToServer();
 
     Single<UserModel> getUserFromFacebook();
 
-    Single<RequestModel> signUpToServer(UserModel userModel);
+    Single<ResponseModel> signUpToServer(UserModel userModel);
 }

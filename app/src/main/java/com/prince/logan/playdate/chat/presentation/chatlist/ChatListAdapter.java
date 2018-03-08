@@ -52,11 +52,11 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
         return chats.size();
     }
 
-    public class Holder extends RecyclerView.ViewHolder {
+    class Holder extends RecyclerView.ViewHolder {
         TextView dateTitle;
         RecyclerView chats;
 
-        public Holder(View itemView) {
+        Holder(View itemView) {
             super(itemView);
             dateTitle = itemView.findViewById(R.id.chat_date);
             chats = itemView.findViewById(R.id.chat_sublist);
