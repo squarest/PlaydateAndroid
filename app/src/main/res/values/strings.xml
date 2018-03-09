@@ -28,4 +28,9 @@
     <string name="distance">Distance</string>
     <string name="ethnicity">Ethnicity</string>
     <string name="distance_format">%.0f</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="report_a_bug_feedback">Report a bug / Feedback</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_use">Terms of Use</string>
 </resources>
