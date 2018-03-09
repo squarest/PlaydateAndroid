@@ -5,6 +5,7 @@ import com.prince.logan.playdate.base.App;
 import com.prince.logan.playdate.base.BasePresenter;
 import com.prince.logan.playdate.chat.domain.IChatInteractor;
 import com.prince.logan.playdate.entities.ChatData;
+import com.prince.logan.playdate.entities.PlaydateModel;
 
 import javax.inject.Inject;
 
@@ -22,12 +23,14 @@ public class ChatPresenter extends BasePresenter<ChatView> {
         App.getChatComponent().inject(this);
     }
 
-    public void viewCreated() {
-        interactor.loadUserId()
+    public void viewCreated(PlaydateModel playdateModel) {
+        Disposable disposable = interactor.setChatData(playdateModel.firebaseId, playdateModel.userFullName)
+                .andThen(interactor.loadUserId())
                 .subscribe(s -> {
                     getViewState().initList(s);
                     loadChat();
                 }, Throwable::printStackTrace);
+        putDisposable(disposable);
     }
 
     private void loadChat() {

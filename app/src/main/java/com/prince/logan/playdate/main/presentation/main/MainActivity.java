@@ -4,9 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +26,6 @@ import java.util.List;
 public class MainActivity extends BaseActivity implements MainView {
 
     private FragmentTabHost mTabHost;
-    private ViewPager mViewPager;
     private List<Fragment> mFragmentList;
     private Class mClass[] = {ProfileFragment.class, PlaydateFragment.class, ChatListFragment.class, MenuFragment.class};
     private Fragment mFragment[] = {new ProfileFragment(), new PlaydateFragment(), new ChatListFragment(), new MenuFragment()};
@@ -50,14 +47,12 @@ public class MainActivity extends BaseActivity implements MainView {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initView();
-        initEvent();
         presenter.viewCreated();
     }
 
     private void initView() {
 
         mTabHost = findViewById(android.R.id.tabhost);
-        mViewPager = findViewById(R.id.view_pager);
         mFragmentList = new ArrayList<>();
         mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
         mTabHost.getTabWidget().setDividerDrawable(null);
@@ -69,17 +64,7 @@ public class MainActivity extends BaseActivity implements MainView {
             mTabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.WHITE);
         }
 
-        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public Fragment getItem(int position) {
-                return mFragmentList.get(position);
-            }
 
-            @Override
-            public int getCount() {
-                return mFragmentList.size();
-            }
-        });
     }
 
     private View getTabView(int index) {
@@ -94,26 +79,5 @@ public class MainActivity extends BaseActivity implements MainView {
         title.setText(mTitles[index]);
 
         return view;
-    }
-
-    private void initEvent() {
-
-        mTabHost.setOnTabChangedListener(tabId -> mViewPager.setCurrentItem(mTabHost.getCurrentTab()));
-
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                mTabHost.setCurrentTab(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 }

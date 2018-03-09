@@ -4,7 +4,6 @@ import com.prince.logan.playdate.entities.PlaydateModel;
 
 import java.util.List;
 
-import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**
@@ -16,7 +15,7 @@ public interface IPlaydateInteractor {
 
     Single<List<PlaydateModel>> loadAllMatchedUsers();
 
-    Completable setSelectedPlaydate(PlaydateModel playdateModel);
+    Single<PlaydateModel> setSelectedPlaydate(String id);
 
     Single<PlaydateModel> getSelectedPlaydate();
 }

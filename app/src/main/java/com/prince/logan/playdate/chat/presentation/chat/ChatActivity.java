@@ -11,6 +11,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.prince.logan.playdate.R;
 import com.prince.logan.playdate.base.BaseActivity;
 import com.prince.logan.playdate.entities.ChatData;
+import com.prince.logan.playdate.entities.PlaydateModel;
 
 /**
  * Created by PRINCE on 11/20/2017.
@@ -30,7 +31,7 @@ public class ChatActivity extends BaseActivity implements ChatView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        presenter.viewCreated();
+        presenter.viewCreated((PlaydateModel) getIntent().getSerializableExtra("chatData"));
         initViews();
     }
 

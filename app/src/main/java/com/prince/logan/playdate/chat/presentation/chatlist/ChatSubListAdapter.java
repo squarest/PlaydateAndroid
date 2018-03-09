@@ -1,6 +1,7 @@
 package com.prince.logan.playdate.chat.presentation.chatlist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.prince.logan.playdate.R;
+import com.prince.logan.playdate.chat.presentation.chat.ChatActivity;
 import com.prince.logan.playdate.entities.PlaydateModel;
 import com.squareup.picasso.Picasso;
 
@@ -21,7 +23,6 @@ import java.util.List;
 public class ChatSubListAdapter extends RecyclerView.Adapter<ChatSubListAdapter.SimpleViewHolder> {
     private Context mContext;
     private List<PlaydateModel> users;
-    private ChatListPresenter chatListPresenter;
 
 
     static class SimpleViewHolder extends RecyclerView.ViewHolder {
@@ -39,9 +40,8 @@ public class ChatSubListAdapter extends RecyclerView.Adapter<ChatSubListAdapter.
         }
     }
 
-    public ChatSubListAdapter(List<PlaydateModel> data, ChatListPresenter presenter) {
+    public ChatSubListAdapter(List<PlaydateModel> data) {
         this.users = data;
-        this.chatListPresenter = presenter;
     }
 
     public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -65,7 +65,12 @@ public class ChatSubListAdapter extends RecyclerView.Adapter<ChatSubListAdapter.
         }
         holder.userName.setText(chatUser.userFullName);
 
-        holder.view.setOnClickListener(view -> chatListPresenter.chatSelected(chatUser.firebaseId, chatUser.userFullName));
+        holder.view.setOnClickListener(view ->
+        {
+            Intent intent = new Intent(mContext, ChatActivity.class);
+            intent.putExtra("chatData", chatUser);
+            mContext.startActivity(intent);
+        });
     }
 
     @Override

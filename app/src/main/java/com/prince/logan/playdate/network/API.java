@@ -43,13 +43,14 @@ public interface API {
             @Query("user_id") String user_id
     );
 
+    @GET("getQuestionsById/25")
+    Single<ResponseModel> get_questions();
+
+    @GET("get_answers/{id}")
+    Single<ResponseModel> getAnswers(@Path("id") String userId);
+
     @GET("get_sub_category/{id}")
     Call<ResponseModel> get_sub_category(
-            @Path("id") int questionCateId
-    );
-
-    @GET("getQuestionsById/{id}")
-    Call<ResponseModel> get_questions(
             @Path("id") int questionCateId
     );
 

@@ -12,5 +12,4 @@ import java.util.List;
 public interface ChatListView extends BaseView {
     void setChatList(List<List<PlaydateModel>> chats);
 
-    void showChat();
 }

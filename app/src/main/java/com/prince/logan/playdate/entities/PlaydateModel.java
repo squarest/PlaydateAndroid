@@ -2,11 +2,14 @@ package com.prince.logan.playdate.entities;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * Created by dmitrijfomenko on 05.03.2018.
  */
 
-public class PlaydateModel {
+public class PlaydateModel implements Serializable {
 
     @SerializedName("id")
     public String id;
@@ -100,6 +103,10 @@ public class PlaydateModel {
 
     @SerializedName("chat_active")
     public String chatActive;
+
+    public double distance;
+
+    public List<QAModel> questions;
 
 
 }

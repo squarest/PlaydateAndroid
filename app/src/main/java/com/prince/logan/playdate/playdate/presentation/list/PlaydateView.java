@@ -14,5 +14,7 @@ public interface PlaydateView extends BaseView {
 
     void addNewPlaydate(PlaydateModel playdateModel);
 
-    void showDetailedPlaydate();
+    void showPlaydateFailedDialog();
+
+    void showMessage(int messageId);
 }

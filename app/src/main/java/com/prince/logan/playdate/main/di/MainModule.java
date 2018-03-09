@@ -1,7 +1,5 @@
 package com.prince.logan.playdate.main.di;
 
-import android.content.Context;
-
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.prince.logan.playdate.main.data.IMainRepo;
@@ -19,12 +17,6 @@ import dagger.Provides;
  */
 @Module
 public class MainModule {
-    @Provides
-    @MainScope
-    public LocationProvider provideLocationProvider(Context context) {
-        return new LocationProvider(context);
-    }
-
     @Provides
     @MainScope
     public LoginManager provideLoginManager() {

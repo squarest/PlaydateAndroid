@@ -6,6 +6,7 @@ import com.prince.logan.playdate.playdate.data.IPlaydateRepo;
 import com.prince.logan.playdate.playdate.data.PLaydateRepo;
 import com.prince.logan.playdate.playdate.domain.IPlaydateInteractor;
 import com.prince.logan.playdate.playdate.domain.PlaydateInteractor;
+import com.prince.logan.playdate.utils.LocationProvider;
 
 import dagger.Module;
 import dagger.Provides;
@@ -17,8 +18,8 @@ import dagger.Provides;
 public class PlaydateModule {
     @PlaydateScope
     @Provides
-    public IPlaydateRepo providePlaydateRepo(ApiClient apiClient, FirebaseAuth firebaseAuth) {
-        return new PLaydateRepo(apiClient, firebaseAuth);
+    public IPlaydateRepo providePlaydateRepo(ApiClient apiClient, FirebaseAuth firebaseAuth, LocationProvider locationProvider) {
+        return new PLaydateRepo(apiClient, firebaseAuth, locationProvider);
     }
 
     @PlaydateScope

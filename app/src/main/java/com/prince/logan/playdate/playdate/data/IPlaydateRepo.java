@@ -1,6 +1,10 @@
 package com.prince.logan.playdate.playdate.data;
 
+import android.location.Location;
+
 import com.prince.logan.playdate.entities.PlaydateModel;
+import com.prince.logan.playdate.entities.QuestionModel;
+import com.prince.logan.playdate.entities.ResponseModel;
 
 import java.util.List;
 
@@ -11,7 +15,13 @@ import io.reactivex.Single;
  */
 
 public interface IPlaydateRepo {
-    Single<PlaydateModel> postMakePlaydate();
+    Single<ResponseModel> postMakePlaydate();
 
     Single<List<PlaydateModel>> getMatchedUsers();
+
+    Single<List<QuestionModel>> get_questions();
+
+    Single<String[]> getAnswers(String uId);
+
+    double getDistanceTo(Location location);
 }

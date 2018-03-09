@@ -14,4 +14,6 @@ public interface Constant {
     int QUESTION_CATEGORY_ID = 7;
 
     int QUESTION_SUBCATEGORY_ID = 25;
+    String[] arrayEthnicity = {"Arab", "Asian", "Black", "Latino", "Native American", "South Asian", "White", "Other"};
+
 }

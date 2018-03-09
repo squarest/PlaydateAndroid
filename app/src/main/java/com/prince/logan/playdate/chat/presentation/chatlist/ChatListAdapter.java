@@ -20,12 +20,10 @@ import java.util.List;
 
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder> {
     private List<List<PlaydateModel>> chats;
-    private ChatListPresenter presenter;
     private Context mContext;
 
-    public ChatListAdapter(List<List<PlaydateModel>> chats, ChatListPresenter presenter) {
+    public ChatListAdapter(List<List<PlaydateModel>> chats) {
         this.chats = chats;
-        this.presenter = presenter;
     }
 
     @Override
@@ -42,7 +40,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
         holder.dateTitle.setText(date);
         holder.chats.setLayoutManager(new LinearLayoutManager(mContext));
         holder.chats.addItemDecoration(new DividerItemDecoration(mContext, LinearLayoutManager.VERTICAL));
-        ChatSubListAdapter adapter = new ChatSubListAdapter(chats.get(position), presenter);
+        ChatSubListAdapter adapter = new ChatSubListAdapter(chats.get(position));
         holder.chats.setAdapter(adapter);
     }
 

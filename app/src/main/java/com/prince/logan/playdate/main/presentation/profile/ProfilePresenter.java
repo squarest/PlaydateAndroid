@@ -4,12 +4,12 @@ import com.arellomobile.mvp.InjectViewState;
 import com.prince.logan.playdate.base.App;
 import com.prince.logan.playdate.base.BasePresenter;
 import com.prince.logan.playdate.entities.QuestionModel;
-import com.prince.logan.playdate.entities.UserModel;
 import com.prince.logan.playdate.main.domain.IMainInteractor;
 
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -28,16 +28,20 @@ public class ProfilePresenter extends BasePresenter<ProfileView> {
 
     public void viewCreated() {
         profileView.showLoading();
-        interactor.loadUser()
+        Disposable d = interactor.loadUser()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(UserModel::get_user_avatar)
                 .doFinally(() -> profileView.dismissLoading())
-                .subscribe(profileView::setProfilePhoto, Throwable::printStackTrace);
-        interactor.loadQuestion()
+                .subscribe(userModel -> {
+                    profileView.setProfilePhoto(userModel.get_user_avatar());
+                    profileView.setName(userModel.get_user_first_name());
+                }, Throwable::printStackTrace);
+        putDisposable(d);
+        Disposable disposable = interactor.loadQuestion()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(QuestionModel::getImgCate)
                 .subscribe(profileView::setQuestionImage);
+        putDisposable(disposable);
     }
 }

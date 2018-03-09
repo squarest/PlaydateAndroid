@@ -15,6 +15,11 @@ public class ResponseModel {
     private ArrayList<QuestionModel> answers;
     private List<List<PlaydateModel>> groupedPlaydates;
     private PlaydateModel playdate;
+    private String answer_list;
+
+    public String getAnswer_list() {
+        return answer_list;
+    }
 
     public PlaydateModel getPlaydate() {
         return playdate;

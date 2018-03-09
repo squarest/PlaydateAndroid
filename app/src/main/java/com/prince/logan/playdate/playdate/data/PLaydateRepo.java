@@ -1,9 +1,13 @@
 package com.prince.logan.playdate.playdate.data;
 
+import android.location.Location;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.prince.logan.playdate.entities.PlaydateModel;
+import com.prince.logan.playdate.entities.QuestionModel;
 import com.prince.logan.playdate.entities.ResponseModel;
 import com.prince.logan.playdate.network.ApiClient;
+import com.prince.logan.playdate.utils.LocationProvider;
 
 import java.util.List;
 
@@ -16,10 +20,12 @@ import io.reactivex.Single;
 public class PLaydateRepo implements IPlaydateRepo {
     private ApiClient apiClient;
     private FirebaseAuth firebaseAuth;
+    private LocationProvider locationProvider;
 
-    public PLaydateRepo(ApiClient apiClient, FirebaseAuth firebaseAuth) {
+    public PLaydateRepo(ApiClient apiClient, FirebaseAuth firebaseAuth, LocationProvider locationProvider) {
         this.apiClient = apiClient;
         this.firebaseAuth = firebaseAuth;
+        this.locationProvider = locationProvider;
     }
 
     private String getUid() {
@@ -27,14 +33,31 @@ public class PLaydateRepo implements IPlaydateRepo {
     }
 
     @Override
-    public Single<PlaydateModel> postMakePlaydate() {
-        return apiClient.getApi().postMakePLaydate(getUid())
-                .map(ResponseModel::getPlaydate);
+    public Single<ResponseModel> postMakePlaydate() {
+        return apiClient.getApi().postMakePLaydate(getUid());
     }
 
     @Override
     public Single<List<PlaydateModel>> getMatchedUsers() {
         return apiClient.getApi().getMatchedUsers(getUid())
                 .map(ResponseModel::getMatchedUsers);
+    }
+
+    @Override
+    public Single<List<QuestionModel>> get_questions() {
+        return apiClient.getApi().get_questions()
+                .map(ResponseModel::getCateQuestion);
+    }
+
+    @Override
+    public Single<String[]> getAnswers(String uId) {
+        return apiClient.getApi().getAnswers(uId)
+                .map(ResponseModel::getAnswer_list)
+                .map(s -> s.split(","));
+    }
+
+    @Override
+    public double getDistanceTo(Location location) {
+        return locationProvider.getDistanceTo(location);
     }
 }

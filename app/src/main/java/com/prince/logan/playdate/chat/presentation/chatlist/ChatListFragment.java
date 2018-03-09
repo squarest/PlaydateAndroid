@@ -1,6 +1,5 @@
 package com.prince.logan.playdate.chat.presentation.chatlist;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +12,6 @@ import android.view.ViewGroup;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.prince.logan.playdate.R;
-import com.prince.logan.playdate.chat.presentation.chat.ChatActivity;
 import com.prince.logan.playdate.entities.PlaydateModel;
 import com.prince.logan.playdate.main.presentation.main.MainView;
 
@@ -58,12 +56,7 @@ public class ChatListFragment extends MvpAppCompatFragment implements ChatListVi
     @Override
     public void setChatList(List<List<PlaydateModel>> chats) {
         chatList.setLayoutManager(new LinearLayoutManager(getContext()));
-        chatList.setAdapter(new ChatListAdapter(chats, presenter));
+        chatList.setAdapter(new ChatListAdapter(chats));
     }
 
-    @Override
-    public void showChat() {
-        Intent intent = new Intent(getContext(), ChatActivity.class);
-        startActivity(intent);
-    }
 }

@@ -7,6 +7,8 @@ import com.prince.logan.playdate.main.domain.IMainInteractor;
 
 import javax.inject.Inject;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by dmitrijfomenko on 01.03.2018.
  */
@@ -20,16 +22,18 @@ public class MenuPresenter extends BasePresenter<MenuView> {
     }
 
     public void logoutButtonClicked() {
-        interactor.logout()
+        Disposable disposable1 = interactor.logout()
                 .doOnSubscribe(disposable -> getViewState().showLoading())
                 .doOnTerminate(() -> getViewState().dismissLoading())
                 .subscribe(() -> getViewState().showLoginScreen());
+        putDisposable(disposable1);
     }
 
     public void deleteButtonClicked() {
-        interactor.deleteUser()
+        Disposable disposable1 = interactor.deleteUser()
                 .doOnSubscribe(disposable -> getViewState().showLoading())
                 .doOnTerminate(() -> getViewState().dismissLoading())
                 .subscribe(() -> getViewState().showLoginScreen());
+        putDisposable(disposable1);
     }
 }

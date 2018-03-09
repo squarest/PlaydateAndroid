@@ -1,12 +1,12 @@
 package com.prince.logan.playdate.playdate.presentation.list;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -14,7 +14,7 @@ import com.prince.logan.playdate.R;
 import com.prince.logan.playdate.databinding.FragmentPlaydateBinding;
 import com.prince.logan.playdate.entities.PlaydateModel;
 import com.prince.logan.playdate.main.presentation.main.MainView;
-import com.prince.logan.playdate.playdate.presentation.details.PlaydateDetailActivity;
+import com.prince.logan.playdate.utils.DialogUtil;
 
 import java.util.List;
 
@@ -40,7 +40,11 @@ public class PlaydateFragment extends MvpAppCompatFragment implements PlaydateVi
         super.onViewCreated(view, savedInstanceState);
         mainView = (MainView) getActivity();
         presenter.viewCreated();
-        binding.makePlaydateButton.setOnClickListener(view1 -> presenter.makePlaydateButtonClicked());
+        binding.makePlaydateButton.setOnClickListener(view1 ->
+        {
+            showLoading();
+            presenter.makePlaydateButtonClicked();
+        });
 
 
     }
@@ -60,7 +64,7 @@ public class PlaydateFragment extends MvpAppCompatFragment implements PlaydateVi
     @Override
     public void setPlaydates(List<PlaydateModel> playdates) {
         if (playdates.size() > 0) {
-            sliderAdapter = new PlaydateSliderAdapter(playdates, presenter);
+            sliderAdapter = new PlaydateSliderAdapter(playdates);
             binding.avatarsSlider.setAdapter(sliderAdapter);
             binding.avatarsSlider.setOffscreenItems(2);
             binding.avatarsSlider.addOnItemChangedListener((viewHolder, adapterPosition) ->
@@ -85,8 +89,15 @@ public class PlaydateFragment extends MvpAppCompatFragment implements PlaydateVi
     }
 
     @Override
-    public void showDetailedPlaydate() {
-        Intent intent = new Intent(getContext(), PlaydateDetailActivity.class);
-        startActivity(intent);
+    public void showPlaydateFailedDialog() {
+        DialogUtil dialogUtil = new DialogUtil(getContext());
+        dialogUtil.getAlertDialog(getString(R.string.playdate_fail_dialog_title),
+                getString(R.string.playdate_fail_dialog_descr)).show();
+
+    }
+
+    @Override
+    public void showMessage(int messageId) {
+        Toast.makeText(getContext(), messageId, Toast.LENGTH_SHORT).show();
     }
 }

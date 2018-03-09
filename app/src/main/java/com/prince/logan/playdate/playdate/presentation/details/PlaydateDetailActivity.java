@@ -1,94 +1,61 @@
 package com.prince.logan.playdate.playdate.presentation.details;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.support.v7.widget.LinearLayoutManager;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.prince.logan.playdate.R;
+import com.prince.logan.playdate.base.BaseActivity;
 import com.prince.logan.playdate.chat.presentation.chat.ChatActivity;
-import com.prince.logan.playdate.entities.UserModel;
+import com.prince.logan.playdate.databinding.ActivityPlaydateDetailBinding;
+import com.prince.logan.playdate.entities.PlaydateModel;
 import com.squareup.picasso.Picasso;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by PRINCE on 11/14/2017.
  */
 
-public class PlaydateDetailActivity extends Activity implements View.OnClickListener{
-
-    @BindView(R.id.img_playdate_detail_back)
-    ImageView back;
-    @BindView(R.id.txt_playdate_user_name)
-    TextView txtUserName;
-    @BindView(R.id.img_playdate_profile)
-    ImageView imgProfileImage;
-    @BindView(R.id.playdate_detail_list)
-    ListView playdateDetailList;
-    @BindView(R.id.btn_chat_start)
-    Button btn_start_chat;
-
-    UserModel userDetail;
-
+public class PlaydateDetailActivity extends BaseActivity implements PlaydateDetailView {
+    public ActivityPlaydateDetailBinding binding;
+    @InjectPresenter
+    PlaydateDetailPresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_playdate_detail);
-        ButterKnife.bind(this);
-
-        initData();
-        setEvent();
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_playdate_detail);
+        presenter.viewCreated(getIntent().getStringExtra("playdateId"));
+        setEvents();
     }
 
-    private void setEvent() {
-        back.setOnClickListener(this);
-        btn_start_chat.setOnClickListener(this);
-    }
-
-    private void initData() {
-        Intent intent = this.getIntent();
-        Bundle bundle = intent.getExtras();
-        if (bundle != null) {
-            userDetail = (UserModel)bundle.getSerializable("userModel");
-            initView();
-        }
-    }
-
-    private void initView() {
-        txtUserName.setText(userDetail.get_user_full_name());
-        String avatarImg = userDetail.get_user_avatar();
-        avatarImg = avatarImg.replace("http://", "https://");
-        Picasso.with(this)
-                .load(avatarImg)
-                .placeholder(R.drawable.user) // optional
-                .error(R.drawable.user)         // optional
-                .into(imgProfileImage);
+    private void setEvents() {
+        binding.backButton.setOnClickListener(view -> finish());
+        binding.chatButton.setOnClickListener(view -> presenter.chatButtonClicked());
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.img_playdate_detail_back:
-                this.finish();
-                break;
-            case R.id.btn_chat_start:
-                Intent startChattingIntent = new Intent(PlaydateDetailActivity.this, ChatActivity.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putSerializable("userModel", (Serializable) userDetail);
-//                startChattingIntent.putExtras(bundle);
+    public void setUserData(PlaydateModel playdateModel) {
+        binding.setUser(playdateModel);
+        binding.userName.setText(playdateModel.userFullName);
+        binding.questionsList.setLayoutManager(new LinearLayoutManager(this));
+        binding.questionsList.setAdapter(new PlaydateAnswersAdapter(playdateModel.questions));
+        String avatarImg = playdateModel.avatarUrl;
+        avatarImg = avatarImg.replace("http://", "https://");
+        Picasso.with(this)
+                .load(avatarImg)
+                .placeholder(R.drawable.user)
+                .error(R.drawable.user)
+                .into(binding.playdateImage);
+        dismissLoading();
+    }
 
-                startChattingIntent.putExtra("user_id", userDetail.get_firebase_id());
-                startChattingIntent.putExtra("user_name", userDetail.get_user_full_name());
-                startActivity(startChattingIntent);
-                break;
-        }
+    @Override
+    public void showChat(PlaydateModel playdateModel) {
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.putExtra("chatData", playdateModel);
+        startActivity(intent);
     }
 }

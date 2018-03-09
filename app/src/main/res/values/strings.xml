@@ -6,7 +6,7 @@
     <string name="failed_to_start_app">Failed to start app</string>
     <string name="edit_profile_button"><u>edit profile</u></string>
     <string name="preference_button"><u>preference</u></string>
-    <string name="welcome_title">Welcome,</string>
+    <string name="welcome_title">Hi,</string>
     <string name="answer_questions_title">Answer questions</string>
     <string name="delete_dialod_msg">Are you sure?</string>
     <string name="delete_dialog_title">Delete user</string>
@@ -17,4 +17,15 @@
     <string name="playdate_descr_1">No playdates yet:(</string>
     <string name="playdate_descr">This is your play date from %s %s. Say hi!</string>
     <string name="playdate_title">Meet %s!</string>
+    <string name="playdate_fail_dialog_title">No Soup For You!</string>
+    <string name="playdate_fail_dialog_descr">You\'re out of play dates for the day. Please check back later!</string>
+    <string name="error">Error</string>
+    <string name="stats">stats</string>
+    <string name="age">Age</string>
+    <string name="gender">Gender</string>
+    <string name="q_amp_a"><![CDATA[Q & A]]></string>
+    <string name="no">No</string>
+    <string name="distance">Distance</string>
+    <string name="ethnicity">Ethnicity</string>
+    <string name="distance_format">%.0f</string>
 </resources>

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.prince.logan.playdate.utils.LocationProvider;
 
 import javax.inject.Singleton;
 
@@ -26,6 +27,12 @@ public class DataModule {
     @Singleton
     public FirebaseAuth provideFirebaseAuth() {
         return FirebaseAuth.getInstance();
+    }
+
+    @Provides
+    @Singleton
+    public LocationProvider provideLocationProvider(Context context) {
+        return new LocationProvider(context);
     }
 
 }

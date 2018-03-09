@@ -1,6 +1,7 @@
 package com.prince.logan.playdate.playdate.presentation.list;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import com.pkmmte.view.CircularImageView;
 import com.prince.logan.playdate.R;
 import com.prince.logan.playdate.entities.PlaydateModel;
+import com.prince.logan.playdate.playdate.presentation.details.PlaydateDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
@@ -21,11 +23,9 @@ import java.util.List;
 public class PlaydateSliderAdapter extends RecyclerView.Adapter<PlaydateSliderAdapter.Holder> {
     private List<PlaydateModel> mData;
     private Context mContext;
-    private PlaydatePresenter presenter;
 
-    public PlaydateSliderAdapter(List<PlaydateModel> mData, PlaydatePresenter presenter) {
+    public PlaydateSliderAdapter(List<PlaydateModel> mData) {
         this.mData = mData;
-        this.presenter = presenter;
     }
 
     public void addNew(PlaydateModel playdateModel) {
@@ -44,7 +44,8 @@ public class PlaydateSliderAdapter extends RecyclerView.Adapter<PlaydateSliderAd
 
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-        String avatar_url = mData.get(position).avatarUrl;
+        PlaydateModel playdateModel = mData.get(position);
+        String avatar_url = playdateModel.avatarUrl;
         if (avatar_url != null) {
             String profileImage = avatar_url.replace("http://", "https://");
             Picasso.with(mContext)
@@ -53,7 +54,11 @@ public class PlaydateSliderAdapter extends RecyclerView.Adapter<PlaydateSliderAd
                     .error(R.drawable.user)
                     .into(holder.avatar);
         }
-        holder.avatar.setOnClickListener(view -> presenter.userSelected(mData.get(position)));
+        holder.avatar.setOnClickListener(view -> {
+            Intent intent = new Intent(mContext, PlaydateDetailActivity.class);
+            intent.putExtra("playdateId", playdateModel.firebaseId);
+            mContext.startActivity(intent);
+        });
     }
 
 

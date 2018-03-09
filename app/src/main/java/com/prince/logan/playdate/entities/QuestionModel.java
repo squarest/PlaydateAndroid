@@ -18,13 +18,6 @@ public class QuestionModel{
         return id;
     }
 
-    public int getQa_cate_id() {
-        return sub_cate_id;
-    }
-
-    public int getCate_id() {
-        return cate_id;
-    }
 
     public String getSub_cate(){
         return sub_cate;
