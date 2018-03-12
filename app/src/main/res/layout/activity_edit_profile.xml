@@ -1,368 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.make.playdate.entities.UserModel" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <LinearLayout
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/colorPrimary">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@color/colorPrimary">
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/back"
-                    android:id="@+id/img_edit_profile_back"
-                    android:layout_marginLeft="15dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/md_white_1000"
-                    android:text="Edit Profile"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:textSize="20dp"
-                    android:id="@+id/textView" />
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/update"
-                    android:layout_alignBottom="@+id/textView"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:id="@+id/img_edit_profile_save"/>
-            </RelativeLayout>
-        </LinearLayout>
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Edit Profile"
+                android:textColor="@color/md_white_1000"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/save_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:text="@string/save"
+                android:textColor="@color/md_white_1000"
+                android:textSize="18dp" />
+        </RelativeLayout>
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:id="@+id/img_edit_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_sample" />
+
+                <LinearLayout
+                    android:id="@+id/lin_edit_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="@string/name"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/txt_edit_Name"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="15dp"
+                        android:text="@{user._user_full_name}"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/md_grey_400" />
+
+                <LinearLayout
+                    android:id="@+id/lin_edit_sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="@string/gender"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/gender"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="@{user._user_gender==null?@string/none_selected:user._user_gender}"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/md_grey_400" />
+
+                <LinearLayout
+                    android:id="@+id/lin_edit_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="@string/age"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/age"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="@{user.user_age.equals(`0`)|user.user_age.equals(`-1`)?@string/none_selected:user.user_age}"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="15dp" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/md_grey_400" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:background="@color/md_white_1000">
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <ImageView
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:adjustViewBounds="true"
-                                android:scaleType="fitCenter"
-                                android:id="@+id/img_edit_profile"
-                                android:background="@drawable/profile_sample"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="45dp"
-                                android:layout_below="@+id/img_edit_profile"
-                                android:id="@+id/lin_edit_name"
-                                android:orientation="horizontal">
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="2"
-                                    android:textColor="@color/md_black_1000"
-                                    android:text="Name:"
-                                    android:gravity="center|left"
-                                    android:textStyle="bold"
-                                    android:layout_marginLeft="25dp"
-                                    android:textSize="15dp"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="@string/ethnicity"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
 
+                    <TextView
+                        android:id="@+id/ethnicity"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="15dp" />
 
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="5"
-                                    android:textColor="@color/md_black_1000"
-                                    android:gravity="center|right"
-                                    android:layout_marginRight="25dp"
-                                    android:textSize="15dp"
-                                    android:id="@+id/txt_edit_Name"
-                                    android:text="David Castillo"/>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/md_grey_400"
-                                android:layout_alignBottom="@+id/lin_edit_name"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"></LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="45dp"
-                                android:layout_below="@+id/lin_edit_name"
-                                android:id="@+id/lin_edit_sex"
-                                android:orientation="horizontal">
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="2"
-                                    android:textColor="@color/md_black_1000"
-                                    android:text="Sex:"
-                                    android:gravity="center|left"
-                                    android:textStyle="bold"
-                                    android:layout_marginLeft="25dp"
-                                    android:textSize="15dp"/>
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="5"
-                                    android:textColor="@color/md_black_1000"
-                                    android:gravity="center|right"
-                                    android:layout_marginRight="25dp"
-                                    android:textSize="15dp"
-                                    android:id="@+id/txt_edit_sex"
-                                    android:text="Female"/>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/md_grey_400"
-                                android:layout_alignBottom="@+id/lin_edit_sex"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"></LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="45dp"
-                                android:layout_below="@+id/lin_edit_sex"
-                                android:id="@+id/lin_edit_age"
-                                android:orientation="horizontal">
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="2"
-                                    android:textColor="@color/md_black_1000"
-                                    android:text="Age:"
-                                    android:gravity="center|left"
-                                    android:textStyle="bold"
-                                    android:layout_marginLeft="25dp"
-                                    android:textSize="15dp"/>
-
-                                <EditText
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="5"
-                                    android:gravity="center|right"
-                                    android:numeric="integer"
-                                    android:background="@color/md_white_1000"
-                                    android:hint="Your age"
-                                    android:textSize="15dp"
-                                    android:id="@+id/ed_edit_age"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="15dp"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="(ages)"
-                                    android:layout_marginRight="20dp"/>
-
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/md_grey_400"
-                                android:layout_alignBottom="@+id/lin_edit_age"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"></LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="45dp"
-                                android:layout_below="@+id/lin_edit_age"
-                                android:id="@+id/lin_edit_height"
-                                android:orientation="horizontal">
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="2"
-                                    android:textColor="@color/md_black_1000"
-                                    android:text="Height:"
-                                    android:gravity="center|left"
-                                    android:textStyle="bold"
-                                    android:layout_marginLeft="25dp"
-                                    android:textSize="15dp"/>
-
-                                <EditText
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="5"
-                                    android:gravity="center|right"
-                                    android:id="@+id/ed_edit_height"
-                                    android:background="@color/md_white_1000"
-                                    android:hint="Your height"
-                                    android:numeric="decimal"
-                                    android:textSize="15dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="15dp"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="(Feets)"
-                                    android:id="@+id/pHeight"
-                                    android:layout_marginRight="20dp"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/md_grey_400"
-                                android:layout_alignBottom="@+id/lin_edit_height"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"></LinearLayout>
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/md_grey_400"
-                                android:layout_alignBottom="@+id/lin_edit_age"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"></LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="45dp"
-                                android:layout_below="@+id/lin_edit_height"
-                                android:id="@+id/lin_edit_ethnicity"
-                                android:orientation="horizontal">
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="2"
-                                    android:textColor="@color/md_black_1000"
-                                    android:text="Ethnicity:"
-                                    android:gravity="center|left"
-                                    android:textStyle="bold"
-                                    android:layout_marginLeft="25dp"
-                                    android:textSize="15dp"/>
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="5"
-                                    android:textColor="@color/md_black_1000"
-                                    android:gravity="center|right"
-                                    android:layout_marginRight="25dp"
-                                    android:textSize="15dp"
-                                    android:id="@+id/spinner_edit_ethnicity"
-                                    android:text="None Selected"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/md_grey_400"
-                                android:layout_alignBottom="@+id/lin_edit_ethnicity"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"></LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="45dp"
-                                android:layout_below="@+id/lin_edit_ethnicity"
-                                android:id="@+id/lin_edit_religion"
-                                android:orientation="horizontal">
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="2"
-                                    android:textColor="@color/md_black_1000"
-                                    android:text="Religion:"
-                                    android:gravity="center|left"
-                                    android:textStyle="bold"
-                                    android:layout_marginLeft="25dp"
-                                    android:textSize="15dp"/>
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="5"
-                                    android:textColor="@color/md_black_1000"
-                                    android:gravity="center|right"
-                                    android:layout_marginRight="25dp"
-                                    android:textSize="15dp"
-                                    android:id="@+id/spinner_edit_religion"
-                                    android:text="None Selected"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/md_grey_400"
-                                android:layout_alignBottom="@+id/lin_edit_religion"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"></LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="45dp"
-                                android:layout_below="@+id/lin_edit_religion"
-                                android:id="@+id/lin_edit_education"
-                                android:orientation="horizontal">
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="2"
-                                    android:textColor="@color/md_black_1000"
-                                    android:text="Education:"
-                                    android:gravity="center|left"
-                                    android:textStyle="bold"
-                                    android:layout_marginLeft="25dp"
-                                    android:textSize="15dp"/>
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="5"
-                                    android:textColor="@color/md_black_1000"
-                                    android:gravity="center|right"
-                                    android:layout_marginRight="25dp"
-                                    android:textSize="15dp"
-                                    android:id="@+id/spinner_edit_education"
-                                    android:text="None Selected"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/md_grey_400"
-                                android:layout_alignBottom="@+id/lin_edit_education"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"></LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:layout_below="@+id/lin_edit_education"></LinearLayout>
-
-                        </RelativeLayout>
                 </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/md_grey_400" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="@string/push_notifications"
+                        android:textColor="@color/md_black_1000"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switch_push_notification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
-
-</LinearLayout>
+</layout>

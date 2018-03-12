@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:text="@string/report_user"
+        android:textAlignment="center"
+        android:textColor="@color/md_black_1000"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/md_black_1000"
+        android:textSize="16dp"
+        tools:text="We won't tell him either way" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/md_grey_100" />
+
+    <TextView
+        android:id="@+id/spam_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/feels_like_spam"
+        android:textAlignment="center"
+        android:textColor="@color/md_red_400"
+        android:textSize="18dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/md_grey_100" />
+
+    <TextView
+        android:id="@+id/behav_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/inappropriate_behavior"
+        android:textAlignment="center"
+        android:textColor="@color/md_red_400"
+        android:textSize="18dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/md_grey_100" />
+
+    <TextView
+        android:id="@+id/dismiss_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/never_mind"
+        android:textAlignment="center"
+        android:textColor="@color/md_light_blue_A700"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+</LinearLayout>

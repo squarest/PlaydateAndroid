@@ -6,7 +6,7 @@
 
         <variable
             name="user"
-            type="com.prince.logan.playdate.entities.PlaydateModel" />
+            type="com.make.playdate.entities.PlaydateModel" />
     </data>
 
     <RelativeLayout

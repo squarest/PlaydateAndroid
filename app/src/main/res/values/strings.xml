@@ -2,7 +2,6 @@
     <string name="app_name">Playdate</string>
     <string name="facebook_app_id">276324066222471</string>
     <string name="fb_login_protocol_scheme">fb276324066222471</string>
-
     <string name="failed_to_start_app">Failed to start app</string>
     <string name="edit_profile_button"><u>edit profile</u></string>
     <string name="preference_button"><u>preference</u></string>
@@ -21,16 +20,30 @@
     <string name="playdate_fail_dialog_descr">You\'re out of play dates for the day. Please check back later!</string>
     <string name="error">Error</string>
     <string name="stats">stats</string>
-    <string name="age">Age</string>
     <string name="gender">Gender</string>
     <string name="q_amp_a"><![CDATA[Q & A]]></string>
     <string name="no">No</string>
     <string name="distance">Distance</string>
-    <string name="ethnicity">Ethnicity</string>
     <string name="distance_format">%.0f</string>
     <string name="delete_account">Delete Account</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="report_a_bug_feedback">Report a bug / Feedback</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_of_use">Terms of Use</string>
+    <string name="account">ACCOUNT</string>
+    <string name="repot">Report</string>
+    <string name="report_user">Report user</string>
+    <string name="feels_like_spam">Feels like spam</string>
+    <string name="inappropriate_behavior">Inappropriate behavior</string>
+    <string name="never_mind">Never mind</string>
+    <string name="save">Save</string>
+    <string name="non_binary">Non-binary</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="all">All</string>
+    <string name="age">Age</string>
+    <string name="none_selected">None Selected</string>
+    <string name="name">Name</string>
+    <string name="ethnicity">Ethnicity</string>
+    <string name="push_notifications">Push notifications</string>
 </resources>
