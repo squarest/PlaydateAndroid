@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class FaqAdapter extends ArrayAdapter<String> {
     private Context context;
-    private int mResource;
     private ArrayList<String> itemName;
     String faq;
 
@@ -25,7 +24,6 @@ public class FaqAdapter extends ArrayAdapter<String> {
                         ArrayList<String> list) {
         super(context, itemResourceId, list);
         this.context = context;
-        this.mResource = itemResourceId;
         this.itemName = list;
     }
 
@@ -33,14 +31,13 @@ public class FaqAdapter extends ArrayAdapter<String> {
     public View getView(final int position, View convertView, ViewGroup parent) {
         View v = null;
         if (null == convertView) {
-//            LayoutInflater inflater = context.getLayoutInflater();
             v =  LayoutInflater.from(context).inflate(R.layout.adapter_faq, null);
 
         } else {
             v = convertView;
         }
         faq = itemName.get(position);
-        TextView faqText = (TextView) v.findViewById(R.id.txt_adpater_faq_item);
+        TextView faqText = v.findViewById(R.id.txt_adpater_faq_item);
         faqText.setText(faq);
 
         return v;

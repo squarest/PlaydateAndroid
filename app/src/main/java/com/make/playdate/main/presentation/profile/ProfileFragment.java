@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -18,6 +17,7 @@ import com.make.playdate.databinding.FragmentProfileBinding;
 import com.make.playdate.global.Constant;
 import com.make.playdate.main.presentation.main.MainView;
 import com.make.playdate.preference.presentation.editprofile.EditProfileActivity;
+import com.make.playdate.preference.presentation.pref.PreferencesActivity;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -61,7 +61,7 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileView
                         .putBoolean(Constant.IS_PLAYDATE_KEY, isPlaydate).apply());
         binding.preferenceButton.setOnClickListener(view ->
         {
-            Intent intent = new Intent(getContext(), PreferenceActivity.class);
+            Intent intent = new Intent(getContext(), PreferencesActivity.class);
             startActivity(intent);
         });
         binding.editProfileButton.setOnClickListener(view -> {

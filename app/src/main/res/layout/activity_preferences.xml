@@ -1,187 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorPrimary">
+    <data>
 
-        <ImageView
-            android:id="@+id/img_preference_back"
-            android:layout_width="30dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/back" />
-
-        <TextView
-            android:id="@+id/textviewPrefer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="Preferences"
-            android:textColor="@color/md_white_1000"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/img_preference_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:text="@string/save"
-            android:textColor="@color/md_white_1000"
-            android:textSize="18dp" />
-    </RelativeLayout>
-
-
-    <info.hoang8f.android.segmented.SegmentedGroup
-        android:id="@+id/segmented_look_for"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="32dp"
-        android:orientation="horizontal"
-        segmentedgroup:sc_border_width="1dp"
-        segmentedgroup:sc_corner_radius="5dp"
-        segmentedgroup:sc_tint_color="@color/md_purple_800">
-
-        <RadioButton
-            android:id="@+id/radio_both"
-            style="@style/RadioButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checked="true"
-            android:text="@string/all" />
-
-        <RadioButton
-            android:id="@+id/radio_woman"
-            style="@style/RadioButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/female" />
-
-        <RadioButton
-            android:id="@+id/radio_man"
-            style="@style/RadioButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/male" />
-
-
-        <RadioButton
-            android:id="@+id/radio_not_binary"
-            style="@style/RadioButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/non_binary" />
-
-
-    </info.hoang8f.android.segmented.SegmentedGroup>
+        <variable
+            name="user"
+            type="com.make.playdate.entities.UserModel" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
 
+        android:orientation="vertical">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="right"
-            android:text="@string/age"
-            android:textSize="16dp" />
+            android:layout_height="60dp"
+            android:background="@color/colorPrimary">
 
-        <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-            android:id="@+id/age_range"
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:id="@+id/textviewPrefer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Preferences"
+                android:textColor="@color/md_white_1000"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/save_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:text="@string/save"
+                android:textColor="@color/md_white_1000"
+                android:textSize="18dp" />
+        </RelativeLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_weight="1"
-            app:bar_color="@color/colorPrimary"
-            app:bar_highlight_color="@color/md_grey_200"
-            app:corner_radius="10"
-            app:data_type="_integer"
-            app:gap="20"
-            app:left_thumb_color="@color/colorPrimary"
-            app:max_value="100"
-            app:min_value="50"
-            app:right_thumb_color="@color/colorPrimary" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="24dp">
 
+            <info.hoang8f.android.segmented.SegmentedGroup
+                android:id="@+id/segmented_look_for"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                segmentedgroup:sc_border_width="1dp"
+                segmentedgroup:sc_corner_radius="5dp"
+                segmentedgroup:sc_tint_color="@color/md_purple_800">
+
+                <RadioButton
+                    android:id="@+id/radio_all"
+                    style="@style/RadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="@string/all" />
+
+                <RadioButton
+                    android:id="@+id/radio_female"
+                    style="@style/RadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/female" />
+
+                <RadioButton
+                    android:id="@+id/radio_male"
+                    style="@style/RadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/male" />
+
+
+                <RadioButton
+                    android:id="@+id/radio_not_binary"
+                    style="@style/RadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/non_binary" />
+
+
+            </info.hoang8f.android.segmented.SegmentedGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/age"
+                    android:textSize="16dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/mi_age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:textSize="16dp" />
+
+                    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                        android:id="@+id/age_range"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_weight="1"
+                        app:bar_color="@color/md_grey_200"
+                        app:bar_highlight_color="@color/colorPrimary"
+                        app:corner_radius="10"
+                        app:data_type="_integer"
+                        app:min_value="21"
+                        app:max_value="60"
+                        app:gap="1"
+                        app:left_thumb_color="@color/colorPrimary"
+                        app:left_thumb_color_pressed="@color/colorPrimary"
+                        app:right_thumb_color="@color/colorPrimary"
+                        app:right_thumb_color_pressed="@color/colorPrimary"
+                        app:steps="1" />
+
+                    <TextView
+                        android:id="@+id/max_age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="60"
+                        android:textSize="16dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/distance"
+                    android:textSize="16dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
+                        android:id="@+id/distance_seek_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:layout_weight="1"
+                        app:bar_color="@color/md_grey_200"
+                        app:bar_highlight_color="@color/colorPrimary"
+                        app:corner_radius="10"
+                        app:data_type="_integer"
+                        app:min_value="1"
+                        app:max_value="100"
+                        app:left_thumb_color="@color/colorPrimary"
+                        app:left_thumb_color_pressed="@color/colorPrimary"
+                        app:steps="1" />
+
+                    <TextView
+                        android:id="@+id/distance_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="60"
+                        android:textSize="16dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/ethnicity"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/ethnicity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorPrimary"
+                    tools:text="@string/none_selected" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="right"
-            android:text="Distance"
-            android:textSize="16dp" />
-
-        <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-            android:id="@+id/distance_seek_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_weight="1"
-            app:bar_color="@color/colorPrimary"
-            app:bar_highlight_color="@color/md_grey_200"
-            app:corner_radius="10"
-            app:data_type="_integer"
-            app:gap="20"
-            app:left_thumb_color="@color/colorPrimary"
-            app:max_value="100"
-            app:min_value="50"
-            app:right_thumb_color="@color/colorPrimary" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="right"
-            android:text="@string/ethnicity"
-            android:textSize="16dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_weight="1"
-            android:textColor="@color/colorPrimary" />
-
-    </LinearLayout>
-</LinearLayout>
+</layout>

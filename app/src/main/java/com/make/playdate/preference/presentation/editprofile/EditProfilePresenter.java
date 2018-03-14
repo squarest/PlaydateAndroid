@@ -8,6 +8,8 @@ import com.make.playdate.preference.domain.IPreferenceInteractor;
 
 import javax.inject.Inject;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by dmitrijfomenko on 10.03.2018.
  */
@@ -21,18 +23,19 @@ public class EditProfilePresenter extends BasePresenter<EditProfileView> {
     }
 
     public void viewCreated() {
-        interactor.loadUser()
+        Disposable d = interactor.loadUser()
                 .doOnSubscribe(disposable -> getViewState().showLoading())
                 .doFinally(() -> getViewState().dismissLoading())
                 .subscribe(userModel -> getViewState().setUser(userModel), Throwable::printStackTrace);
+        putDisposable(d);
     }
 
     public void saveButtonClicked(UserModel userModel) {
-        interactor.updateUser(userModel)
+        Disposable d = interactor.updateUser(userModel)
                 .doOnSubscribe(disposable -> getViewState().showLoading())
                 .doFinally(() -> getViewState().dismissLoading())
                 .subscribe(() -> {
                 }, Throwable::printStackTrace);
-
+        putDisposable(d);
     }
 }

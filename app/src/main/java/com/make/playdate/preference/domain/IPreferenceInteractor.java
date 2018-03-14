@@ -11,5 +11,8 @@ import io.reactivex.Single;
 
 public interface IPreferenceInteractor {
     Single<UserModel> loadUser();
+
     Completable updateUser(UserModel userModel);
+
+    Completable updatePreferences(UserModel userModel);
 }

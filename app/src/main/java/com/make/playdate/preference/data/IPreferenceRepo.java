@@ -13,4 +13,8 @@ public interface IPreferenceRepo {
     Single<UserModel> getUser();
 
     Single<ResponseModel> updateUser(UserModel userModel);
+
+    Single<ResponseModel> updateNotification(int isPushNotification);
+
+    Single<ResponseModel> updatePreferences(UserModel userModel);
 }

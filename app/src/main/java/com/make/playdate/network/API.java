@@ -49,6 +49,9 @@ public interface API {
     @GET("get_answers/{id}")
     Single<ResponseModel> getAnswers(@Path("id") String userId);
 
+    @POST("flag_user")
+    Single<ResponseModel> flagUser(@Query("user_id") String userId, @Query("flaggee_id") String flaggeeId);
+
     @GET("get_sub_category/{id}")
     Call<ResponseModel> get_sub_category(
             @Path("id") int questionCateId
@@ -108,21 +111,10 @@ public interface API {
     );
 
     @POST("update_setting")
-    Call<ResponseModel> update_setting(
-            @Query("user_id") String id,
-            @Query("looking_for") int looking_for,
-            @Query("age_from") int age_from,
-            @Query("age_to") int age_to,
-            @Query("height_from") float height_from,
-            @Query("height_to") float height_to,
-            @Query("distance") int distance,
-            @Query("ethnicity") String ethnicity,
-            @Query("religion") String religion,
-            @Query("education") String education
-    );
+    Single<ResponseModel> update_setting(@Body UserModel userModel);
 
     @POST("update_notification_setting")
-    Call<ResponseModel> update_notification(
+    Single<ResponseModel> update_notification(
             @Query("notification") int notification,
             @Query("user_id") String id
     );

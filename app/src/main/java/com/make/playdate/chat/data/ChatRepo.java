@@ -112,4 +112,9 @@ public class ChatRepo implements IChatRepo {
     public void removeChat() {
         mDatabaseReference.removeEventListener(mChildEventListener);
     }
+
+    @Override
+    public Single<ResponseModel> flagUser(String flaggeeId) {
+        return apiClient.getApi().flagUser(getUid(), flaggeeId);
+    }
 }

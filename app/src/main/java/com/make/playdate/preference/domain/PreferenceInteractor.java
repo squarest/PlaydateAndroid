@@ -29,6 +29,15 @@ public class PreferenceInteractor implements IPreferenceInteractor {
     @Override
     public Completable updateUser(UserModel userModel) {
         return preferenceRepo.updateUser(userModel)
+                .flatMap(responseModel -> preferenceRepo.updateNotification(userModel.getIs_pushnotification()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .toCompletable();
+    }
+
+    @Override
+    public Completable updatePreferences(UserModel userModel) {
+        return preferenceRepo.updatePreferences(userModel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .toCompletable();

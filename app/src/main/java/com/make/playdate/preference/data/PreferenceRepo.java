@@ -34,4 +34,14 @@ public class PreferenceRepo implements IPreferenceRepo {
     public Single<ResponseModel> updateUser(UserModel userModel) {
         return apiClient.getApi().edit_user(userModel);
     }
+
+    @Override
+    public Single<ResponseModel> updateNotification(int isPushNotification) {
+        return apiClient.getApi().update_notification(isPushNotification, getUid());
+    }
+
+    @Override
+    public Single<ResponseModel> updatePreferences(UserModel userModel) {
+        return apiClient.getApi().update_setting(userModel);
+    }
 }

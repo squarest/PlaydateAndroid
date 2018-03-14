@@ -63,7 +63,7 @@
                     android:layout_height="300dp"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/profile_sample" />
+                    tools:src="@drawable/profile_sample" />
 
                 <LinearLayout
                     android:id="@+id/lin_edit_name"

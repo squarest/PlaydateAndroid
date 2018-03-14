@@ -28,4 +28,6 @@ public interface IChatRepo {
     Single<UserModel> getUser();
 
     void removeChat();
+
+    Single<ResponseModel>flagUser(String flaggeeId);
 }

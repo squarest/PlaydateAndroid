@@ -58,7 +58,7 @@ public class ChatPresenter extends BasePresenter<ChatView> {
         super.onDestroy();
     }
 
-    public void reportButonClicked(int flagId) {
-
+    public void reportButonClicked() {
+        putDisposable(interactor.flagUser().subscribe());
     }
 }

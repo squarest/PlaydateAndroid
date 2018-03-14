@@ -8,28 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:38515805991:android:df25ea4f9b77501d",
+        "mobilesdk_app_id": "1:38515805991:android:62b06e427b8280b0",
         "android_client_info": {
-          "package_name": "com.prince.logan.playdate"
+          "package_name": "com.make.playdate"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "38515805991-p0vug5cedg74grm341act6h2gp937cpn.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.prince.logan.playdate",
-            "certificate_hash": "b311a578b0e702ee157be5ba2cf3822a854bb7cf"
-          }
-        },
-        {
-          "client_id": "38515805991-fjm76dqhucas43mmvpfhpsmta5783grf.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.prince.logan.playdate",
-            "certificate_hash": "58f269ca9a9971f061c11c15e063d8533eff336b"
-          }
-        },
         {
           "client_id": "38515805991-0jmsr3jelc050fvvurc55q52mciatkgm.apps.googleusercontent.com",
           "client_type": 3
@@ -45,20 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "38515805991-0jmsr3jelc050fvvurc55q52mciatkgm.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "38515805991-7iurmqsd5r5a157r38dlj7bc0vq1uq35.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.prince.logan.playdate"
-              }
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

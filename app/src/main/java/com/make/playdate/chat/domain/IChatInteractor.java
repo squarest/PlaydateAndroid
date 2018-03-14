@@ -27,4 +27,6 @@ public interface IChatInteractor {
     Completable setChatData(String userId, String userName);
 
     Single<String> loadUserId();
+
+    Completable flagUser();
 }

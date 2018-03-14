@@ -20,6 +20,7 @@ public class DialogUtil {
     public ProgressDialog getProgressDialog() {
         ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
         progressDialog.setMessage("Please wait...");
         return progressDialog;
     }

@@ -79,5 +79,13 @@ public class ChatInteractor implements IChatInteractor {
         return Single.just(chatRepo.getUid());
     }
 
+    @Override
+    public Completable flagUser() {
+        return chatRepo.flagUser(conversationId)
+                .toCompletable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
 
 }

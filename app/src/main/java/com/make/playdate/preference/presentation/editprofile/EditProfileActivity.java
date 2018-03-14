@@ -67,7 +67,7 @@ public class EditProfileActivity extends BaseActivity implements EditProfileView
             builderAge.setTitle("Select");
             builderAge.setItems(Constant.genderArray, (dialog, item) -> {
                 ((TextView) view).setText(Constant.genderArray[item]);
-                user.setUser_age(Constant.genderArray[item]);
+                user.setGender(Constant.genderArray[item]);
 
             });
             builderAge.show();
@@ -93,14 +93,14 @@ public class EditProfileActivity extends BaseActivity implements EditProfileView
 
     @Override
     public void setUser(UserModel userModel) {
+        user = userModel;
         binding.setUser(userModel);
         String userEthnicity;
         if (userModel.getUser_ethnicity() == -1) userEthnicity = getString(R.string.none_selected);
-        else userEthnicity = String.valueOf(userModel.getUser_ethnicity());
+        else userEthnicity = Constant.arrayEthnicity[userModel.getUser_ethnicity()];
         binding.ethnicity.setText(userEthnicity);
         boolean isPushEnabled = userModel.getIs_pushnotification() == 1;
         binding.switchPushNotification.setChecked(isPushEnabled);
-        user = userModel;
         Picasso.with(this)
                 .load(userModel.get_user_avatar())
                 .placeholder(R.drawable.user)
