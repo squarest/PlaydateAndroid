@@ -13,6 +13,8 @@ import com.make.playdate.playdate.di.PlaydateComponent;
 import com.make.playdate.playdate.di.PlaydateModule;
 import com.make.playdate.preference.di.PreferenceComponent;
 import com.make.playdate.preference.di.PreferenceModule;
+import com.make.playdate.questions.di.QAComponent;
+import com.make.playdate.questions.di.QAModule;
 
 import javax.inject.Singleton;
 
@@ -33,4 +35,6 @@ public interface AppComponent {
     PlaydateComponent plusPlaydateComponent(PlaydateModule playdateModule);
 
     PreferenceComponent plusPreferenceModule(PreferenceModule preferenceModule);
+
+    QAComponent plusQAComponent(QAModule qaModule);
 }

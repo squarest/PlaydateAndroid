@@ -66,20 +66,18 @@ public class ChatActivity extends BaseActivity implements ChatView {
         TextView description = view.findViewById(R.id.description);
         description.setText(String.format("We won't tell %s either way", name));
         dialog.setContentView(view);
-        view.setOnClickListener(v ->
-        {
-            switch (v.getId()) {
-                case R.id.spam_button: {
-                    presenter.reportButonClicked(0);
-                    break;
-                }
-                case R.id.behav_button: {
-                    presenter.reportButonClicked(1);
-                    break;
-                }
-            }
+        TextView spamButton = view.findViewById(R.id.spam_button);
+        spamButton.setOnClickListener(view1 -> {
+            presenter.reportButonClicked();
             dialog.dismiss();
         });
+        TextView behavButton = view.findViewById(R.id.behav_button);
+        behavButton.setOnClickListener(view1 -> {
+            presenter.reportButonClicked();
+            dialog.dismiss();
+        });
+        TextView dismissButton = view.findViewById(R.id.dismiss_button);
+        dismissButton.setOnClickListener(view1 -> dialog.dismiss());
         dialog.show();
 
     }

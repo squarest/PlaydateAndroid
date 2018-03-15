@@ -54,7 +54,7 @@ public class ChatSubListAdapter extends RecyclerView.Adapter<ChatSubListAdapter.
     public void onBindViewHolder(SimpleViewHolder holder, final int position) {
         PlaydateModel chatUser = users.get(position);
         String avatar_url = chatUser.avatarUrl;
-        if (avatar_url != null) {
+        if (avatar_url != null && !avatar_url.isEmpty()) {
             String profileImage = avatar_url.replace("http://", "https://");
 
             Picasso.with(mContext)

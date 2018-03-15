@@ -43,12 +43,14 @@ public class PlaydateDetailActivity extends BaseActivity implements PlaydateDeta
         binding.questionsList.setLayoutManager(new LinearLayoutManager(this));
         binding.questionsList.setAdapter(new PlaydateAnswersAdapter(playdateModel.questions));
         String avatarImg = playdateModel.avatarUrl;
-        avatarImg = avatarImg.replace("http://", "https://");
-        Picasso.with(this)
-                .load(avatarImg)
-                .placeholder(R.drawable.user)
-                .error(R.drawable.user)
-                .into(binding.playdateImage);
+        if (avatarImg != null && !avatarImg.isEmpty()) {
+            avatarImg = avatarImg.replace("http://", "https://");
+            Picasso.with(this)
+                    .load(avatarImg)
+                    .placeholder(R.drawable.user)
+                    .error(R.drawable.user)
+                    .into(binding.playdateImage);
+        }
         dismissLoading();
     }
 

@@ -20,4 +20,6 @@ public interface IMainInteractor {
     Completable deleteUser();
 
     Completable logout();
+
+    Single<Boolean> checkAnswers();
 }

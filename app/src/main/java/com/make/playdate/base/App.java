@@ -16,6 +16,8 @@ import com.make.playdate.playdate.di.PlaydateComponent;
 import com.make.playdate.playdate.di.PlaydateModule;
 import com.make.playdate.preference.di.PreferenceComponent;
 import com.make.playdate.preference.di.PreferenceModule;
+import com.make.playdate.questions.di.QAComponent;
+import com.make.playdate.questions.di.QAModule;
 
 /**
  * Created by dmitrijfomenko on 27.02.2018.
@@ -28,6 +30,11 @@ public class App extends Application {
     private static ChatComponent chatComponent;
     private static PlaydateComponent playdateComponent;
     private static PreferenceComponent preferenceComponent;
+    private static QAComponent qaComponent;
+
+    public static QAComponent getQaComponent() {
+        return qaComponent;
+    }
 
     public static PreferenceComponent getPreferenceComponent() {
         return preferenceComponent;
@@ -61,6 +68,7 @@ public class App extends Application {
         chatComponent = buildChatComponent();
         playdateComponent = buildPlaydateComponent();
         preferenceComponent = buildPreferenceComponent();
+        qaComponent = buildQAComponent();
     }
 
     private AppComponent buildAppComponent() {
@@ -103,4 +111,10 @@ public class App extends Application {
         return preferenceComponent;
     }
 
+    private QAComponent buildQAComponent() {
+        if (qaComponent == null) {
+            qaComponent = appComponent.plusQAComponent(new QAModule());
+        }
+        return qaComponent;
+    }
 }

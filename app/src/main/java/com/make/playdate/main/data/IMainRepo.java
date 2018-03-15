@@ -25,4 +25,6 @@ public interface IMainRepo {
     void removeUserFromDevice();
 
     Single<ResponseModel> removeUserFromServer();
+
+    Single<ResponseModel> checkAnswers();
 }

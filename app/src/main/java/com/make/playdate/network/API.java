@@ -52,38 +52,25 @@ public interface API {
     @POST("flag_user")
     Single<ResponseModel> flagUser(@Query("user_id") String userId, @Query("flaggee_id") String flaggeeId);
 
-    @GET("get_sub_category/{id}")
-    Call<ResponseModel> get_sub_category(
-            @Path("id") int questionCateId
-    );
 
     @POST("report_bug")
     Call<ResponseModel> report_bug(
             @Query("name") String name, @Query("mail") String mail, @Query("message") String message
     );
 
-    @POST("set_user_playdate")
-    Call<ResponseModel> set_user_playdate(
-            @Query("firebase_id") String firebaseId, @Query("cate_id") int cateId
-    );
-
     @POST("saving_answers")
-    Call<ResponseModel> saving_answers(
+    Single<ResponseModel> saving_answers(
             @Query("cate_id") int cateId, @Query("sub_cate_id") int subId, @Query("user_id") String userId, @Query("answers") String answer
     );
 
     @POST("check_answers")
-    Call<ResponseModel> check_answers(
+    Single<ResponseModel> check_answers(
             @Query("cate_id") int cateId, @Query("sub_cate_id") int subId, @Query("user_id") String userId
     );
 
-    @POST("update_answers")
-    Call<ResponseModel> update_answers(
-            @Query("answer_id") int answerId, @Query("answers") String question
-    );
 
     @GET("getting_answered_question/{id}")
-    Call<ResponseModel> getting_answered_question(
+    Single<ResponseModel> getting_answered_question(
             @Path("id") int answerId
     );
 

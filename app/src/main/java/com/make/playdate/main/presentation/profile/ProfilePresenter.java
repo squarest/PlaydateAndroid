@@ -33,15 +33,29 @@ public class ProfilePresenter extends BasePresenter<ProfileView> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(() -> profileView.dismissLoading())
                 .subscribe(userModel -> {
-                    profileView.setProfilePhoto(userModel.get_user_avatar());
+                    String avatar = userModel.get_user_avatar();
+                    if (avatar != null && !avatar.isEmpty())
+                        profileView.setProfilePhoto(avatar);
                     profileView.setName(userModel.get_user_first_name());
                 }, Throwable::printStackTrace);
         putDisposable(d);
+
         Disposable disposable = interactor.loadQuestion()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(QuestionModel::getImgCate)
                 .subscribe(profileView::setQuestionImage);
+        putDisposable(disposable);
+    }
+
+    public void questionCardClicked() {
+        Disposable disposable = interactor.checkAnswers()
+                .doOnSubscribe(disposable1 -> profileView.showLoading())
+                .doFinally(() -> profileView.dismissLoading())
+                .subscribe(isAnswered -> {
+                    if (isAnswered) profileView.showQADialog();
+                    else profileView.showQuestionScreen();
+                }, Throwable::printStackTrace);
         putDisposable(disposable);
     }
 }

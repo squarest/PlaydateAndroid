@@ -13,4 +13,8 @@ public interface ProfileView extends BaseView {
 
     void setQuestionImage(String imageUrl);
 
+    void showQADialog();
+
+    void showQuestionScreen();
+
 }

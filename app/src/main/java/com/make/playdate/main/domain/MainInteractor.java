@@ -58,4 +58,12 @@ public class MainInteractor implements IMainInteractor {
         return Completable.complete();
     }
 
+    @Override
+    public Single<Boolean> checkAnswers() {
+        return mainRepo.checkAnswers()
+                .map(responseModel -> responseModel.getResult() == 0)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
 }

@@ -1,45 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorPrimary">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/back"
-            android:id="@+id/img_answer_back"
-            android:layout_marginLeft="15dp"/>
-        <TextView
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorPrimary">
+
+            <ImageView
+                android:id="@+id/img_answer_back"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:id="@+id/txt_answer_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Question &amp; Answer"
+                android:textColor="@color/md_white_1000"
+                android:textSize="20dp" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_answer_question"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <Button
+            android:id="@+id/btn_reanswer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/md_white_1000"
-            android:text="Question &amp; Answer"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:textSize="20dp"
-            android:id="@+id/txt_answer_title"/>
-    </RelativeLayout>
+            android:background="@color/colorPrimary"
+            android:text="Reanswer Questions"
+            android:textColor="@color/md_white_1000" />
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/list_answer_question">
-
-    </ListView>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="Reanswer Questions"
-        android:id="@+id/btn_reanswer"
-        android:textColor="@color/md_white_1000"/>
-
-</LinearLayout>
+    </LinearLayout>
+</layout>

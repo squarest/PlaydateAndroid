@@ -36,7 +36,7 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
-            android:name="com.make.playdate.questions.QuestionActivity"
+            android:name="com.make.playdate.questions.presentation.questions.QuestionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
@@ -77,7 +77,7 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
-            android:name="com.make.playdate.questions.ViewAnswerActivity"
+            android:name="com.make.playdate.questions.presentation.answers.AnswersActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 

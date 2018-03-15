@@ -46,7 +46,7 @@ public class PlaydateSliderAdapter extends RecyclerView.Adapter<PlaydateSliderAd
     public void onBindViewHolder(Holder holder, int position) {
         PlaydateModel playdateModel = mData.get(position);
         String avatar_url = playdateModel.avatarUrl;
-        if (avatar_url != null) {
+        if (avatar_url != null && !avatar_url.isEmpty()) {
             String profileImage = avatar_url.replace("http://", "https://");
             Picasso.with(mContext)
                     .load(profileImage)

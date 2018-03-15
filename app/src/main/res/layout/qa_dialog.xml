@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:text="Hey there!"
+        android:textAlignment="center"
+        android:textColor="@color/md_black_1000"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/md_black_1000"
+        android:textSize="16dp"
+        android:text="You've already answered. Would you like to reanswer?" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/md_grey_100" />
+
+    <TextView
+        android:id="@+id/answers_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textAllCaps="true"
+        android:text="@string/answers_button"
+        android:textAlignment="center"
+        android:textColor="@color/md_light_blue_A700"
+        android:textSize="18dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/md_grey_100" />
+
+    <TextView
+        android:id="@+id/yes_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textAllCaps="true"
+        android:text="@string/yes"
+        android:textAlignment="center"
+        android:textColor="@color/md_light_blue_A700"
+        android:textSize="18dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/md_grey_100" />
+
+    <TextView
+        android:id="@+id/no_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textAllCaps="true"
+        android:text="@string/no"
+        android:textAlignment="center"
+        android:textColor="@color/md_light_blue_A700"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+</LinearLayout>
