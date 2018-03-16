@@ -125,7 +125,7 @@ public class EditProfileActivity extends BaseActivity implements EditProfileView
 
     @Override
     public void onBackPressed() {
-        if (getIntent().getBooleanExtra("", false)) {
+        if (getIntent().getBooleanExtra("isFirstStart", false)) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else finish();
