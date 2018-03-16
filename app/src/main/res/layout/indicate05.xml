@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/lin_indicate01"
+    android:id="@+id/lin_indicate04"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img0"
+    android:background="@drawable/img4"
     android:orientation="horizontal">
 
     <TextView
@@ -14,9 +14,8 @@
         android:layout_marginRight="40dp"
         android:background="@drawable/slider_descr_background"
         android:padding="16dp"
-        android:text="@string/ind1"
+        android:text="@string/ind5"
         android:textAlignment="center"
         android:textColor="@color/md_white_1000"
         android:textSize="24dp" />
-
 </RelativeLayout>

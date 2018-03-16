@@ -40,8 +40,10 @@ public class PlaydateDetailActivity extends BaseActivity implements PlaydateDeta
     public void setUserData(PlaydateModel playdateModel) {
         binding.setUser(playdateModel);
         binding.userName.setText(playdateModel.userFullName);
-        binding.questionsList.setLayoutManager(new LinearLayoutManager(this));
-        binding.questionsList.setAdapter(new PlaydateAnswersAdapter(playdateModel.questions));
+        if (playdateModel.questions != null && playdateModel.questions.size() > 0) {
+            binding.questionsList.setLayoutManager(new LinearLayoutManager(this));
+            binding.questionsList.setAdapter(new PlaydateAnswersAdapter(playdateModel.questions));
+        }
         String avatarImg = playdateModel.avatarUrl;
         if (avatarImg != null && !avatarImg.isEmpty()) {
             avatarImg = avatarImg.replace("http://", "https://");

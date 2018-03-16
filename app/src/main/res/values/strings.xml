@@ -57,4 +57,11 @@
     <string name="twitter">Twitter</string>
     <string name="website">Website</string>
     <string name="faq">FAQ</string>
+    <string name="ind1">Welcome to playdate!   A blazing fast way to meet some new!</string>
+    <string name="ind2">Simply log in and edit your profile</string>
+    <string name="ind3">Next, edit your preferences</string>
+    <string name="ind4">Don\'t forget the questions too!</string>
+    <string name="ind5">Tap the \"make play date\" button</string>
+    <string name="ind6">And you\'ll instantly get a play date!</string>
+    <string name="ind7">Chat is open for 24 hours. Happy blazing!</string>
 </resources>

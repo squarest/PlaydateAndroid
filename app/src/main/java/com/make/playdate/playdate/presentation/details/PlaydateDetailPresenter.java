@@ -8,6 +8,7 @@ import com.make.playdate.playdate.domain.IPlaydateInteractor;
 import javax.inject.Inject;
 
 import io.reactivex.disposables.Disposable;
+import retrofit2.HttpException;
 
 /**
  * Created by dmitrijfomenko on 07.03.2018.
@@ -26,10 +27,17 @@ public class PlaydateDetailPresenter extends BasePresenter<PlaydateDetailView> {
     public void viewCreated(String id) {
         Disposable disposable = interactor.setSelectedPlaydate(id)
                 .doOnSubscribe(d -> view.showLoading())
-                .subscribe(view::setUserData,
-                        Throwable::printStackTrace);
+                .subscribe(view::setUserData, throwable ->
+                {
+                    if (throwable instanceof HttpException && ((HttpException) throwable).code() == 500) {
+                        Disposable d = interactor.getSelectedPlaydate()
+                                .subscribe(view::setUserData, Throwable::printStackTrace);
+                        putDisposable(d);
+                    }
+                });
         putDisposable(disposable);
     }
+
 
     public void chatButtonClicked() {
         Disposable disposable = interactor.getSelectedPlaydate()

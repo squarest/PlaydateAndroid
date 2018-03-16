@@ -1,11 +1,11 @@
 package com.make.playdate.preference.presentation.pref;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -15,10 +15,13 @@ import com.make.playdate.R;
 import com.make.playdate.base.BaseActivity;
 import com.make.playdate.databinding.ActivityPreferencesBinding;
 import com.make.playdate.entities.UserModel;
-import com.make.playdate.global.Constant;
 import com.make.playdate.questions.presentation.answers.AnswersActivity;
 import com.make.playdate.questions.presentation.questions.QuestionActivity;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by PRINCE on 11/17/2017.
@@ -49,17 +52,7 @@ public class PreferencesActivity extends BaseActivity implements PreferenceView 
             binding.maxAge.setText(maxAge.toString());
         });
         binding.distanceSeekBar.setOnSeekbarChangeListener(distance -> binding.distanceValue.setText(distance.toString()));
-        binding.ethnicity.setOnClickListener(view ->
-        {
-            AlertDialog.Builder builderEthnicity = new AlertDialog.Builder(this);
-            builderEthnicity.setTitle("Select");
-            builderEthnicity.setItems(Constant.arrayEthnicity, (dialog, item) -> {
-                ((TextView) view).setText(Constant.arrayEthnicity[item]);
-                user.setEthnicity(String.valueOf(item));
 
-            });
-            builderEthnicity.show();
-        });
         binding.segmentedLookFor.setOnCheckedChangeListener((radioGroup, i) ->
         {
             int lookingFor = -1;
@@ -124,7 +117,10 @@ public class PreferencesActivity extends BaseActivity implements PreferenceView 
         user = userModel;
         String ethnicity;
         if (user.getEthnicity().equals("-1")) ethnicity = getString(R.string.none_selected);
-        else ethnicity = Constant.arrayEthnicity[Integer.valueOf(user.getEthnicity())];
+        else {
+            String[] selected = userModel.getEthnicity().split(",");
+            ethnicity = String.format("%d selected", selected.length);
+        }
         binding.ethnicity.setText(ethnicity);
         binding.distanceValue.setText(String.valueOf(userModel.getDistance()));
         binding.ageRange.setMinStartValue((float) userModel.getAge_from())
@@ -146,8 +142,34 @@ public class PreferencesActivity extends BaseActivity implements PreferenceView 
                 binding.radioAll.setChecked(true);
                 break;
         }
+        String ethn = user.getEthnicity();
+        ArrayList<String> selected;
+        if (ethn.equals("-1")) selected = new ArrayList<>();
+        else selected = new ArrayList<>(Arrays.asList(ethn.split(",")));
+        binding.ethnicity.setOnClickListener(view ->
+        {
+            Intent intent = new Intent(PreferencesActivity.this, EthnicityActivity.class);
+            intent.putExtra("selected", selected);
+            startActivityForResult(intent, 0);
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK & data != null) {
+            List<String> selected = data.getStringArrayListExtra("selected");
+            if (selected.size() > 0) {
+                binding.ethnicity.setText(String.format("%d selected", selected.size()));
+                user.setEthnicity(TextUtils.join(",", selected));
+            } else {
+                binding.ethnicity.setText(getString(R.string.none_selected));
+                user.setEthnicity("-1");
+            }
 
 
+        }
     }
 
     private UserModel getPreferences() {

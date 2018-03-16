@@ -135,6 +135,9 @@ public class LoginActivity extends BaseActivity implements LoginView {
         pageList.add(createPageView(R.layout.indicate02));
         pageList.add(createPageView(R.layout.indicate03));
         pageList.add(createPageView(R.layout.indicate04));
+        pageList.add(createPageView(R.layout.indicate05));
+        pageList.add(createPageView(R.layout.indicate06));
+        pageList.add(createPageView(R.layout.indicate07));
 
         return pageList;
     }
