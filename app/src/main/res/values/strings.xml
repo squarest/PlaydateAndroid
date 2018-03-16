@@ -52,4 +52,9 @@
     <string name="vision_dialod_descr">Our vision is to make it easy to meet new people and have fun</string>
     <string name="yes">yes</string>
     <string name="answers_button">view answers</string>
+    <string name="rate_app">Rate app</string>
+    <string name="vision">Vision</string>
+    <string name="twitter">Twitter</string>
+    <string name="website">Website</string>
+    <string name="faq">FAQ</string>
 </resources>

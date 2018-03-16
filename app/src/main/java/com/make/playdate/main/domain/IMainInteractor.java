@@ -1,6 +1,5 @@
 package com.make.playdate.main.domain;
 
-import com.make.playdate.entities.QuestionModel;
 import com.make.playdate.entities.UserModel;
 
 import io.reactivex.Completable;
@@ -15,11 +14,9 @@ public interface IMainInteractor {
 
     Single<UserModel> loadUser();
 
-    Single<QuestionModel> loadQuestion();
+
 
     Completable deleteUser();
 
     Completable logout();
-
-    Single<Boolean> checkAnswers();
 }

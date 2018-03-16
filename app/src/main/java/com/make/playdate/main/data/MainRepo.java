@@ -68,9 +68,6 @@ public class MainRepo implements IMainRepo {
         return apiClient.getApi().delete_user(getUserId());
     }
 
-    @Override
-    public Single<ResponseModel> checkAnswers() {
-        return apiClient.getApi().check_answers(8, 25, getUserId());
-    }
+
 
 }

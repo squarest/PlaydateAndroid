@@ -9,4 +9,7 @@ import com.make.playdate.entities.UserModel;
 
 public interface PreferenceView extends BaseView{
     void setPreferences(UserModel userModel);
+    void showQuestionScreen();
+    void setQuestionImage(String imageUrl);
+    void showQADialog();
 }

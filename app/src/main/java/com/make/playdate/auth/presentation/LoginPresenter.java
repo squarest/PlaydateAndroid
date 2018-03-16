@@ -41,7 +41,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> getViewState().showLoading())
                 .doFinally(() -> getViewState().dismissLoading())
-                .subscribe(() -> getViewState().showNextScreen(), Throwable::printStackTrace);
+                .subscribe(() -> getViewState().showEditUserScreen(), Throwable::printStackTrace);
         putDisposable(disposable1);
     }
 }

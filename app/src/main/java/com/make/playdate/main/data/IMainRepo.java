@@ -26,5 +26,5 @@ public interface IMainRepo {
 
     Single<ResponseModel> removeUserFromServer();
 
-    Single<ResponseModel> checkAnswers();
+
 }

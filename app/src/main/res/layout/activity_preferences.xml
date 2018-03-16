@@ -14,7 +14,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:orientation="vertical">
 
         <RelativeLayout
@@ -55,13 +54,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:orientation="vertical">
 
             <info.hoang8f.android.segmented.SegmentedGroup
                 android:id="@+id/segmented_look_for"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginTop="24dp"
                 android:orientation="horizontal"
                 segmentedgroup:sc_border_width="1dp"
                 segmentedgroup:sc_corner_radius="5dp"
@@ -107,6 +108,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -142,11 +145,11 @@
                         app:bar_highlight_color="@color/colorPrimary"
                         app:corner_radius="10"
                         app:data_type="_integer"
-                        app:min_value="21"
-                        app:max_value="60"
                         app:gap="1"
                         app:left_thumb_color="@color/colorPrimary"
                         app:left_thumb_color_pressed="@color/colorPrimary"
+                        app:max_value="60"
+                        app:min_value="21"
                         app:right_thumb_color="@color/colorPrimary"
                         app:right_thumb_color_pressed="@color/colorPrimary"
                         app:steps="1" />
@@ -164,6 +167,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -174,6 +179,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="@string/distance"
+
                     android:textSize="16dp" />
 
                 <LinearLayout
@@ -192,10 +198,10 @@
                         app:bar_highlight_color="@color/colorPrimary"
                         app:corner_radius="10"
                         app:data_type="_integer"
-                        app:min_value="1"
-                        app:max_value="100"
                         app:left_thumb_color="@color/colorPrimary"
                         app:left_thumb_color_pressed="@color/colorPrimary"
+                        app:max_value="100"
+                        app:min_value="1"
                         app:steps="1" />
 
                     <TextView
@@ -211,6 +217,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -230,6 +238,32 @@
                     android:textColor="@color/colorPrimary"
                     tools:text="@string/none_selected" />
             </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/question_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/questions_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/qa_placeholder"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:id="@+id/questions_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/answer_questions_title"
+                    android:textAllCaps="true"
+                    android:textColor="@color/md_white_1000"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 </layout>

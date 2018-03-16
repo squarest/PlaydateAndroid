@@ -4,62 +4,46 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SearchView;
 
 import com.make.playdate.R;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by PRINCE on 11/15/2017.
  */
 
-public class FAQActivity extends Activity implements View.OnClickListener{
+public class FAQActivity extends Activity {
 
-    @BindView(R.id.list_faq)
-    ListView listFaq;
-    @BindView(R.id.search_faq)
-    SearchView searchFaq;
-    @BindView(R.id.img_faq_back)
-    ImageView back;
-
-    FaqAdapter adapter_faq;
-
-    ArrayList<String> faqList = new ArrayList<String>();
+    private ListView listFaq;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState){
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faq);
-        ButterKnife.bind(this);
 
-        back.setOnClickListener(this);
-
+        ImageView backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(view -> finish());
+        listFaq = findViewById(R.id.list_faq);
         listFaq.setOnItemClickListener((adapterView, view, i, l) -> {
             Intent detailIntent = new Intent(FAQActivity.this, FAQDetailActivity.class);
             detailIntent.putExtra("faq_id", i);
             startActivity(detailIntent);
         });
-
         initView();
     }
 
     private void initView() {
-
-        faqList = getItems();
-
-        adapter_faq = new FaqAdapter(this, R.layout.adapter_faq, faqList);
+        ArrayList<String> faqList = getItems();
+        FaqAdapter adapter_faq = new FaqAdapter(this, R.layout.adapter_faq, faqList);
         listFaq.setAdapter(adapter_faq);
         adapter_faq.notifyDataSetChanged();
     }
 
-    private ArrayList<String> getItems(){
+    private ArrayList<String> getItems() {
 
         ArrayList<String> faq_list = new ArrayList<>();
 
@@ -68,16 +52,10 @@ public class FAQActivity extends Activity implements View.OnClickListener{
         faq_list.add("Why does chat only stay open for 24 hours?");
         faq_list.add("Why do I only get one playdate a day?");
         faq_list.add("How can I contribute?");
+        faq_list.add("When will playdate come to my area?");
+        faq_list.add("When can I make a new playdate everyday?");
 
         return faq_list;
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.img_faq_back:
-                this.finish();
-                break;
-        }
-    }
 }

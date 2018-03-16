@@ -1,5 +1,6 @@
 package com.make.playdate.preference.data;
 
+import com.make.playdate.entities.QuestionModel;
 import com.make.playdate.entities.ResponseModel;
 import com.make.playdate.entities.UserModel;
 
@@ -17,4 +18,8 @@ public interface IPreferenceRepo {
     Single<ResponseModel> updateNotification(int isPushNotification);
 
     Single<ResponseModel> updatePreferences(UserModel userModel);
+
+    Single<ResponseModel> checkAnswers();
+
+    Single<QuestionModel> getQuestion();
 }

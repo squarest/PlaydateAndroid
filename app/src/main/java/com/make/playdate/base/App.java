@@ -3,6 +3,7 @@ package com.make.playdate.base;
 import android.app.Application;
 
 import com.facebook.FacebookSdk;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.make.playdate.auth.di.LoginComponent;
 import com.make.playdate.auth.di.LoginModule;
 import com.make.playdate.chat.di.ChatComponent;
@@ -62,6 +63,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         FacebookSdk.sdkInitialize(getApplicationContext());
+        AndroidThreeTen.init(this);
         appComponent = buildAppComponent();
         loginComponent = buildLoginComponent();
         mainComponent = buildMainComponent();

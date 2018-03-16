@@ -24,6 +24,7 @@ import com.make.playdate.R;
 import com.make.playdate.base.BaseActivity;
 import com.make.playdate.databinding.ActivityLoginBinding;
 import com.make.playdate.main.presentation.main.MainActivity;
+import com.make.playdate.preference.presentation.editprofile.EditProfileActivity;
 import com.rd.animation.type.AnimationType;
 
 import java.util.ArrayList;
@@ -160,5 +161,13 @@ public class LoginActivity extends BaseActivity implements LoginView {
         LoginActivity.this.finish();
     }
 
+    @Override
+    public void showEditUserScreen() {
+        Intent edit = new Intent(LoginActivity.this, EditProfileActivity.class);
+        startActivity(edit);
+    }
 
+    @Override
+    public void onBackPressed() {
+    }
 }

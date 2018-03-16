@@ -1,7 +1,6 @@
 package com.make.playdate.help.faq;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,34 +9,23 @@ import android.widget.TextView;
 
 import com.make.playdate.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by PRINCE on 11/20/2017.
  */
 
 public class FAQDetailActivity extends Activity {
-
-    Context context;
-    @BindView(R.id.img_faq_detail_back)
-    ImageView back;
-    @BindView(R.id.txt_faq_title)
-    TextView txtFaqTitle;
-    @BindView(R.id.txt_faq_content)
-    TextView txtFaqConent;
+    private TextView txtFaqTitle;
+    private TextView txtFaqConent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faq_detail);
-        ButterKnife.bind(this);
-
-        context = this;
-
+        txtFaqTitle = findViewById(R.id.txt_faq_title);
+        txtFaqConent = findViewById(R.id.txt_faq_content);
+        ImageView backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(view -> onBackPressed());
         initView();
-
-        back.setOnClickListener(view -> ((Activity)context).finish());
     }
 
     private void initView() {
@@ -48,7 +36,8 @@ public class FAQDetailActivity extends Activity {
             faqIndex = bundle.getInt("faq_id");
         }
 
-        switch (faqIndex){
+
+        switch (faqIndex) {
             case 0:
                 txtFaqTitle.setText("How does this all work?");
                 txtFaqConent.setText("It’s easy as 1-2-3! \n(1) You log in with your Facebook account and set up your preferences. \n" +
@@ -73,6 +62,14 @@ public class FAQDetailActivity extends Activity {
                 txtFaqTitle.setText("How can I contribute?");
                 txtFaqConent.setText("Thank you for your interest! \nIf you have something to contribute, we would love to hear from you. " +
                         "\nContact us at logan@makeplaydate.com or in the About section of the Menu and feel free to tweet at us @makeplaydate. We look forward to hearing from you!");
+                break;
+            case 5:
+                txtFaqTitle.setText("When will playdate come to my area");
+                txtFaqConent.setText("We're sorry for the inconvenience. We are working hard to bring playdate to you. \\nPlease contact us using the \"Report a bug\" button in the Menu so we can prioritize future locations. \\nWe look forward to hearing from you!");
+                break;
+            case 6:
+                txtFaqTitle.setText("When can I make a new playdate everyday?");
+                txtFaqConent.setText("We reset the timer at midnight UTC. This means that you can make a new playdate at 4pm every day, just in time for 4:20!");
                 break;
         }
     }

@@ -3,7 +3,6 @@ package com.make.playdate.main.presentation.profile;
 import com.arellomobile.mvp.InjectViewState;
 import com.make.playdate.base.App;
 import com.make.playdate.base.BasePresenter;
-import com.make.playdate.entities.QuestionModel;
 import com.make.playdate.main.domain.IMainInteractor;
 
 import javax.inject.Inject;
@@ -40,22 +39,5 @@ public class ProfilePresenter extends BasePresenter<ProfileView> {
                 }, Throwable::printStackTrace);
         putDisposable(d);
 
-        Disposable disposable = interactor.loadQuestion()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(QuestionModel::getImgCate)
-                .subscribe(profileView::setQuestionImage);
-        putDisposable(disposable);
-    }
-
-    public void questionCardClicked() {
-        Disposable disposable = interactor.checkAnswers()
-                .doOnSubscribe(disposable1 -> profileView.showLoading())
-                .doFinally(() -> profileView.dismissLoading())
-                .subscribe(isAnswered -> {
-                    if (isAnswered) profileView.showQADialog();
-                    else profileView.showQuestionScreen();
-                }, Throwable::printStackTrace);
-        putDisposable(disposable);
     }
 }

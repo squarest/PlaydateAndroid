@@ -11,10 +11,8 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.make.playdate.chat.presentation.chat.ChatActivity;
 import com.make.playdate.R;
-
-import org.json.JSONObject;
+import com.make.playdate.chat.presentation.chat.ChatActivity;
 
 /**
  * Created by Developer on 6/29/2016.
@@ -22,28 +20,15 @@ import org.json.JSONObject;
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
-    JSONObject jsonObject = null;
     String title, message;
     public static final int notifyIDActivity = 9001;
 
     String userId;
     String userName;
-    NotificationCompat.Builder builder;
     Intent resultIntent;
 
-    /**
-     * Called when message is received.
-     *
-     * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
-     */
-    // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        // TODO(developer): Handle FCM messages here.
-        // If the application is in the foreground handle both data and notification messages here.
-        // Also if you intend on generating your own notifications as a result of a received FCM
-        // message, here is where that should be initiated. See sendNotification method below.
-
         RemoteMessage.Notification not = remoteMessage.getNotification();
 
         if (not != null) {
@@ -60,17 +45,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     }
-    // [END receive_message]
 
 
     private void sendNotification() {
         Context context = getApplicationContext();
-//        final String appPackageName = newAppName; // getPackageName() from Context or Activity object
-//        try {
-//            resultIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.softedia." + appPackageName));
-//        } catch (android.content.ActivityNotFoundException anfe) {
-//            resultIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.softedia." + appPackageName));
-//        }
         resultIntent=new Intent(this, ChatActivity.class);
 
         resultIntent.putExtra("user_id", userId);

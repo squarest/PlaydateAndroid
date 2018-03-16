@@ -1,5 +1,6 @@
 package com.make.playdate.preference.domain;
 
+import com.make.playdate.entities.QuestionModel;
 import com.make.playdate.entities.UserModel;
 
 import io.reactivex.Completable;
@@ -15,4 +16,6 @@ public interface IPreferenceInteractor {
     Completable updateUser(UserModel userModel);
 
     Completable updatePreferences(UserModel userModel);
+    Single<Boolean> checkAnswers();
+    Single<QuestionModel> loadQuestion();
 }

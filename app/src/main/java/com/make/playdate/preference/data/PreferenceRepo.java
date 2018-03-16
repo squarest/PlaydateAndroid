@@ -1,8 +1,10 @@
 package com.make.playdate.preference.data;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.make.playdate.entities.QuestionModel;
 import com.make.playdate.entities.ResponseModel;
 import com.make.playdate.entities.UserModel;
+import com.make.playdate.global.Constant;
 import com.make.playdate.network.ApiClient;
 
 import io.reactivex.Single;
@@ -43,5 +45,16 @@ public class PreferenceRepo implements IPreferenceRepo {
     @Override
     public Single<ResponseModel> updatePreferences(UserModel userModel) {
         return apiClient.getApi().update_setting(userModel);
+    }
+
+    @Override
+    public Single<ResponseModel> checkAnswers() {
+        return apiClient.getApi().check_answers(8, 25, getUid());
+    }
+
+    @Override
+    public Single<QuestionModel> getQuestion() {
+        return apiClient.getApi().get_category()
+                .map(requestModel -> requestModel.getCateQuestion().get(Constant.QUESTION_CATEGORY_ID));
     }
 }

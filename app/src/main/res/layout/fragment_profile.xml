@@ -4,19 +4,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/md_white_1000"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/img_profile"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/user" />
@@ -144,32 +144,5 @@
             android:layout_marginRight="10dp"
             android:background="@color/md_grey_400" />
 
-        <RelativeLayout
-            android:id="@+id/question_card"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:baselineAligned="false">
-
-            <ImageView
-                android:id="@+id/questions_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:background="@drawable/qa_placeholder"
-                android:scaleType="fitXY" />
-
-            <TextView
-                android:id="@+id/questions_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="@string/answer_questions_title"
-                android:textAllCaps="true"
-                android:textColor="@color/md_white_1000"
-                android:textSize="30dp"
-                android:textStyle="bold" />
-        </RelativeLayout>
     </LinearLayout>
 </layout>

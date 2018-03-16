@@ -1,2 +1,0 @@
-configurations.maybeCreate("default")
-artifacts.add("default", file('quickblox-android-sdk-core-3.5.1.aar'))

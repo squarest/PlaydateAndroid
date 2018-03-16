@@ -5,16 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.make.playdate.R;
 import com.make.playdate.entities.ChatData;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
 
 public class ChatAdapter extends ArrayAdapter<ChatData> {
 
@@ -87,14 +81,10 @@ public class ChatAdapter extends ArrayAdapter<ChatData> {
     }
 
     private class ViewHolderAnother {
-        private ImageView mImgProfile;
-        private TextView mTxtUserName;
         private TextView mTxtMessage;
         private TextView mTxtTime;
 
         private void bindView(View convertView) {
-            mImgProfile = convertView.findViewById(R.id.img_profile);
-            mTxtUserName = convertView.findViewById(R.id.txt_userName);
             mTxtMessage = convertView.findViewById(R.id.txt_message);
             mTxtTime = convertView.findViewById(R.id.txt_time);
         }
@@ -103,7 +93,7 @@ public class ChatAdapter extends ArrayAdapter<ChatData> {
             ChatData chatData = getItem(position);
 
             mTxtMessage.setText(chatData.text);
-            mTxtTime.setText(getDate(chatData.date));
+            mTxtTime.setText(chatData.date);
         }
     }
 
@@ -120,23 +110,8 @@ public class ChatAdapter extends ArrayAdapter<ChatData> {
             ChatData chatData = getItem(position);
 
             mTxtMessage.setText(chatData.text);
-            mTxtTime.setText(getDate(chatData.date));
+            mTxtTime.setText(chatData.date);
         }
     }
 
-    private String getDate(String dateString) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
-        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-        Date value = null;
-        try {
-            value = formatter.parse(dateString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
-        dateFormatter.setTimeZone(TimeZone.getDefault());
-        String dt = dateFormatter.format(value);
-
-        return dt;
-    }
 }

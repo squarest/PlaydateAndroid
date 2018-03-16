@@ -3,6 +3,7 @@ package com.make.playdate.main.presentation.menu;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.jaredrummler.android.device.DeviceName;
 import com.make.playdate.R;
 import com.make.playdate.auth.presentation.LoginActivity;
 import com.make.playdate.databinding.FragmentMenuBinding;
@@ -54,6 +56,8 @@ public class MenuFragment extends MvpAppCompatFragment implements View.OnClickLi
         binding.linMenuUserProfile.setOnClickListener(this);
         binding.linMenuLogout.setOnClickListener(this);
         binding.linMenuDelete.setOnClickListener(this);
+        binding.linPrivacyPolicy.setOnClickListener(this);
+        binding.linTerms.setOnClickListener(this);
     }
 
     @Override
@@ -75,7 +79,8 @@ public class MenuFragment extends MvpAppCompatFragment implements View.OnClickLi
             case R.id.lin_menu_feedback:
                 Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                         "mailto", "contact@makeplaydate.com", null));
-                i.putExtra(android.content.Intent.EXTRA_SUBJECT, "Report a bug");
+                String subject = String.format("Android Bug Report: %s %s", DeviceName.getDeviceInfo(getContext()).getName(), Build.VERSION.RELEASE);
+                i.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
                 i.putExtra(android.content.Intent.EXTRA_TEXT, "");
                 startActivity(Intent.createChooser(i, "Send email"));
                 getActivity().overridePendingTransition(R.anim.slide_in_from_right,
@@ -99,8 +104,18 @@ public class MenuFragment extends MvpAppCompatFragment implements View.OnClickLi
             case R.id.lin_menu_delete:
                 dialogUtil = new DialogUtil(getContext());
                 dialogUtil.getAlertDialog(getString(R.string.delete_dialog_title), getString(R.string.delete_dialod_msg),
-                        (dialogInterface, i1) -> presenter.deleteButtonClicked());
-                presenter.deleteButtonClicked();
+                        (dialogInterface, i1) -> presenter.deleteButtonClicked()).show();
+                break;
+            case R.id.lin_privacy_policy:
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://www.makeplaydate.com/privacy"));
+                startActivity(intent);
+                break;
+
+            case R.id.lin_terms:
+                Intent intent1 = new Intent(Intent.ACTION_VIEW);
+                intent1.setData(Uri.parse("https://www.makeplaydate.com/terms"));
+                startActivity(intent1);
                 break;
         }
     }

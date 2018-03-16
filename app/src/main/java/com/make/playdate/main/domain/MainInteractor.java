@@ -1,6 +1,5 @@
 package com.make.playdate.main.domain;
 
-import com.make.playdate.entities.QuestionModel;
 import com.make.playdate.entities.UserModel;
 import com.make.playdate.main.data.IMainRepo;
 
@@ -38,10 +37,7 @@ public class MainInteractor implements IMainInteractor {
         return mainRepo.getUser();
     }
 
-    @Override
-    public Single<QuestionModel> loadQuestion() {
-        return mainRepo.getQuestion();
-    }
+
 
     @Override
     public Completable deleteUser() {
@@ -56,14 +52,6 @@ public class MainInteractor implements IMainInteractor {
     public Completable logout() {
         mainRepo.removeUserFromDevice();
         return Completable.complete();
-    }
-
-    @Override
-    public Single<Boolean> checkAnswers() {
-        return mainRepo.checkAnswers()
-                .map(responseModel -> responseModel.getResult() == 0)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
     }
 
 }
