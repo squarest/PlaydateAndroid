@@ -1,6 +1,7 @@
 package com.make.playdate.preference.presentation.editprofile;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import com.make.playdate.base.BaseActivity;
 import com.make.playdate.databinding.ActivityEditProfileBinding;
 import com.make.playdate.entities.UserModel;
 import com.make.playdate.global.Constant;
+import com.make.playdate.main.presentation.main.MainActivity;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -35,7 +37,7 @@ public class EditProfileActivity extends BaseActivity implements EditProfileView
     }
 
     private void setEvents() {
-        binding.backButton.setOnClickListener(view -> finish());
+        binding.backButton.setOnClickListener(view -> onBackPressed());
         binding.saveButton.setOnClickListener(view -> {
                     if (isValid()) presenter.saveButtonClicked(user);
                 }
@@ -119,5 +121,13 @@ public class EditProfileActivity extends BaseActivity implements EditProfileView
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getIntent().getBooleanExtra("", false)) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else finish();
     }
 }

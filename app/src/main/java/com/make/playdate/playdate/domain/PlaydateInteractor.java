@@ -50,6 +50,7 @@ public class PlaydateInteractor implements IPlaydateInteractor {
                     return playdateModel;
                 })
                 .map(playdateModel -> {
+                    if(!playdateModel.userEthnicity.equals("-1"))
                     playdateModel.userEthnicity = Constant.arrayEthnicity[Integer.valueOf(playdateModel.userEthnicity)];
                     return playdateModel;
                 })

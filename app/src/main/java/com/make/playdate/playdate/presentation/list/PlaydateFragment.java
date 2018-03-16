@@ -67,6 +67,7 @@ public class PlaydateFragment extends MvpAppCompatFragment implements PlaydateVi
             sliderAdapter = new PlaydateSliderAdapter(playdates);
             binding.avatarsSlider.setAdapter(sliderAdapter);
             binding.avatarsSlider.setOffscreenItems(2);
+            binding.avatarsSlider.setSlideOnFling(false);
             binding.avatarsSlider.addOnItemChangedListener((viewHolder, adapterPosition) ->
             {
                 PlaydateModel playdate = playdates.get(adapterPosition);

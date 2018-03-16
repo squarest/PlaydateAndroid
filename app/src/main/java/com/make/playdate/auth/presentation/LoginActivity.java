@@ -164,6 +164,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     @Override
     public void showEditUserScreen() {
         Intent edit = new Intent(LoginActivity.this, EditProfileActivity.class);
+        edit.putExtra("isFirstStart", true);
         startActivity(edit);
     }
 
