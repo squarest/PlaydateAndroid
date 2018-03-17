@@ -1,10 +1,8 @@
 package com.make.playdate.main.presentation.profile;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,6 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.make.playdate.R;
 import com.make.playdate.databinding.FragmentProfileBinding;
-import com.make.playdate.global.Constant;
 import com.make.playdate.main.presentation.main.MainView;
 import com.make.playdate.preference.presentation.editprofile.EditProfileActivity;
 import com.make.playdate.preference.presentation.pref.PreferencesActivity;
@@ -27,7 +24,6 @@ import com.squareup.picasso.Picasso;
 public class ProfileFragment extends MvpAppCompatFragment implements ProfileView {
     private FragmentProfileBinding binding;
     private MainView mainView;
-    private SharedPreferences sharedPreferences;
     @InjectPresenter
     public ProfilePresenter presenter;
 
@@ -42,23 +38,20 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileView
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mainView = (MainView) getActivity();
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         presenter.viewCreated();
         setEvents();
-        setSwitch();
     }
 
-
-    private void setSwitch() {
-        boolean isPlaydate = sharedPreferences.getBoolean(Constant.IS_PLAYDATE_KEY, false);
+    @Override
+    public void setSwitch(boolean isPlaydate) {
         binding.switchReceivePlaydate.setChecked(isPlaydate);
+        binding.switchReceivePlaydate.setOnCheckedChangeListener((buttonView, isPl) ->
+                presenter.userPlaydateChanged(isPl));
     }
 
 
     private void setEvents() {
-        binding.switchReceivePlaydate.setOnCheckedChangeListener((buttonView, isPlaydate) ->
-                sharedPreferences.edit()
-                        .putBoolean(Constant.IS_PLAYDATE_KEY, isPlaydate).apply());
+
         binding.preferenceButton.setOnClickListener(view ->
         {
             Intent intent = new Intent(getContext(), PreferencesActivity.class);

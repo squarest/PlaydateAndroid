@@ -105,4 +105,7 @@ public interface API {
             @Query("notification") int notification,
             @Query("user_id") String id
     );
+
+    @POST("set_user_playdate")
+    Single<ResponseModel> set_user_playdate(@Query("firebase_id") String firebaseId, @Query("user_playdate") int userPlaydate);
 }

@@ -25,15 +25,13 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity implements MainView {
 
-    private FragmentTabHost mTabHost;
-    private List<Fragment> mFragmentList;
     private Class mClass[] = {ProfileFragment.class, PlaydateFragment.class, ChatListFragment.class, MenuFragment.class};
     private Fragment mFragment[] = {new ProfileFragment(), new PlaydateFragment(), new ChatListFragment(), new MenuFragment()};
     private String mTitles[] = {"Profile", "Playdate", "Chat", "Menu"};
     private int mImages[] = {
             R.drawable.tab_profile,
             R.drawable.tab_playdate,
-            R.drawable.chat_icon,
+            R.drawable.tab_chat,
             R.drawable.tab_menu
     };
 
@@ -56,8 +54,8 @@ public class MainActivity extends BaseActivity implements MainView {
         TextView screenTitle = toolbar.findViewById(R.id.toolbar_title);
         screenTitle.setText(mTitles[0]);
         setSupportActionBar(toolbar);
-        mTabHost = findViewById(android.R.id.tabhost);
-        mFragmentList = new ArrayList<>();
+        FragmentTabHost mTabHost = findViewById(android.R.id.tabhost);
+        List<Fragment> mFragmentList = new ArrayList<>();
         mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
         mTabHost.getTabWidget().setDividerDrawable(null);
 

@@ -38,7 +38,6 @@ public class MainInteractor implements IMainInteractor {
     }
 
 
-
     @Override
     public Completable deleteUser() {
         return mainRepo.removeUserFromServer()
@@ -52,6 +51,14 @@ public class MainInteractor implements IMainInteractor {
     public Completable logout() {
         mainRepo.removeUserFromDevice();
         return Completable.complete();
+    }
+
+    @Override
+    public Completable changePlaydateStatus(boolean isPlaydate) {
+        int userPLaydate = isPlaydate ? 1 : 0;
+        return mainRepo.setUserPlaydate(userPLaydate).toCompletable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
 }

@@ -68,6 +68,10 @@ public class MainRepo implements IMainRepo {
         return apiClient.getApi().delete_user(getUserId());
     }
 
+    @Override
+    public Single<ResponseModel> setUserPlaydate(int userPlaydate) {
+        return apiClient.getApi().set_user_playdate(getUserId(), userPlaydate);
+    }
 
 
 }

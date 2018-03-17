@@ -33,7 +33,6 @@ public class PreferencesActivity extends BaseActivity implements PreferenceView 
     @InjectPresenter
     public PreferencePresenter presenter;
     private UserModel user;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,7 +117,7 @@ public class PreferencesActivity extends BaseActivity implements PreferenceView 
         String ethnicity;
         if (user.getEthnicity().equals("-1")) ethnicity = getString(R.string.none_selected);
         else {
-            String[] selected = userModel.getEthnicity().split(",");
+            String[] selected = user.getEthnicity().split(",");
             ethnicity = String.format("%d selected", selected.length);
         }
         binding.ethnicity.setText(ethnicity);

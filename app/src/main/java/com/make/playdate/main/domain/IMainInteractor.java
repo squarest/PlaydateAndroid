@@ -14,9 +14,9 @@ public interface IMainInteractor {
 
     Single<UserModel> loadUser();
 
-
-
     Completable deleteUser();
 
     Completable logout();
+
+    Completable changePlaydateStatus(boolean isPlaydate);
 }

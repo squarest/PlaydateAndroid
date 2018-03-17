@@ -11,4 +11,6 @@ public interface ProfileView extends BaseView {
 
     void setProfilePhoto(String imageUrl);
 
+    void setSwitch(boolean isPlaydate);
+
 }

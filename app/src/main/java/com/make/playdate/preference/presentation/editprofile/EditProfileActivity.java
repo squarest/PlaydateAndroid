@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.make.playdate.R;
@@ -39,10 +38,7 @@ public class EditProfileActivity extends BaseActivity implements EditProfileView
     private void setEvents() {
         int editedFieldColor = getResources().getColor(R.color.md_red_600);
         binding.backButton.setOnClickListener(view -> onBackPressed());
-        binding.saveButton.setOnClickListener(view -> {
-                    if (isValid()) presenter.saveButtonClicked(user);
-                }
-        );
+        binding.saveButton.setOnClickListener(view -> presenter.saveButtonClicked(user));
         binding.ethnicity.setOnClickListener(view ->
         {
             AlertDialog.Builder builderEthnicity = new AlertDialog.Builder(this);
@@ -87,9 +83,9 @@ public class EditProfileActivity extends BaseActivity implements EditProfileView
     }
 
     private String[] getAgeList() {
-        int minAge = 18;
+        int minAge = 21;
         int maxAge = 60;
-        String[] list = new String[43];
+        String[] list = new String[40];
         for (int i = minAge; i <= maxAge; i++) {
             list[i - minAge] = String.valueOf(i);
         }
@@ -115,17 +111,6 @@ public class EditProfileActivity extends BaseActivity implements EditProfileView
 
     }
 
-    private boolean isValid() {
-        if (binding.age.getText().toString().equals(getString(R.string.none_selected))) {
-            Toast.makeText(this, "Please enter your age", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        if (binding.ethnicity.getText().toString().equals(getString(R.string.none_selected))) {
-            Toast.makeText(this, "Select Ethnicity", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;
-    }
 
     @Override
     public void onBackPressed() {

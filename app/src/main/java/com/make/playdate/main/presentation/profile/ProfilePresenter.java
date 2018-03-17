@@ -36,8 +36,15 @@ public class ProfilePresenter extends BasePresenter<ProfileView> {
                     if (avatar != null && !avatar.isEmpty())
                         profileView.setProfilePhoto(avatar);
                     profileView.setName(userModel.get_user_first_name());
+                    profileView.setSwitch(userModel.getUser_playdate() == 1);
                 }, Throwable::printStackTrace);
         putDisposable(d);
 
+    }
+
+    public void userPlaydateChanged(boolean isPlaydate) {
+        interactor.changePlaydateStatus(isPlaydate)
+                .subscribe(() -> {
+                }, Throwable::printStackTrace);
     }
 }

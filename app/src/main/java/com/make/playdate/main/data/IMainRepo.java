@@ -26,5 +26,7 @@ public interface IMainRepo {
 
     Single<ResponseModel> removeUserFromServer();
 
+    Single<ResponseModel> setUserPlaydate(int userPlaydate);
+
 
 }
