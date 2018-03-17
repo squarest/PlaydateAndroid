@@ -33,7 +33,7 @@
                 android:layout_centerInParent="true"
                 android:text="Edit Profile"
                 android:textColor="@color/md_white_1000"
-                android:textSize="20dp" />
+                android:textSize="@dimen/toolbar_title_text_size" />
 
             <TextView
                 android:id="@+id/save_button"
@@ -44,7 +44,7 @@
                 android:layout_marginRight="16dp"
                 android:text="@string/save"
                 android:textColor="@color/md_white_1000"
-                android:textSize="18dp" />
+                android:textSize="@dimen/toolbar_title_text_size" />
         </RelativeLayout>
 
         <ScrollView
@@ -126,7 +126,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:text="@{user._user_gender==null?@string/none_selected:user._user_gender}"
-                        android:textColor="@color/md_black_1000"
+                        android:textColor="@color/md_purple_600"
                         android:textSize="15dp" />
                 </LinearLayout>
 
@@ -161,7 +161,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:text="@{user.user_age.equals(`0`)|user.user_age.equals(`-1`)?@string/none_selected:user.user_age}"
-                        android:textColor="@color/md_black_1000"
+                        android:textColor="@color/md_purple_600"
                         android:textSize="15dp" />
 
 
@@ -196,7 +196,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:textColor="@color/md_black_1000"
+                        android:textColor="@color/md_purple_600"
                         android:textSize="15dp" />
 
                 </LinearLayout>

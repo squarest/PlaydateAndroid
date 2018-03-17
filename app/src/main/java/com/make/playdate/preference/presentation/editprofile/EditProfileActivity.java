@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -36,7 +35,9 @@ public class EditProfileActivity extends BaseActivity implements EditProfileView
         setEvents();
     }
 
+
     private void setEvents() {
+        int editedFieldColor = getResources().getColor(R.color.md_red_600);
         binding.backButton.setOnClickListener(view -> onBackPressed());
         binding.saveButton.setOnClickListener(view -> {
                     if (isValid()) presenter.saveButtonClicked(user);
@@ -47,7 +48,8 @@ public class EditProfileActivity extends BaseActivity implements EditProfileView
             AlertDialog.Builder builderEthnicity = new AlertDialog.Builder(this);
             builderEthnicity.setTitle("Select");
             builderEthnicity.setItems(Constant.arrayEthnicity, (dialog, item) -> {
-                ((TextView) view).setText(Constant.arrayEthnicity[item]);
+                binding.ethnicity.setText(Constant.arrayEthnicity[item]);
+                binding.ethnicity.setTextColor(editedFieldColor);
                 user.setUser_ethnicity(item);
 
             });
@@ -58,7 +60,8 @@ public class EditProfileActivity extends BaseActivity implements EditProfileView
             AlertDialog.Builder builderAge = new AlertDialog.Builder(this);
             builderAge.setTitle("Select");
             builderAge.setItems(ageList, (dialog, item) -> {
-                ((TextView) view).setText(ageList[item]);
+                binding.age.setText(ageList[item]);
+                binding.age.setTextColor(editedFieldColor);
                 user.setUser_age(ageList[item]);
 
             });
@@ -68,7 +71,8 @@ public class EditProfileActivity extends BaseActivity implements EditProfileView
             AlertDialog.Builder builderAge = new AlertDialog.Builder(this);
             builderAge.setTitle("Select");
             builderAge.setItems(Constant.genderArray, (dialog, item) -> {
-                ((TextView) view).setText(Constant.genderArray[item]);
+                binding.gender.setText(Constant.genderArray[item]);
+                binding.gender.setTextColor(editedFieldColor);
                 user.setGender(Constant.genderArray[item]);
 
             });
@@ -85,7 +89,7 @@ public class EditProfileActivity extends BaseActivity implements EditProfileView
     private String[] getAgeList() {
         int minAge = 18;
         int maxAge = 60;
-        String[] list = new String[44];
+        String[] list = new String[43];
         for (int i = minAge; i <= maxAge; i++) {
             list[i - minAge] = String.valueOf(i);
         }
@@ -128,6 +132,6 @@ public class EditProfileActivity extends BaseActivity implements EditProfileView
         if (getIntent().getBooleanExtra("isFirstStart", false)) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        } else finish();
+        } else super.onBackPressed();
     }
 }

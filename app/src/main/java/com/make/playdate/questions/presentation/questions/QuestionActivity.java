@@ -15,6 +15,7 @@ import com.make.playdate.main.presentation.main.MainActivity;
 import com.make.playdate.utils.DialogUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by PRINCE on 11/14/2017.
@@ -39,6 +40,7 @@ public class QuestionActivity extends BaseActivity implements QuestionView {
     public void showQuestionAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("");
+        alertDialog.setCancelable(false);
         alertDialog.setMessage("You've answered all questions. Will you save this answers?");
         alertDialog.setPositiveButton("Yes", (dialog, which) -> presenter.saveAnswersButtonClicked(answers));
         alertDialog.setNegativeButton("No", (dialog, i) -> {
@@ -52,7 +54,7 @@ public class QuestionActivity extends BaseActivity implements QuestionView {
     public void setQuestions(ArrayList<QuestionModel> qaArrayList) {
         SwipeDeck cardStack = findViewById(R.id.swipe_deck);
         cardStack.setHardwareAccelerationEnabled(true);
-
+        Collections.shuffle(qaArrayList);
         SwipeDeckAdapter adapter = new SwipeDeckAdapter(this, R.layout.card_item, qaArrayList);
         cardStack.setAdapter(adapter);
 

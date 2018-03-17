@@ -16,8 +16,8 @@
 
             <ImageView
                 android:id="@+id/img_chat_back"
-                android:layout_width="20dp"
-                android:layout_height="16dp"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
                 android:src="@drawable/back" />
@@ -29,7 +29,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:textColor="@color/md_white_1000"
-                android:textSize="16dp"
+                android:textSize="@dimen/toolbar_title_text_size"
                 tools:text="David Castillo" />
 
             <TextView

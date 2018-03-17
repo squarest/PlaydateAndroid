@@ -37,7 +37,7 @@
                 android:layout_centerVertical="true"
                 android:text="Preferences"
                 android:textColor="@color/md_white_1000"
-                android:textSize="20dp" />
+                android:textSize="@dimen/toolbar_title_text_size" />
 
             <TextView
                 android:id="@+id/save_button"
@@ -48,7 +48,7 @@
                 android:layout_marginRight="16dp"
                 android:text="@string/save"
                 android:textColor="@color/md_white_1000"
-                android:textSize="18dp" />
+                android:textSize="@dimen/toolbar_title_text_size" />
         </RelativeLayout>
 
         <LinearLayout

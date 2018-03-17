@@ -44,7 +44,7 @@ public class ChatActivity extends BaseActivity implements ChatView {
     private void initViews() {
         mEdtMessage = findViewById(R.id.edit_message);
         ImageView back = findViewById(R.id.img_chat_back);
-        back.setOnClickListener(view -> finish());
+        back.setOnClickListener(view -> onBackPressed());
 
         TextView sendButton = findViewById(R.id.btn_send);
         sendButton.setOnClickListener(view -> {

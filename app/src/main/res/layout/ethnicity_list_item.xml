@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-
-    android:padding="16dp">
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
     <TextView
 
@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:textSize="16dp"
         android:textColor="@color/md_black_1000"
         tools:text="Question" />
 
@@ -20,8 +21,16 @@
         android:id="@+id/ethnicity_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/md_grey_200"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/ethnicity_check"/>
 
 </RelativeLayout>
 

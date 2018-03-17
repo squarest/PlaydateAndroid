@@ -31,74 +31,52 @@
                 android:layout_centerVertical="true"
                 android:text="Question &amp; Answer"
                 android:textColor="@color/md_white_1000"
-                android:textSize="20dp" />
+                android:textSize="@dimen/toolbar_title_text_size" />
         </RelativeLayout>
 
-        <RelativeLayout
+
+        <LinearLayout
+            android:id="@+id/lin_question_body"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/lin_question"
+            android:orientation="vertical">
+
+
+            <com.daprlabs.cardstack.SwipeDeck
+                android:id="@+id/swipe_deck"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:layout_marginTop="40dp"
+                android:padding="48dp"
+                swipedeck:card_spacing="10dp"
+                swipedeck:max_visible="3"
+                swipedeck:opacity_end="0.2"
+                swipedeck:render_above="true"
+                swipedeck:rotation_degrees="15" />
 
             <LinearLayout
-                android:id="@+id/lin_question"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="center|bottom">
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Please answer to the all questions \nfor meeting matched friends!"
-                    android:textAlignment="center"
-                    android:textColor="@color/md_grey_600" />
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="70dp"
+                    android:background="@drawable/uncheck"
+                    android:text="" />
 
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/check" />
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lin_question_body"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/lin_question"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="3">
-
-                    <com.daprlabs.cardstack.SwipeDeck
-                        android:id="@+id/swipe_deck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="40dp"
-                        swipedeck:card_spacing="10dp"
-                        swipedeck:max_visible="3"
-                        swipedeck:opacity_end="0.2"
-                        swipedeck:render_above="true"
-                        swipedeck:rotation_degrees="15" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center">
-
-                    <Button
-                        android:id="@+id/button"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginRight="70dp"
-                        android:background="@drawable/uncheck"
-                        android:text="" />
-
-                    <Button
-                        android:id="@+id/button2"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/check" />
-                </LinearLayout>
-            </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 </com.daprlabs.cardstack.SwipeFrameLayout>
 

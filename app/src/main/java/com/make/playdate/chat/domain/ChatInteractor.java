@@ -4,12 +4,12 @@ import com.make.playdate.chat.data.IChatRepo;
 import com.make.playdate.entities.ChatData;
 import com.make.playdate.entities.PlaydateModel;
 
-import org.threeten.bp.LocalDateTime;
-import org.threeten.bp.ZoneId;
-import org.threeten.bp.ZonedDateTime;
-import org.threeten.bp.format.DateTimeFormatter;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
@@ -39,22 +39,37 @@ public class ChatInteractor implements IChatInteractor {
 
     @Override
     public Observable<ChatData> loadMessages() {
-        return chatRepo.getMessages(conversationId);
+        return chatRepo.getMessages(conversationId)
+                .map(chatData -> {
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm", Locale.US);
+                    formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+                    Date value = null;
+                    try {
+                        value = formatter.parse(chatData.date);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
+                    dateFormatter.setTimeZone(TimeZone.getDefault());
+                    chatData.date = dateFormatter.format(value);
+                    return chatData;
+
+                });
     }
 
     @Override
     public Completable sendMessage(ChatData chatData) {
-        LocalDateTime localDateTime = LocalDateTime.now();
-        ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.of("UTC"));
-        String date = zonedDateTime.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm"));
-        chatData.date = date;
+        long time = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy HH:mm",Locale.US);
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        chatData.date = sdf.format(time);
         chatRepo.pushMessage(chatData);
         return chatRepo.sendNotification(conversationId, chatData)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .toCompletable();
-
     }
+
 
     @Override
     public Single<String> loadConversationName() {

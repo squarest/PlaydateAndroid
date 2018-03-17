@@ -22,7 +22,7 @@
             android:text="Question &amp; Answer"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:textSize="20dp"
+            android:textSize="@dimen/toolbar_title_text_size"
             android:id="@+id/txt_sub_cate"/>
     </RelativeLayout>
 

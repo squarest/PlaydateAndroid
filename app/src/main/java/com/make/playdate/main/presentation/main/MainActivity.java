@@ -44,14 +44,18 @@ public class MainActivity extends BaseActivity implements MainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         initView();
         presenter.viewCreated();
     }
 
-    private void initView() {
 
+
+    private void initView() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        TextView screenTitle = toolbar.findViewById(R.id.toolbar_title);
+        screenTitle.setText(mTitles[0]);
+        setSupportActionBar(toolbar);
         mTabHost = findViewById(android.R.id.tabhost);
         mFragmentList = new ArrayList<>();
         mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
@@ -63,7 +67,7 @@ public class MainActivity extends BaseActivity implements MainView {
             mFragmentList.add(mFragment[i]);
             mTabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.WHITE);
         }
-
+        mTabHost.setOnTabChangedListener(s -> screenTitle.setText(s));
 
     }
 
@@ -71,13 +75,10 @@ public class MainActivity extends BaseActivity implements MainView {
         View view;
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.tab_item, null);
-
         ImageView image = view.findViewById(R.id.image);
         TextView title = view.findViewById(R.id.title);
-
         image.setImageResource(mImages[index]);
         title.setText(mTitles[index]);
-
         return view;
     }
 }

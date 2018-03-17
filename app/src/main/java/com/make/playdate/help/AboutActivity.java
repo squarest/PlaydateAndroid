@@ -25,7 +25,7 @@ public class AboutActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_about);
         dialogUtil = new DialogUtil(this);
-        binding.backButton.setOnClickListener(view -> finish());
+        binding.backButton.setOnClickListener(view -> onBackPressed());
         binding.linAboutVision.setOnClickListener(view -> dialogUtil.getAlertDialog(getString(R.string.vision_dialod_title),
                 getString(R.string.vision_dialod_descr)).show());
         binding.txtTwitter.setText("@makeplaydate");

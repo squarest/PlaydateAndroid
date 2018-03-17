@@ -11,8 +11,9 @@
             android:id="@+id/playdate_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/md_purple_700"
-            android:padding="16dp"
+            android:background="@color/md_purple_600"
+            android:padding="8dp"
+            android:textSize="18dp"
             android:textAlignment="center"
             android:textColor="@color/md_white_1000"
             tools:text="Meet Playdate!" />
@@ -85,9 +86,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:padding="16dp"
+            android:padding="10dp"
             android:text="@string/make_playdate_button"
             android:textAlignment="center"
+            android:textSize="18dp"
             android:textColor="@color/md_white_1000" />
     </LinearLayout>
 </layout>

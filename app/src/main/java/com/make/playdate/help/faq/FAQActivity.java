@@ -26,7 +26,7 @@ public class FAQActivity extends Activity {
         setContentView(R.layout.activity_faq);
 
         ImageView backButton = findViewById(R.id.back_button);
-        backButton.setOnClickListener(view -> finish());
+        backButton.setOnClickListener(view -> onBackPressed());
         listFaq = findViewById(R.id.list_faq);
         listFaq.setOnItemClickListener((adapterView, view, i, l) -> {
             Intent detailIntent = new Intent(FAQActivity.this, FAQDetailActivity.class);

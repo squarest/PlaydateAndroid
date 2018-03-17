@@ -27,7 +27,7 @@
                 android:layout_centerVertical="true"
                 android:text="About"
                 android:textColor="@color/md_white_1000"
-                android:textSize="20dp" />
+                android:textSize="@dimen/toolbar_title_text_size" />
         </RelativeLayout>
 
 
