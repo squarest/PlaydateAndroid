@@ -51,7 +51,6 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileView
 
 
     private void setEvents() {
-
         binding.preferenceButton.setOnClickListener(view ->
         {
             Intent intent = new Intent(getContext(), PreferencesActivity.class);

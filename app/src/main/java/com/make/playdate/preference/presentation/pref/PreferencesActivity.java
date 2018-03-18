@@ -21,7 +21,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by PRINCE on 11/17/2017.
@@ -33,6 +32,7 @@ public class PreferencesActivity extends BaseActivity implements PreferenceView 
     @InjectPresenter
     public PreferencePresenter presenter;
     private UserModel user;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +111,8 @@ public class PreferencesActivity extends BaseActivity implements PreferenceView 
 
     }
 
+    private ArrayList<String> selected;
+
     @Override
     public void setPreferences(UserModel userModel) {
         user = userModel;
@@ -142,7 +144,7 @@ public class PreferencesActivity extends BaseActivity implements PreferenceView 
                 break;
         }
         String ethn = user.getEthnicity();
-        ArrayList<String> selected;
+
         if (ethn.equals("-1")) selected = new ArrayList<>();
         else selected = new ArrayList<>(Arrays.asList(ethn.split(",")));
         binding.ethnicity.setOnClickListener(view ->
@@ -158,7 +160,7 @@ public class PreferencesActivity extends BaseActivity implements PreferenceView 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK & data != null) {
-            List<String> selected = data.getStringArrayListExtra("selected");
+            selected = data.getStringArrayListExtra("selected");
             if (selected.size() > 0) {
                 binding.ethnicity.setText(String.format("%d selected", selected.size()));
                 user.setEthnicity(TextUtils.join(",", selected));

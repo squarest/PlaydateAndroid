@@ -12,8 +12,6 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import io.reactivex.disposables.Disposable;
-
 /**
  * Created by dmitrijfomenko on 07.03.2018.
  */
@@ -30,18 +28,17 @@ public class PlaydatePresenter extends BasePresenter<PlaydateView> {
     }
 
     void viewCreated() {
-        Disposable disposable = interactor.loadAllMatchedUsers()
+        interactor.loadAllMatchedUsers()
                 .doOnSubscribe(disposable1 -> playdateView.showLoading())
                 .doFinally(() -> playdateView.dismissLoading())
                 .subscribe(playdateView::setPlaydates, throwable -> {
                     throwable.printStackTrace();
                     playdateView.setPlaydates(new ArrayList<>());
                 });
-        putDisposable(disposable);
     }
 
     void makePlaydateButtonClicked() {
-        Disposable disposable = interactor.loadMatchUser()
+        interactor.loadMatchUser()
                 .doOnError(throwable -> playdateView.dismissLoading())
                 .subscribe(playdateView::addNewPlaydate, throwable -> {
                     if (throwable instanceof PlaydateLimitReachedException)
@@ -50,6 +47,5 @@ public class PlaydatePresenter extends BasePresenter<PlaydateView> {
                         playdateView.showMessage(R.string.error);
                     else throwable.printStackTrace();
                 });
-        putDisposable(disposable);
     }
 }

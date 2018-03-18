@@ -8,7 +8,6 @@ import com.make.playdate.main.domain.IMainInteractor;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -27,7 +26,7 @@ public class ProfilePresenter extends BasePresenter<ProfileView> {
 
     public void viewCreated() {
         profileView.showLoading();
-        Disposable d = interactor.loadUser()
+        interactor.loadUser()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(() -> profileView.dismissLoading())
@@ -38,8 +37,6 @@ public class ProfilePresenter extends BasePresenter<ProfileView> {
                     profileView.setName(userModel.get_user_first_name());
                     profileView.setSwitch(userModel.getUser_playdate() == 1);
                 }, Throwable::printStackTrace);
-        putDisposable(d);
-
     }
 
     public void userPlaydateChanged(boolean isPlaydate) {
