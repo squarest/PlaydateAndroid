@@ -9,7 +9,9 @@ import com.make.playdate.entities.PlaydateModel;
 
 import javax.inject.Inject;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by dmitrijfomenko on 03.03.2018.
@@ -18,9 +20,11 @@ import io.reactivex.disposables.Disposable;
 public class ChatPresenter extends BasePresenter<ChatView> {
     @Inject
     public IChatInteractor interactor;
+    private ChatView chatView;
 
     public ChatPresenter() {
         App.getChatComponent().inject(this);
+        chatView = getViewState();
     }
 
     public void viewCreated(PlaydateModel playdateModel) {
@@ -28,7 +32,7 @@ public class ChatPresenter extends BasePresenter<ChatView> {
         Disposable disposable = interactor.setChatData(playdateModel.firebaseId, playdateModel.userFullName)
                 .andThen(interactor.loadUserId())
                 .subscribe(s -> {
-                    getViewState().initList(s);
+                    chatView.initList(s);
                     loadChat();
                 }, Throwable::printStackTrace);
         putDisposable(disposable);
@@ -43,8 +47,14 @@ public class ChatPresenter extends BasePresenter<ChatView> {
                 .subscribe(s -> getViewState().setConversationName(s), Throwable::printStackTrace);
         putDisposable(disposable);
         Disposable disposable1 = interactor.loadMessages()
-                .subscribe(chatData -> getViewState().setMessage(chatData), Throwable::printStackTrace);
+                .subscribe(chatView::setMessage, Throwable::printStackTrace);
+        Disposable disposable2 = interactor.checkUserTyping()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(chatView::showUserTyping, Throwable::printStackTrace);
         putDisposable(disposable1);
+        putDisposable(disposable2);
+
     }
 
     public void sendButtonClicked(ChatData chatData) {
@@ -61,4 +71,10 @@ public class ChatPresenter extends BasePresenter<ChatView> {
     public void reportButonClicked() {
         putDisposable(interactor.flagUser().subscribe());
     }
+
+    public void userTyping(boolean isTyping) {
+        Disposable disposable = interactor.setTyping(isTyping).subscribe();
+        putDisposable(disposable);
+    }
+
 }

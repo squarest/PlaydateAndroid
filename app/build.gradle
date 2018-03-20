@@ -6,7 +6,7 @@ android {
     buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.make.playdate"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -108,6 +108,7 @@ dependencies {
     compile 'com.yahoo.mobile.client.android.util.rangeseekbar:rangeseekbar-library:0.1.0'
     //device names
     compile 'com.jaredrummler:android-device-names:1.1.6'
+    compile 'com.airbnb.android:lottie:2.5.1'
 }
 
 

@@ -91,7 +91,6 @@ public class ChatAdapter extends ArrayAdapter<ChatData> {
 
         private void setData(int position) {
             ChatData chatData = getItem(position);
-
             mTxtMessage.setText(chatData.text);
             mTxtTime.setText(chatData.date);
         }
@@ -108,7 +107,6 @@ public class ChatAdapter extends ArrayAdapter<ChatData> {
 
         private void setData(int position) {
             ChatData chatData = getItem(position);
-
             mTxtMessage.setText(chatData.text);
             mTxtTime.setText(chatData.date);
         }

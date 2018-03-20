@@ -12,8 +12,12 @@ import com.make.playdate.entities.ResponseModel;
 import com.make.playdate.entities.UserModel;
 import com.make.playdate.network.ApiClient;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
@@ -45,20 +49,36 @@ public class ChatRepo implements IChatRepo {
 
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
+
     private String roomId;
 
     @Override
-    public Observable<ChatData> getMessages(String conversationId) {
+    public Completable setChat(String conversationId) {
         int compare = conversationId.compareTo(getUid());
+
         if (compare > 0) {
             roomId = getUid() + conversationId;
         } else {
             roomId = conversationId + getUid();
         }
-        return Observable.create(e -> {
-            mFirebaseDatabase = FirebaseDatabase.getInstance();
-            mDatabaseReference = mFirebaseDatabase.getReference("chats/" + roomId + "/messages");
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference("chats/" + roomId + "/messages");
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z", Locale.US);
+        String curDateTime = sdf.format(new Date(System.currentTimeMillis()));
+        DatabaseReference last = mFirebaseDatabase.getReference().child("chats/" + roomId + "/last");
+        last.child(getUid()).setValue(curDateTime);
+
+        DatabaseReference users = mFirebaseDatabase.getReference().child("chats/" + roomId + "/users");
+        users.child(getUid()).setValue(getUid());
+        users.child(conversationId).setValue(conversationId);
+        return Completable.complete();
+    }
+
+    @Override
+    public Observable<ChatData> getMessages() {
+
+        return Observable.create(e -> {
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -116,5 +136,54 @@ public class ChatRepo implements IChatRepo {
     @Override
     public Single<ResponseModel> flagUser(String flaggeeId) {
         return apiClient.getApi().flagUser(getUid(), flaggeeId);
+    }
+
+    @Override
+    public void setUserTyping(boolean isTyping) {
+        mFirebaseDatabase.getReference("chats/" + roomId + "/typingIndicator")
+                .child(getUid()).setValue(isTyping);
+    }
+
+    private ChildEventListener childEventListener;
+
+    @Override
+    public Observable<Boolean> getTypingIndicator(String conversationId) {
+        return Observable.create(e -> {
+            childEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    if (dataSnapshot.getKey().equals(conversationId)) {
+                        boolean isTyping = (boolean) dataSnapshot.getValue();
+                        e.onNext(isTyping);
+                    }
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                    if (dataSnapshot.getKey().equals(conversationId)) {
+                        boolean isTyping = (boolean) dataSnapshot.getValue();
+                        e.onNext(isTyping);
+                    }
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            };
+            mFirebaseDatabase.getReference("chats/" + roomId + "/typingIndicator")
+                    .addChildEventListener(childEventListener);
+        });
+
     }
 }

@@ -7,6 +7,7 @@ import com.make.playdate.entities.UserModel;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
@@ -19,7 +20,9 @@ public interface IChatRepo {
 
     Single<List<List<PlaydateModel>>> getAllChats();
 
-    Observable<ChatData> getMessages(String conversationId);
+    Completable setChat(String conversationId);
+
+    Observable<ChatData> getMessages();
 
     void pushMessage(ChatData chatData);
 
@@ -29,5 +32,9 @@ public interface IChatRepo {
 
     void removeChat();
 
-    Single<ResponseModel>flagUser(String flaggeeId);
+    Single<ResponseModel> flagUser(String flaggeeId);
+
+    void setUserTyping(boolean isTyping);
+
+    Observable<Boolean> getTypingIndicator(String conversationId);
 }

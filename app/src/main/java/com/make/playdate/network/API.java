@@ -4,7 +4,6 @@ import com.make.playdate.entities.ResponseModel;
 import com.make.playdate.entities.UserModel;
 
 import io.reactivex.Single;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -38,11 +37,6 @@ public interface API {
     Single<ResponseModel> getGroupedMatchedUsers(
             @Query("user_id") String user_id);
 
-    @POST("get_all_users")
-    Single<ResponseModel> get_all_users(
-            @Query("user_id") String user_id
-    );
-
     @GET("getQuestionsById/25")
     Single<ResponseModel> get_questions();
 
@@ -53,11 +47,6 @@ public interface API {
     Single<ResponseModel> flagUser(@Query("user_id") String userId, @Query("flaggee_id") String flaggeeId);
 
 
-    @POST("report_bug")
-    Call<ResponseModel> report_bug(
-            @Query("name") String name, @Query("mail") String mail, @Query("message") String message
-    );
-
     @POST("saving_answers")
     Single<ResponseModel> saving_answers(
             @Query("cate_id") int cateId, @Query("sub_cate_id") int subId, @Query("user_id") String userId, @Query("answers") String answer
@@ -66,12 +55,6 @@ public interface API {
     @POST("check_answers")
     Single<ResponseModel> check_answers(
             @Query("cate_id") int cateId, @Query("sub_cate_id") int subId, @Query("user_id") String userId
-    );
-
-
-    @GET("getting_answered_question/{id}")
-    Single<ResponseModel> getting_answered_question(
-            @Path("id") int answerId
     );
 
     @GET("delete_user/{id}")

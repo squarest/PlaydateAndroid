@@ -29,4 +29,8 @@ public interface IChatInteractor {
     Single<String> loadUserId();
 
     Completable flagUser();
+
+    Completable setTyping(boolean isTyping);
+
+    Observable<Boolean> checkUserTyping();
 }

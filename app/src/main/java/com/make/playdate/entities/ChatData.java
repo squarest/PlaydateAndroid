@@ -8,9 +8,6 @@ public class ChatData {
     public String firebaseId;
     public String senderId;
     public String text;
-    public String userPhotoUrl;
-    public String userEmail;
     public String date;
-    public long time;
 }
 

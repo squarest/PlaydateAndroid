@@ -29,8 +29,20 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "38515805991-0jmsr3jelc050fvvurc55q52mciatkgm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "38515805991-i72gi1ihr7l1gap5qvb7gdcdtemun4av.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.make.playdate"
+              }
+            }
+          ]
         },
         "ads_service": {
           "status": 2

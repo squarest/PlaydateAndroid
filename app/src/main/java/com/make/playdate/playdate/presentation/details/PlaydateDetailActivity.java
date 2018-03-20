@@ -39,7 +39,7 @@ public class PlaydateDetailActivity extends BaseActivity implements PlaydateDeta
     @Override
     public void setUserData(PlaydateModel playdateModel) {
         binding.setUser(playdateModel);
-        binding.userName.setText(playdateModel.userFullName);
+        binding.userName.setText(playdateModel.userFirstName);
         if (playdateModel.questions != null && playdateModel.questions.size() > 0) {
             binding.questionsList.setLayoutManager(new LinearLayoutManager(this));
             binding.questionsList.setAdapter(new PlaydateAnswersAdapter(playdateModel.questions));

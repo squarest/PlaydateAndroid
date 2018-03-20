@@ -39,7 +39,8 @@ public class ChatInteractor implements IChatInteractor {
 
     @Override
     public Observable<ChatData> loadMessages() {
-        return chatRepo.getMessages(conversationId)
+        return chatRepo.setChat(conversationId)
+                .andThen(chatRepo.getMessages())
                 .map(chatData -> {
                     SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm", Locale.US);
                     formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -60,14 +61,15 @@ public class ChatInteractor implements IChatInteractor {
     @Override
     public Completable sendMessage(ChatData chatData) {
         long time = System.currentTimeMillis();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy HH:mm",Locale.US);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy HH:mm", Locale.US);
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         chatData.date = sdf.format(time);
         chatRepo.pushMessage(chatData);
-        return chatRepo.sendNotification(conversationId, chatData)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .toCompletable();
+        return Completable.complete();
+//        return chatRepo.sendNotification(conversationId, chatData)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .toCompletable();
     }
 
 
@@ -100,6 +102,17 @@ public class ChatInteractor implements IChatInteractor {
                 .toCompletable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    public Completable setTyping(boolean isTyping) {
+        chatRepo.setUserTyping(isTyping);
+        return Completable.complete();
+    }
+
+    @Override
+    public Observable<Boolean> checkUserTyping() {
+        return chatRepo.getTypingIndicator(conversationId);
     }
 
 

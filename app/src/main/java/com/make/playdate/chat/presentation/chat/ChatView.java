@@ -15,4 +15,6 @@ interface ChatView extends BaseView {
     void setConversationName(String name);
 
     void hideMessageInput();
+
+    void showUserTyping(boolean isTyping);
 }
