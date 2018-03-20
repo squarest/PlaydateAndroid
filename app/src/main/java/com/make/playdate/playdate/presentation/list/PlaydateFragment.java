@@ -16,6 +16,7 @@ import com.make.playdate.entities.PlaydateModel;
 import com.make.playdate.main.presentation.main.MainView;
 import com.make.playdate.utils.DialogUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -83,7 +84,13 @@ public class PlaydateFragment extends MvpAppCompatFragment implements PlaydateVi
 
     @Override
     public void addNewPlaydate(PlaydateModel playdateModel) {
-        sliderAdapter.addNew(playdateModel);
+        if (sliderAdapter == null) {
+            List<PlaydateModel> playdateModels = new ArrayList<>();
+            playdateModels.add(playdateModel);
+            setPlaydates(playdateModels);
+        }else {
+            sliderAdapter.addNew(playdateModel);
+        }
         binding.avatarsSlider.smoothScrollToPosition(0);
         mainView.dismissLoading();
 
