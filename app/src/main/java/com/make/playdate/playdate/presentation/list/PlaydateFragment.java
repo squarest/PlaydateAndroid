@@ -88,6 +88,7 @@ public class PlaydateFragment extends MvpAppCompatFragment implements PlaydateVi
             List<PlaydateModel> playdateModels = new ArrayList<>();
             playdateModels.add(playdateModel);
             setPlaydates(playdateModels);
+            binding.avatarsPlaceholder.setVisibility(View.GONE);
         }else {
             sliderAdapter.addNew(playdateModel);
         }
